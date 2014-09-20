@@ -1,3 +1,27 @@
 <div id="schedule">
-  <h1>My schedule</h1>
+  <div class="row">
+    <!-- List courses to choose -->
+    <div class="column-4">
+      <!-- Search (course id, course name, professor) -->
+
+      <!-- Filter options (major, time, day, show only open) -->
+
+      <!-- Courses -->
+      <ul class="list-unstyled">
+        <li ng-repeat="course in courses">
+        </li>
+      </ul>
+    </div>
+
+    <!-- Visually represent the schedule -->
+    <div class="column-8">
+        <calendar></calendar>
+    </div>
+
+    <!-- Summary of schedule -->
+    <div class="column-4">
+       <h1>My schedule</h1>
+    </div>
+
+  </div>
 </div>

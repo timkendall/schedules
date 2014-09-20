@@ -1,3 +1,24 @@
+<!-- Simple two column view -->
 <div id="catalog">
-  <h1>2014 Course catalog </h1>
+  <div class="row">
+     <!-- List courses to choose -->
+    <div class="column-4">
+      <!-- Search (course id, course name, professor) -->
+
+      <!-- Filter options (major, time, day, show only open) -->
+
+      <!-- Courses -->
+      <ul class="list-unstyled">
+        <li ng-repeat="course in courses">
+        </li>
+      </ul>
+    </div>
+
+    <!-- Detailed course info (course description, average grade, worth it rating, hardness rating, link to rate my professor) -->
+    <div class="column-12">
+      <!-- Course view -->
+      <div ui-view>
+      </div>
+    </div>
+  </div>
 </div>
