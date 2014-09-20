@@ -432,6 +432,7 @@ for(var k in majors){
     var c = {
       id: id,
       course: k,
+      title: courseTitle(id, k),
       professorName: professorName,
       professorId: Math.abs(professorName.hashCode()),
       time: classTime.time,
@@ -453,7 +454,16 @@ fs.writeFile(__dirname + '/courses.json', JSON.stringify(courses), function(err)
   }
 });
 
-
+function courseTitle(level, major){
+  if(level >= 400)
+    return 'Advanced Course in ' + major;
+  if(level >= 300)
+    return 'Advanced Course in ' + major;
+  if(level >= 200)
+    return 'Intermediate Course in ' + major;
+  if(level >= 100)
+    return 'Intro Course in ' + major;
+}
 
 function randomInt (low, high) {
   return Math.floor(Math.random() * (high - low) + low);
