@@ -422,6 +422,8 @@ var majors = {
 
 var courses = [];
 
+var fs = require('fs');
+
 for(var k in majors){
   for(var id in ids){
     var professorName = professorNames[randomInt(0, professorNames.length)],
@@ -443,7 +445,14 @@ for(var k in majors){
   }
 }
 
-console.log(courses);
+fs.writeFile(__dirname + '/courses.json', JSON.stringify(courses), function(err) {
+  if(err) {
+      console.log(err);
+  } else {
+      console.log("Courses saved!");
+  }
+});
+
 
 
 function randomInt (low, high) {
