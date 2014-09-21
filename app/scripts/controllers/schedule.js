@@ -7,7 +7,7 @@
  * # ScheduleCtrl
  */
 angular.module('schedules')
-  .controller('ScheduleCtrl', function ($scope) {
-
+  .controller('ScheduleCtrl', function ($scope, Catalog) {
+    $scope.availableCourses = Catalog['2014'];
 
   });

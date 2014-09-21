@@ -521,27 +521,27 @@ var possibleCourses = {
   ],
 
   'SE': [
-    { id: 'MGSC-207', name: 'SE 300 Software Requirements and Testing', level: 200 },
-    { id: 'MGSC-208', name: 'SE 310 Software Design', level: 200 },
-    { id: 'MGSC-209', name: 'SE 320 Software Engineering I', level: 200 }
+    { id: 'SE-300', name: 'Software Requirements and Testing', level: 200 },
+    { id: 'SE-310', name: 'Software Design', level: 200 },
+    { id: 'SE-320', name: 'Software Engineering I', level: 200 }
   ],
 
   'PHYS': [
-    { id: 'MGSC-207', name: 'PHYS 101 General Physics I', level: 200 },
-    { id: 'MGSC-208', name: 'PHYS 102 General Physics II', level: 200 },
-    { id: 'MGSC-209', name: 'PHYS 107 General Physics for the Life Sciences I', level: 200 }
+    { id: 'PHYS-101', name: 'General Physics I', level: 200 },
+    { id: 'PHYS-102', name: 'General Physics II', level: 200 },
+    { id: 'PHYS-107', name: 'General Physics for the Life Sciences I', level: 200 }
   ],
 
   'CHEM': [
-    { id: 'MGSC-207', name: 'CHEM 101 Chemistry of Life', level: 200 },
-    { id: 'MGSC-208', name: 'CHEM 105 Chemistry of Environmental Issues', level: 200 },
-    { id: 'MGSC-209', name: 'CHEM 140 General Chemistry I', level: 200 }
+    { id: 'CHEM-101', name: 'Chemistry of Life', level: 200 },
+    { id: 'CHEM-105', name: 'Chemistry of Environmental Issues', level: 200 },
+    { id: 'CHEM-140', name: 'General Chemistry I', level: 200 }
   ],
 
   'ENG': [
-    { id: 'MGSC-207', name: 'ENG 103 Seminar in Rhetoric and Writing', level: 200 },
-    { id: 'MGSC-208', name: 'ENG 203 Humanities Computing', level: 200 },
-    { id: 'MGSC-209', name: 'ENG 205 Research-Based Writing', level: 200 }
+    { id: 'ENG-103', name: 'Seminar in Rhetoric and Writing', level: 200 },
+    { id: 'ENG-203', name: 'Humanities Computing', level: 200 },
+    { id: 'ENG-205', name: 'Research-Based Writing', level: 200 }
   ],
 
   'BUS': [
