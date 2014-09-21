@@ -25,6 +25,10 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+        <!-- Header (navigation, user) -->
+        <ng-include src="'templates/header.html'"></ng-include>
+
+        <!-- Main views -->
         <div ui-view></div>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -55,8 +59,7 @@
         <!-- build:js scripts/main.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/catalog.js"></script>
-        <script src="scripts/controllers/courses.js"></script>
-        <script src="scripts/controllers/professors.js"></script>
+        <script src="scripts/controllers/planned.js"></script>
         <script src="scripts/controllers/schedule.js"></script>
         <script src="scripts/services/catalog.js"></script>
         <script src="scripts/directives/calendar.js"></script>

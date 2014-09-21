@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,700,400italic);
 
+
 html, body {
   width: 100%;
   height: 100%;
@@ -11,3 +12,7 @@ body {
     color: #333;
 }
 
+@import '../components/bourbon/dist/bourbon';
+
+@import 'header';
+@import 'calendar';

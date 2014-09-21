@@ -26,25 +26,25 @@ angular
         controller: 'ScheduleCtrl'
        })
 
-      // List of bookmarked courses
-      .state('courses', {
-        url: '/courses',
-        templateUrl: 'views/courses.html',
-        controller: 'CoursesCtrl'
+      // List of planned/bookmarked courses
+      .state('planned', {
+        url: '/planned',
+        templateUrl: 'views/planned.html',
+        controller: 'PlannedCtrl'
        })
 
-      // List of bookmarked professors
-      .state('professors', {
-        url: '/professors',
-        templateUrl: 'views/professors.html',
-        controller: 'ProfessorsCtrl'
-       })
-
-      // Entire, searhable course catalog for school
+       // Entire, searhable course catalog for school
       .state('catalog', {
         url: '/catalog',
         templateUrl: 'views/catalog.html',
         controller: 'CatalogCtrl'
+       })
+
+      // An individual course
+      .state('catalog.course', {
+        url: '/:courseName',
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl'
        });
 
       $urlRouterProvider.otherwise('/schedule');

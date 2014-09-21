@@ -7,7 +7,7 @@
  * # CoursesCtrl
  */
 angular.module('schedules')
-  .controller('CoursesCtrl', function ($scope) {
+  .controller('PlannedCtrl', function ($scope) {
 
 
   });
