@@ -692,7 +692,8 @@ function generateCourse (professor, major) {
     duration: duration,
     totalSpots: totalSpots,
     availableSpots: availableSpots,
-    waitlist: waitlist
+    waitlist: waitlist,
+    picked: false
   }
 }
 

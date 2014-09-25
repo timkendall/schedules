@@ -1,7 +1,7 @@
 <div id="schedule">
-  <div class="row">
+  <div class="row" style="height: 100%">
     <!-- List courses to choose -->
-    <div class="column-6 courses">
+    <div class="column-5 courses">
       <!-- Search (course id, course name, professor) -->
       <div class="search"><div class="search-icon"><i class="fa fa-search"></i></div><input type="text" name="name" ng-model="search" placeholder="Search" /></div>
 
@@ -9,8 +9,8 @@
 
       <!-- Courses -->
       <div class="course-list">
-      <ul class="list-unstyled">
-        <li ng-repeat="course in availableCourses | filter:search | orderBy:['id','name']" ng-class="{unavailable: course.availableSpots === 0}">
+      <ul class="list-unstyled course-list">
+        <li ng-repeat="course in availableCourses | filter:search | orderBy:['id','name']" ng-class="{unavailable: course.availableSpots === 0, unavailable: course.picked}" ng-click="pick(course)">
           <div class="row" style="height: 100%";>
             <div class="column-4">
               <available taken="{{course.totalSpots - course.availableSpots}}" max="{{course.availableSpots}}"></available>
@@ -28,13 +28,75 @@
     </div>
 
     <!-- Visually represent the schedule -->
-    <div class="column-6">
-        <!-- <calendar></calendar> -->
+    <div class="column-7">
+
+
     </div>
 
     <!-- Summary of schedule -->
-    <div class="column-4">
-       <!-- <h1>My schedule</h1> -->
+    <div class="column-4 summary">
+      <!-- Visualization of time of day for classes-->
+      <div class="row visualization">
+
+        <div class="column-8">
+          <timesofday background="rgba(214,217,223,0.4)" evening="#0D1214"></timesofday>
+        </div>
+
+        <div class="column-8">
+          <h5 style="color: #FD5176;">{{user.schedule.morningClasses}} morning</h5>
+          <h5 style="color: #FBC17E;">{{user.schedule.afternoonClasses}} afternoon</h5>
+          <h5 style="color: #333356;">{{user.schedule.eveningClasses}} evening</h5>
+        </div>
+      </div>
+
+      <!-- Total courses and credits -->
+      <div class="row numbers">
+        <div class="column-8">
+          <h3 animate-on-change="user.schedule.register.length">{{user.schedule.register.length}}</h3>
+          <small>courses</small>
+        </div>
+
+        <div class="column-8">
+          <h3 animate-on-change="user.schedule.credits">{{user.schedule.credits}}</h3>
+          <small>credits</small>
+        </div>
+      </div>
+
+      <div class="row numbers">
+        <div class="column-8">
+          <h3>8AM</h3>
+          <small>earliest course</small>
+        </div>
+
+        <div class="column-8">
+          <h3>5:30PM</h3>
+          <small>latest course</small>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column-16">
+          <ul class="list-unstyled course-list">
+            <li ng-repeat="course in user.schedule.register">
+              <div class="row">
+                <div class="column-2">
+                <i class="fa fa-clock-o"></i>
+                </div>
+
+                <div class="column-12">
+                  <small>{{course.id}}</small>
+                  <h5>{{course.name}}</h5>
+                </div>
+
+                <div class="column-2">
+                  <i class="fa fa-times-circle"></i>
+                </div>
+              </div>
+
+            </li>
+        </div>
+      </div>
+
     </div>
 
   </div>

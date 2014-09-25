@@ -37,4 +37,42 @@
       -webkit-text-fill-color: transparent;
     }
   }
+
+  .user {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .titles, img {
+      display: inline-block;
+    }
+
+    img {
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+      margin: 6px 10px 0 0;
+    }
+
+    .titles {
+      padding-right: 10px;
+
+      @include transform(translateY(-6px));
+
+       h5, h6 {
+        margin: 0;
+      }
+
+      h5 {
+        margin-bottom: -4px;
+      }
+
+      h6 {
+        text-align: right;
+      }
+    }
+
+
+  }
+
 }

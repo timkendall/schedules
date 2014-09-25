@@ -1,7 +1,15 @@
-<div id="header">
+<div id="header" ng-controller="HeaderCtrl">
   <ul class="list-inline">
     <li ui-sref-active="active"><a href ui-sref="schedule"><i class="fa fa-calendar"></i> <!-- Schedule --></a></li>
     <li ui-sref-active="active"><a href ui-sref="planned"><i class="fa fa-bookmark"></i> <!-- Planned --></a></li>
     <li ui-sref-active="active"><a href ui-sref="catalog"><i class="fa fa-align-left"></i> <!-- Catalog --></a></li>
   </ul>
+
+  <div class="user">
+    <div class="titles">
+     <!--  <h5>{{user.firstName}} {{user.lastName}}</h5>
+      <h6>Junior</h6> -->
+    </div>
+    <img src="{{user.profileImg}}" width="55" height="55">
+  </div>
 </div>
