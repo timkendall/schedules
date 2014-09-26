@@ -1,26 +1,23 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Exo+2:400,300,500,600,700);
 
 #schedule {
-
-
   .courses {
-    position: fixed; // to stop scroll
+    position: fixed;
+    // to stop scroll
     left: 80px;
-    width: 330px; // for now
+    width: 330px;
+    // for now
     border-right: 1px solid #D6D9DF;
     overflow-x: hidden;
     height: 100%;
-      overflow-y: auto;
+    overflow-y: auto;
     background: #fff;
-
     .filter {
       background: darken(#19252D, 2%);
       height: 65px;
-
       .btn:first-child {
         margin-right: -4px;
       }
-
       .btn {
         display: inline-block;
         box-sizing: border-box;
@@ -30,66 +27,58 @@
         height: 65px;
         line-height: 65px;
         padding: 0;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255, 255, 255, 0.5);
       }
-
       .btn.active {
         color: #1D9BD6;
       }
-
-      .btn:last-child {
-
-      }
+      .btn: last-child;
     }
-
     .search {
       display: inline-block;
       height: 65px;
       background: none;
       width: calc(100% - 100px);
-      margin: 0px; //hacky
+      margin: 0px;
+      //hacky
       margin-left: -4px;
-      @include transform(translateY(-7px)); //hacky
-
+      @include transform(translateY(-7px));
+      //hacky
       input[type="text"] {
         margin: 0;
-
         height: 37px;
         width: calc(100% - 55px);
-         background: #2C404F;
+        background: #2C404F;
         display: inline-block;
         @include border-right-radius(99px);
-        @include transform(translateY(6px)); //hacky
+        @include transform(translateY(6px));
+        //hacky
         color: #fff;
-
         @include placeholder {
-          color: rgba(255,255,255,0.5);
+          color: rgba(255, 255, 255, 0.5);
         }
       }
-
       .search-icon {
         height: 37px;
         display: inline-block;
         line-height: 37px;
         @include border-left-radius(99px);
-        @include transform(translateY(6px)); //hacky
+        @include transform(translateY(6px));
+        //hacky
         width: 40px;
         text-align: center;
         background: #2C404F;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255, 255, 255, 0.5);
       }
     }
-
     .course-list {
       height: 100%;
       overflow-y: scroll;
       background: #19252D;
-
       li {
         .row {
           margin: 0;
         }
-
         padding: 20px;
         background: #19252D;
         margin: 0 !important;
@@ -97,31 +86,25 @@
           //color: rgba(255,255,255,0.5);
 
         }
-
         h5 {
           color: #fff;
         }
       }
     }
-
     input[type="text"] {
       border: none;
     }
-
     li:hover {
       background: lighten(#19252D, 10%);
       @include transition(all 200ms cubic-bezier(0.19, 1, 0.22, 1));
     }
-
     li.unavailable {
       cursor: initial;
       opacity: 0.5;
     }
   }
-
   .column-7 {
     margin-left: 375px;
-
     ul.course-list {
       li {
         background: none;
@@ -129,12 +112,110 @@
       }
     }
   }
-
   .overview {
-    width: calc(100% - 375px - 330px);
+    width: calc(100% - 375px);
+    //border: 1px solid red;
+    margin-left: calc(375px + 35px);
+    //hacky
+    .column {
+      display: inline-block;
+      //border: 1px solid blue;
+      margin-right: -4px;
+      width: calc(100% / 6);
+    }
+    .days {
+      position: absolute;
+      left: 480px;
+      width: calc(100% - 480px);
+      height: 65px;
+      //border: 1px solid red;
+      background: #fff;
+      .day {
+        background: #D6D9DF;
+        border-radius: 100%;
+        width: 34px;
+        height: 34px;
+        margin: 14px auto 0 auto;
+        line-height: 34px;
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+    .slots {
+      position: fixed;
+      width: calc(100% - 410px);
+      height: 100%;
+      //border: 1px solid green;
+      //overflow: hidden;
 
+      ul.hours {
+        width: 70px;
+        display: inline-block;
+        margin-right: -4px;
+        //border: 1px solid yellow;
+        float: left; // why?
+      }
+      ul.hours li {
+
+
+        color: #666666;
+        height: 50px;
+        font-size: 13px;
+        text-align: right;
+        padding: 0;
+        @include transform(translateY(-14px));
+        // center up numbers with lines
+        //border: 1px solid red;
+
+      }
+      ul.hours li:first-child {
+        //margin-top: 65px;
+      }
+
+      .day-slots {
+        position: fixed;
+        top: 60px;
+        left: 410px;
+        display: inline-block;
+        width: 100%;
+        //border: 1px solid blue;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+        //padding-right: 15px;
+
+        .column-container {
+          width: calc(100% - 480px);
+
+        }
+
+        .column {
+          height: 65px;
+          line-height: 65px;
+          padding: 0 10px;
+          //border: 1px solid red;
+          ul li {
+            height: 50px;
+            border-bottom: 1px solid #D6D9DF;
+            .half {
+              width: 100%;
+              height: 50%;
+            }
+            .half:first-child {
+              border-bottom: 1px dotted lighten(#D6D9DF, 0%);
+            }
+          }
+          ul li:first-child {
+            border-top: 1px solid #D6D9DF;
+          }
+          //     @include display(flex);
+          // @include align-items(center);
+          // @include flex-direction(column);
+          // @include justify-content(center);
+
+        }
+      }
+    }
   }
-
   .summary {
     background: #fff;
     width: 330px;
@@ -143,34 +224,31 @@
     right: 0;
     height: 100%;
     border-left: 1px solid #D6D9DF;
-
+    opacity: 0;
     timesofday {
       display: block;
-      @include transform(translate(40px, 0)); //hacky
+      @include transform(translate(40px, 0));
+      //hacky
       @include filter(contrast(120%));
     }
-
     .visualization {
       //height: 94px;
       margin: 0;
       background: lighten(#EAEBEE, 5%);
       //border: 1px solid red;
-    }
 
+    }
     h5:first-child {
       margin-top: 30px;
       margin-left: -4px;
     }
-
-    h5:last-child {
+    h5: last-child {
       margin-left: -4px;
-    }
-
+    };
     h5 {
       font-size: 13px;
       margin: 0;
     }
-
     .course-list:after {
       content: "";
       display: block;
@@ -179,150 +257,123 @@
       right: 0;
       width: 329px;
       height: 50px;
-
-      background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1));
+      background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
     }
-
     .course-list {
       position: fixed;
       overflow-y: auto;
       width: 330px;
-      height: calc(100% - 370px); // slightly hacky
-      border-top: 1px solid rgba(214,217,223,1);
+      height: calc(100% - 370px);
+      // slightly hacky
+      border-top: 1px solid rgba(214, 217, 223, 1);
       margin: 0;
-
-      li:nth-child(even) {
-        background: rgba(214,217,223,0.2);
-      }
-
+      li: nth-child(even) {
+        background: rgba(214, 217, 223, 0.2);
+      };
       li {
-          @include animation(fadeInDown 0.3s cubic-bezier(0.23, 1, 0.32, 1));
-          padding: 12px 0;
-          margin-bottom: 0;
-
-
-          h5 {
-            overflow: hidden;
-            white-space: nowrap;
-          }
-
+        @include animation(fadeInDown 0.3s cubic-bezier(0.23, 1, 0.32, 1));
+        padding: 12px 0;
+        margin-bottom: 0;
+        h5 {
+          overflow: hidden;
+          white-space: nowrap;
+        }
         .row {
           margin: 0;
           height: 100%;
         }
-
-        .column-12 {
-
-        }
-
+        .column-12 {}
         .column-2 {
           text-align: center;
           i {
-
-            padding-top: 16px; //hacky
+            padding-top: 16px;
+            //hacky
             vertical-align: middle;
-
           }
-
           i.fa-clock-o {
             //color: #42ADDD;
             color: #666;
           }
-
           i.fa-times-circle {
             color: darken(#D6D9DF, 10%);
             @include transition(0.2s ease-in-out);
           }
-
           i.fa-times-circle:hover {
             color: darken(#D6D9DF, 30%);
-             @include transition(0.2s ease-in-out);
+            @include transition(0.2s ease-in-out);
           }
         }
       }
     }
-
     .numbers {
       margin: 0;
-
       .column-8 {
         padding: 17px 0;
         text-align: center;
-        border-top: 1px solid rgba(214,217,223,1);
-
+        border-top: 1px solid rgba(214, 217, 223, 1);
         h3 {
           margin: 0px 0 0 0;
           padding-top: 8px;
           line-height: 16px;
         }
-
         small {
           margin: 0;
           color: darken(#E6E6E6, 20%);
         }
       }
-
-      .column-8:last-child {
-        border-left: 1px solid rgba(214,217,223,1);
-      }
+      .column-8: last-child {
+        border-left: 1px solid rgba(214, 217, 223, 1);
+      };
     }
   }
 }
 
 ul.course-list {
-      padding: 0;
-
-      li {
-        padding: 20px;
-        margin: 0;
-        padding-bottom: 10px;
-        cursor: pointer;
-        background: #fff;
-        //border: 1px solid red;
-        @include transition(all 200ms cubic-bezier(0.19, 1, 0.22, 1));
-
-        small {
-          color: #7E7E7E;
-          display: block;
-        }
-        small.time {
-          color: #1D9BD6;
-        }
-        h5 {
-          margin: 0;
-          padding: 0;
-        }
-      }
-
-      li:nth-child(odd) {
-        //background: lighten(#C9C9C9, 18%);
-      }
+  padding: 0;
+  li {
+    padding: 20px;
+    margin: 0;
+    padding-bottom: 10px;
+    cursor: pointer;
+    background: #fff;
+    //border: 1px solid red;
+    @include transition(all 200ms cubic-bezier(0.19, 1, 0.22, 1));
+    small {
+      color: #7E7E7E;
+      display: block;
     }
+    small.time {
+      color: #1D9BD6;
+    }
+    h5 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+  li: nth-child(odd) {
+    //background: lighten(#C9C9C9, 18%);
+  };
+}
 
 .count {
-
   small {
     font-family: 'Exo', sans-serif;
     font-weight: 700;
-
   }
-
   small:first-child {
     font-size: 16px;
-
   }
-
-  small:last-child {
+  small: last-child {
     font-weight: 400;
     font-size: 12px;
-  }
+  };
 }
 
- major {
-    display: inline-block;
-    border: 1px solid #7E7E7E;
-    border-radius: 2px;
-    padding: 0 5px;
-    height: 20px;
-    line-height: 20px;
-  }
+major {
+  display: inline-block;
+  border: 1px solid #7E7E7E;
+  border-radius: 2px;
+  padding: 0 5px;
+  height: 20px;
+  line-height: 20px;
+}
