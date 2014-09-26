@@ -1,40 +1,107 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Exo+2:400,300,500,600,700);
+
 #schedule {
 
 
   .courses {
     position: fixed; // to stop scroll
-    width: 375px; // for now
+    left: 80px;
+    width: 330px; // for now
     border-right: 1px solid #D6D9DF;
     overflow-x: hidden;
     height: 100%;
       overflow-y: auto;
     background: #fff;
 
-    .search {
-      height: 50px;
-      background: #E6E6E6;
-      border-bottom: 1px solid #D6D9DF;
-      margin-right: -2px; //hacky
+    .filter {
+      background: darken(#19252D, 2%);
+      height: 65px;
 
+      .btn:first-child {
+        margin-right: -4px;
+      }
+
+      .btn {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50px;
+        margin: 0;
+        background: darken(#19252D, 2%);
+        height: 65px;
+        line-height: 65px;
+        padding: 0;
+        color: rgba(255,255,255,0.5);
+      }
+
+      .btn.active {
+        color: #1D9BD6;
+      }
+
+      .btn:last-child {
+
+      }
+    }
+
+    .search {
+      display: inline-block;
+      height: 65px;
+      background: none;
+      width: calc(100% - 100px);
+      margin: 0px; //hacky
+      margin-left: -4px;
+      @include transform(translateY(-7px)); //hacky
 
       input[type="text"] {
-        height: 50px;
-        width: calc(100% - 40px);
-         background: #E6E6E6;
+        margin: 0;
+
+        height: 37px;
+        width: calc(100% - 55px);
+         background: #2C404F;
         display: inline-block;
+        @include border-right-radius(99px);
+        @include transform(translateY(6px)); //hacky
+        color: #fff;
+
+        @include placeholder {
+          color: rgba(255,255,255,0.5);
+        }
       }
 
       .search-icon {
-        height: 50px;
+        height: 37px;
         display: inline-block;
+        line-height: 37px;
+        @include border-left-radius(99px);
+        @include transform(translateY(6px)); //hacky
         width: 40px;
         text-align: center;
+        background: #2C404F;
+        color: rgba(255,255,255,0.5);
       }
     }
 
     .course-list {
       height: 100%;
       overflow-y: scroll;
+      background: #19252D;
+
+      li {
+        .row {
+          margin: 0;
+        }
+
+        padding: 20px;
+        background: #19252D;
+        margin: 0 !important;
+        small {
+          //color: rgba(255,255,255,0.5);
+
+        }
+
+        h5 {
+          color: #fff;
+        }
+      }
     }
 
     input[type="text"] {
@@ -42,7 +109,7 @@
     }
 
     li:hover {
-      background: lighten(#D6D9DF, 10%);
+      background: lighten(#19252D, 10%);
       @include transition(all 200ms cubic-bezier(0.19, 1, 0.22, 1));
     }
 
@@ -63,10 +130,16 @@
     }
   }
 
+  .overview {
+    width: calc(100% - 375px - 330px);
+
+  }
+
   .summary {
+    background: #fff;
     width: 330px;
     position: fixed;
-    top: 55px;
+    top: 0px;
     right: 0;
     height: 100%;
     border-left: 1px solid #D6D9DF;
@@ -74,16 +147,23 @@
     timesofday {
       display: block;
       @include transform(translate(40px, 0)); //hacky
+      @include filter(contrast(120%));
     }
 
     .visualization {
       //height: 94px;
       margin: 0;
+      background: lighten(#EAEBEE, 5%);
       //border: 1px solid red;
     }
 
     h5:first-child {
       margin-top: 30px;
+      margin-left: -4px;
+    }
+
+    h5:last-child {
+      margin-left: -4px;
     }
 
     h5 {
@@ -117,7 +197,7 @@
 
       li {
           @include animation(fadeInDown 0.3s cubic-bezier(0.23, 1, 0.32, 1));
-          padding: 10px 0;
+          padding: 12px 0;
           margin-bottom: 0;
 
 
@@ -166,13 +246,14 @@
       margin: 0;
 
       .column-8 {
-        padding: 20px 0;
+        padding: 17px 0;
         text-align: center;
         border-top: 1px solid rgba(214,217,223,1);
 
-        h3{
-          margin: 0;
-          line-height: 26px;
+        h3 {
+          margin: 0px 0 0 0;
+          padding-top: 8px;
+          line-height: 16px;
         }
 
         small {
@@ -219,42 +300,22 @@ ul.course-list {
     }
 
 .count {
-  display: block;
 
   small {
-    display: block;
-    width: 25px;
-    text-align: center;
-    margin: 0 auto;
-    padding: 4px 0px;
-    font-size: 10px;
+    font-family: 'Exo', sans-serif;
+    font-weight: 700;
+
   }
 
   small:first-child {
-    background: #fff;
-    color: #DE4448 !important;
-    border: 1px solid #DE4448;
-    border-bottom: none;
-    @include border-top-radius(99px);
+    font-size: 16px;
+
   }
 
   small:last-child {
-    background: #fff;
-    border: 1px solid lighten(#CACDD4, 10%);
-    border-top: none;
-    @include border-bottom-radius(99px);
+    font-weight: 400;
+    font-size: 12px;
   }
-
-  small:last-child:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left:50%;
-    width: 4px;
-    height: 4px;
-  }
-
-
 }
 
  major {

@@ -22,7 +22,7 @@ angular.module('schedules').directive('available', function () {
       // Draw backdrop
       var backdrop = canvas.rect(0, 0, 8, 60, 3, 3);
       backdrop.attr({
-        fill: 'rgba(0,0,0,0.1)'
+        fill: 'rgba(0,0,0,0.5)'
       });
 
       // Calculate height

@@ -1,11 +1,19 @@
 .calendar {
   width: 100%;
   height: 100%;
+  tr, td, body {
+  border-left: none;
+}
+
+  th {
+    font-size: 13px;
+  }
 
   .time {
     border-top: none;
     border-left: none;
     border-bottom: none;
     font-size: 11px;
+    color: #B3B3B3;
   }
 }

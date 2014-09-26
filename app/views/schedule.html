@@ -2,8 +2,15 @@
   <div class="row" style="height: 100%">
     <!-- List courses to choose -->
     <div class="column-5 courses">
-      <!-- Search (course id, course name, professor) -->
+      <div class="filter">
+        <div class="btn"><i class="fa fa-bookmark"></i></div>
+        <div class="btn active"><i class="fa fa-align-left"></i></div>
+
+         <!-- Search (course id, course name, professor) -->
       <div class="search"><div class="search-icon"><i class="fa fa-search"></i></div><input type="text" name="name" ng-model="search" placeholder="Search" /></div>
+      </div>
+
+
 
       <!-- Filter options (major, time, day, show only open) -->
 
@@ -12,11 +19,9 @@
       <ul class="list-unstyled course-list">
         <li ng-repeat="course in availableCourses | filter:search | orderBy:['id','name']" ng-class="{unavailable: course.availableSpots === 0, unavailable: course.picked}" ng-click="pick(course)">
           <div class="row" style="height: 100%";>
-            <div class="column-4">
-              <available taken="{{course.totalSpots - course.availableSpots}}" max="{{course.availableSpots}}"></available>
-            </div>
 
-            <div class="column-12">
+
+            <div class="column-16">
               <small>{{course.id}}</small>
               <small class="time">{{course.meets}}, {{course.time}}</small>
               <h5>{{course.name}}</h5>
@@ -28,9 +33,8 @@
     </div>
 
     <!-- Visually represent the schedule -->
-    <div class="column-7">
-
-
+    <div class="column-7 overview">
+      <!-- <calendar></calendar> -->
     </div>
 
     <!-- Summary of schedule -->
