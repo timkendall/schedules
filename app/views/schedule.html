@@ -39,27 +39,27 @@
       <!-- Days row -->
       <div class="days">
         <div class="column">
-          <div class="day">M</div>
+          <div class="day" ng-class="{filled: Calendar.mondays.length}">M</div>
         </div>
 
         <div class="column">
-          <div class="day">T</div>
+          <div class="day" ng-class="{filled: Calendar.tuesdays.length}">T</div>
         </div>
 
         <div class="column">
-          <div class="day">W</div>
+          <div class="day" ng-class="{filled: Calendar.wednesdays.length}">W</div>
         </div>
 
         <div class="column">
-          <div class="day">T</div>
+          <div class="day" ng-class="{filled: Calendar.thursday.length}">T</div>
         </div>
 
         <div class="column">
-          <div class="day">F</div>
+          <div class="day" ng-class="{filled: Calendar.fridays.length}">F</div>
         </div>
 
         <div class="column">
-          <div class="day">S</div>
+          <div class="day" ng-class="{filled: Calendar.saturdays.length}">S</div>
         </div>
       </div>
 
@@ -89,7 +89,7 @@
           <div class="column-container">
           <!-- Monday courses -->
           <div class="column">
-            <event ng-repeat="course in mondayCourses" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
+            <event ng-repeat="course in Calendar.mondays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
               <h5>{{course.id}}</h5>
               <small>Beckman 201</small>
             </event>
@@ -160,7 +160,7 @@
 
           <!-- Tuesday courses -->
           <div class="column">
-            <event ng-repeat="course in tuesdayCourses" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
+            <event ng-repeat="course in Calendar.tuesdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
               <h5>{{course.id}}</h5>
               <small>Beckman 201</small>
             </event>
@@ -230,7 +230,7 @@
 
           <!-- Wednesday courses -->
           <div class="column">
-            <event ng-repeat="course in wednesdayCourses" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
+            <event ng-repeat="course in Calendar.wednesdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
               <h5>{{course.id}}</h5>
               <small>Beckman 201</small>
             </event>
@@ -300,7 +300,7 @@
 
           <!-- Thursday courses -->
           <div class="column">
-            <event ng-repeat="course in thursdayCourses" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
+            <event ng-repeat="course in Calendar.thursdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
               <h5>{{course.id}}</h5>
               <small>Beckman 201</small>
             </event>
@@ -371,7 +371,7 @@
           <!-- Friday courses -->
           <div class="column">
 
-            <event ng-repeat="course in fridayCourses" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
+            <event ng-repeat="course in Calendar.fridays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
               <h5>{{course.id}}</h5>
               <small>Leatherby B13</small>
             </event>
@@ -441,7 +441,7 @@
 
           <!-- Saturday courses -->
           <div class="column">
-            <event ng-repeat="course in saturdayCourses" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
+            <event ng-repeat="course in Calendar.saturdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
               <h5>{{course.id}}</h5>
               <small>Beckman 201</small>
             </event>

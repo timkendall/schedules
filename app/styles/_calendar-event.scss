@@ -16,7 +16,7 @@
 
   height: 50px;
 
-  @include animation(zoomIn 0.3s cubic-bezier(0.23, 1, 0.32, 1));
+  @include animation(flipInX 0.5s cubic-bezier(1, .25, .40, .34));
   @include animation-delay(0.1s); // give time for translate to take effect
 
   h5 {
@@ -35,7 +35,7 @@
 
 .calendar-event.orange {
   color: darken(#D06727, 15%);
-  background: rgba(208,103,39,0.7);
+  background: rgba(251,202,179,0.7);
   border: 1px solid darken(#FBCAB3, 10%);
   h5 {
     color: darken(#D06727, 15%);

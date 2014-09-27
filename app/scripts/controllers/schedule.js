@@ -7,7 +7,7 @@
  * # ScheduleCtrl
  */
 angular.module('schedules')
-  .controller('ScheduleCtrl', function ($scope, Catalog, User) {
+  .controller('ScheduleCtrl', function ($scope, Catalog, User, Calendar) {
     $scope.availableCourses = Catalog['2014'];
 
     $scope.user = User;
@@ -21,31 +21,31 @@ angular.module('schedules')
 
          switch (course.meets) {
           case 'M':
-            $scope.mondayCourses.push(course);
+            Calendar.mondays.push(course);
             break;
           case 'T':
-            $scope.tuesdayCourses.push(course);
+            Calendar.tuesdays.push(course);
             break;
           case 'W':
-            $scope.wednesdayCourses.push(course);
+            Calendar.wednesdays.push(course);
             break;
           case 'Th':
-            $scope.thursdayCourses.push(course);
+            Calendar.thursdays.push(course);
             break;
           case 'F':
-            $scope.fridayCourses.push(course);
+            Calendar.fridays.push(course);
             break;
           case 'S':
-            $scope.saturdayCourses.push(course);
+            Calendar.saturdays.push(course);
             break;
           case 'MWF':
-            $scope.mondayCourses.push(course);
-            $scope.wednesdayCourses.push(course);
-            $scope.fridayCourses.push(course);
+            Calendar.mondays.push(course);
+            Calendar.wednesdays.push(course);
+            Calendar.fridays.push(course);
             break;
           case 'TTh':
-            $scope.tuesdayCourses.push(course);
-            $scope.thursdayCourses.push(course);
+            Calendar.tuesdays.push(course);
+            Calendar.thursdays.push(course);
             break;
           default:
             break;
@@ -54,12 +54,7 @@ angular.module('schedules')
     }
 
     // Containers for calendar
-    $scope.mondayCourses = [];
-    $scope.tuesdayCourses = [];
-    $scope.wednesdayCourses = [];
-    $scope.thursdayCourses = [];
-    $scope.fridayCourses = [];
-    $scope.saturdayCourses = [];
+   $scope.Calendar = Calendar;
 
     // Pluralization templates
     $scope.courseMorningForms = {

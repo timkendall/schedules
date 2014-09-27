@@ -139,6 +139,13 @@
         line-height: 34px;
         text-align: center;
         font-size: 12px;
+        @include transition(all 0.3s ease-in-out);
+      }
+
+      .day.filled {
+        // background: #28A3D9;
+        // color: #fff;
+        @include transition(all 0.3s ease-in-out);
       }
     }
     .slots {
