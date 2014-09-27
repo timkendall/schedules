@@ -163,7 +163,7 @@
         font-size: 13px;
         text-align: right;
         padding: 0;
-        @include transform(translateY(-14px));
+        @include transform(translateY(-13px));
         // center up numbers with lines
         //border: 1px solid red;
 
@@ -192,6 +192,7 @@
           height: 65px;
           line-height: 65px;
           padding: 0 10px;
+          position: relative;
           //border: 1px solid red;
           ul li {
             height: 50px;

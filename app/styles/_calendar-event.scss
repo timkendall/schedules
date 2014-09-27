@@ -1,0 +1,70 @@
+.calendar-event {
+  display: block;
+  // Start at top
+  position: absolute;
+  top: 16px;
+  left: 0;
+
+  width: calc(100% - 20px);
+  padding: 0 10px;
+  margin: 0 10px;
+  background: rgba(255,237,210,0.7);
+  border-radius: 5px;
+  border: 1px solid darken(rgba(255,237,210,1), 5%);
+  z-index: 9999;
+  color: #A66100;
+
+  height: 50px;
+
+  @include animation(zoomIn 0.3s cubic-bezier(0.23, 1, 0.32, 1));
+  @include animation-delay(0.1s); // give time for translate to take effect
+
+  h5 {
+    font-weight: 700;
+    margin: 0;
+    color: #A66100;
+    font-size: 14px;
+  }
+
+  small {
+    margin: -8px 0 0 0;
+    display: block;
+    font-size: 13px;
+  }
+}
+
+.calendar-event.orange {
+  color: darken(#D06727, 15%);
+  background: rgba(208,103,39,0.7);
+  border: 1px solid darken(#FBCAB3, 10%);
+  h5 {
+    color: darken(#D06727, 15%);
+  }
+}
+
+.calendar-event.purple {
+  color: #7F4083;
+  background: rgba(212,187,213,0.7);
+  border: 1px solid darken(rgba(212,187,213,0.7), 1%);
+  h5 {
+    color: #7F4083;
+  }
+}
+
+.calendar-event.green {
+  color: darken(#C5E1B1, 50%);
+  background: rgba(197,225,177,0.7);
+  border: 1px solid darken(#C5E1B1, 5%);
+  h5 {
+    color: darken(#C5E1B1, 50%);
+  }
+}
+
+.calendar-event.red {
+  color: #AA646A;
+  background: rgba(235,182,190,0.7);
+  border: 1px solid darken(#EBB6BE, 5%);
+  h5 {
+    color: #AA646A;
+  }
+}
