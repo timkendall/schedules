@@ -15,7 +15,7 @@ $ npm install -g bower
 ```
 $ npm install -g gulp
 ```
-* SASS - [SASS](http://sass-lang.com) is a CSS extension language used for styling Octobox frontend. You'll need the latest version of the SASS Ruby gem in order to build the stylesheets.
+* SASS - [SASS](http://sass-lang.com) is a CSS extension language used for styling Schedules frontend. You'll need the latest version of the SASS Ruby gem in order to build the stylesheets.
 
 ```
 $ sudo gem install sass
