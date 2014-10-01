@@ -29,7 +29,7 @@ To build and run the app locally run the following commands:
 2. Install app dependencies with `bower install`
 3. Run with `gulp watch`
 
-You can then view the app at http://localhost:9000/
+You can then view the app at `http://localhost:9000/`
 
 ## Contributing
 1. Fork the repo
