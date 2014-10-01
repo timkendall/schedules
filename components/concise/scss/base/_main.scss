@@ -1,0 +1,32 @@
+@if $use-main == true {
+  //------------------------------------
+  //  MAIN
+  //------------------------------------
+  
+  // Variables
+  $font-size: #{($base-font-size/16px)*1em};
+  $line-height-integer: #{$line-height-ratio};
+  
+  *{
+    &,
+    &:before,
+    &:after {
+      @include vendor(box-sizing, border-box);
+    }
+  }
+  
+  html, 
+  body {
+    background-color: #fff;
+    color: $base-font-color;
+    font: normal normal $font-size/$line-height-integer $base-font-family;
+    margin: 0;
+    
+    font-smooth: always;
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+  }
+
+  html[dir="rtl"] { direction: rtl; }
+}

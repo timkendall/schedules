@@ -1,0 +1,28 @@
+{
+  "name": "angular-raven",
+  "version": "0.5.6",
+  "main": "angular-raven.js",
+  "ignore": [
+    "**/.*",
+    "*.yml",
+    "*.xml",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "*"
+  },
+  "homepage": "https://github.com/gdi2290/angular-raven",
+  "_release": "0.5.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.5.6",
+    "commit": "28b74b70db5b5b56a63a89dc3ca22049583b615a"
+  },
+  "_source": "git://github.com/gdi2290/angular-raven.git",
+  "_target": "~0.5.6",
+  "_originalSource": "angular-raven",
+  "_direct": true
+}

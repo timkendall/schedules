@@ -1,0 +1,50 @@
+<div class="calendar">
+    <table class="table table-full table-border-all">
+      <thead>
+        <tr>
+          <th></th>
+          <th>MON</th>
+          <th>TUE</th>
+          <th>WED</th>
+          <th>THU</th>
+          <th>FRI</th>
+          <th>SAT</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- A row for each hour -->
+        <tr ng-repeat="hour in hours">
+          <!-- Hour -->
+          <td class="time">
+            {{hour.name}}
+          </td>
+
+          <!-- This hour on Monday -->
+          <td>
+          </td>
+
+          <!-- This hour on Tuesday -->
+          <td>
+          </td>
+
+           <!-- This hour on Wednesday -->
+          <td>
+          </td>
+
+          <!-- This hour on Thursday -->
+          <td>
+          </td>
+
+           <!-- This hour on Friday -->
+          <td>
+          </td>
+
+          <!-- This hour on Saturday -->
+          <td>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+</div>
