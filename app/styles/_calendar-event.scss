@@ -17,7 +17,6 @@
   height: 50px;
 
   @include animation(flipInX 0.5s cubic-bezier(1, .25, .40, .34));
-  @include animation-delay(0.1s); // give time for translate to take effect
 
   h5 {
     font-weight: 700;
