@@ -43,5 +43,8 @@ We will accept pulls that:
 * Are written in pure JavaScript (sorry no Coffeescript)
 * Don't add unnecessary dependencies (no jQuery or Bootstrap please) - make use of only Angular.js, Lodash, Concise.css, and Bourbon libraries for the frontend
 
+## Contributers
+Timothy Kendall, Ian Jackson, James Steininger, Ross Clare
+
 ## License
 [The AGPL v3 License](http://www.gnu.org/licenses/agpl-3.0.html)
