@@ -5,7 +5,8 @@
   width: 80px;
   height: 100%;
   line-height: 65px;
-  border-bottom: 1px solid #D6D9DF;
+  border-right: 1px solid #D6D9DF;
+
   margin: 0;
   padding: 0 40px;
    @include display(flex);
@@ -28,6 +29,7 @@
 
   ul li a {
     color: #7E7E7E;
+    outline: none;
     @include transition(all 200ms cubic-bezier(0.39, 0.575, 0.565, 1));
   }
 
@@ -52,8 +54,8 @@
     right: 0;
     //background: #D6D9DF;
     height: 65px;
-    width: 330px;
-    border-bottom: 1px solid #D6D9DF;
+    width: 80px;
+    //border-bottom: 1px solid #D6D9DF;
 
     .titles, img {
       display: inline-block;
@@ -63,13 +65,14 @@
       border-radius: 100%;
       width: 40px;
       height: 40px;
-      margin: 12px 0px 0 0;
-      float: right;
-      border: 3px solid darken(#D6D9DF, 30%);
+      //margin: 12px 0px 0 0;
+      margin: 20px 0px 0 20px;
+      //float: right;
+      border: 2px solid darken(#D6D9DF, 30%);
     }
 
     i {
-      display: block;
+      display: none;
       //@include transform(rotate(180deg));
       float: right;
       line-height: 30px;
@@ -84,6 +87,8 @@
     }
 
     .titles {
+      display: none;
+
       padding: 10px;
       padding-top: 16px;
       text-align: right;

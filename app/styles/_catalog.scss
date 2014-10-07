@@ -1,0 +1,36 @@
+#catalog {
+  position: fixed;
+  top: 0;
+  left: 80px;
+  width: 100%;
+  height: 100%;
+  //background: red;
+
+  .header {
+    height: 65px;
+   //background: red;
+    .search {
+      position: absolute;
+      top: 15px;
+      right: 40px;
+
+      width: 300px;
+
+      input {
+        width: 200px;
+        background: #fff;
+        color: #666;
+      }
+
+      .search-icon {
+        background: lighten(#D6D9DF, 3%);
+        color: #80899C;
+      }
+    }
+  }
+
+  ul {
+    margin: 0 auto;
+
+  }
+}

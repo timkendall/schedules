@@ -1,7 +1,0 @@
-node_modules
-dist
-.tmp
-.sass-cache
-app/courses.json
-app/components
-test/components

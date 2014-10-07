@@ -34,43 +34,6 @@
       }
       .btn: last-child;
     }
-    .search {
-      display: inline-block;
-      height: 65px;
-      background: none;
-      width: calc(100% - 100px);
-      margin: 0px;
-      //hacky
-      margin-left: -4px;
-      @include transform(translateY(-7px));
-      //hacky
-      input[type="text"] {
-        margin: 0;
-        height: 37px;
-        width: calc(100% - 55px);
-        background: #2C404F;
-        display: inline-block;
-        @include border-right-radius(99px);
-        @include transform(translateY(6px));
-        //hacky
-        color: #fff;
-        @include placeholder {
-          color: rgba(255, 255, 255, 0.5);
-        }
-      }
-      .search-icon {
-        height: 37px;
-        display: inline-block;
-        line-height: 37px;
-        @include border-left-radius(99px);
-        @include transform(translateY(6px));
-        //hacky
-        width: 40px;
-        text-align: center;
-        background: #2C404F;
-        color: rgba(255, 255, 255, 0.5);
-      }
-    }
     .course-list {
       height: 100%;
       overflow-y: scroll;
@@ -141,7 +104,6 @@
         font-size: 12px;
         @include transition(all 0.3s ease-in-out);
       }
-
       .day.filled {
         // background: #28A3D9;
         // color: #fff;
@@ -154,17 +116,16 @@
       height: 100%;
       //border: 1px solid green;
       //overflow: hidden;
-
       ul.hours {
         width: 70px;
         display: inline-block;
         margin-right: -4px;
         //border: 1px solid yellow;
-        float: left; // why?
+        float: left;
+        // why?
+
       }
       ul.hours li {
-
-
         color: #666666;
         height: 50px;
         font-size: 13px;
@@ -177,8 +138,8 @@
       }
       ul.hours li:first-child {
         //margin-top: 65px;
-      }
 
+      }
       .day-slots {
         position: fixed;
         top: 60px;
@@ -189,12 +150,9 @@
         height: calc(100% - 60px);
         overflow-y: auto;
         //padding-right: 15px;
-
         .column-container {
           width: calc(100% - 480px);
-
         }
-
         .column {
           height: 65px;
           line-height: 65px;
@@ -384,4 +342,42 @@ major {
   padding: 0 5px;
   height: 20px;
   line-height: 20px;
+}
+
+.search {
+  display: inline-block;
+  height: 65px;
+  background: none;
+  width: calc(100% - 100px);
+  margin: 0px;
+  //hacky
+  margin-left: -4px;
+  @include transform(translateY(-7px));
+  //hacky
+  input[type="text"] {
+    margin: 0;
+    height: 37px;
+    width: calc(100% - 55px);
+    background: #2C404F;
+    display: inline-block;
+    @include border-right-radius(99px);
+    @include transform(translateY(6px));
+    //hacky
+    color: #fff;
+    @include placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+  .search-icon {
+    height: 37px;
+    display: inline-block;
+    line-height: 37px;
+    @include border-left-radius(99px);
+    @include transform(translateY(6px));
+    //hacky
+    width: 40px;
+    text-align: center;
+    background: #2C404F;
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
