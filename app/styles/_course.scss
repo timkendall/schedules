@@ -68,6 +68,45 @@ $radius: 0px;
     }
   }
 
+  .body {
+    padding: 20px;
+    input {
+      border-radius: 99px;
+    }
+
+    #verify {
+      text-align: center;
+      input {
+        width: 250px;
+        margin: 0 auto;
+        padding-left: 10px;
+      }
+
+      .btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    #info {
+      .btn.back {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50%;
+      }
+
+      .btn.bg-yellow {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50%;
+      }
+    }
+  }
+
   .sections {
     li {
       div {

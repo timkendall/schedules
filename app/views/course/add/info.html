@@ -1,0 +1,34 @@
+<div id="info">
+
+   <form>
+
+        <div class="form-item">
+          <label for="id">ID:</label>
+          <input ng-disabled="true" value="{{course.id}}" type="text" name="course-id"  />
+        </div>
+
+        <div class="form-item">
+          <label for="name">Name:</label>
+          <input type="text" name="name"  ng-model="course.name" placeholder="ex. Introduction to Microeconomics" />
+        </div>
+
+        <div class="form-item">
+          <label for="credits">Credits:</label>
+           <select name="level" ng-model="course.credits">
+             <option name="0.5">3</option>
+             <option name="1">1</option>
+             <option name="3">0.5</option>
+           </select>
+        </div>
+
+        <div class="form-item">
+          <label for="description">Description:</label>
+          <textarea name="description" ng-model="course.description"></textarea>
+        </div><!-- .form-item -->
+
+
+      </form>
+
+   <div class="btn btn-small back" ng-click="back('/schedule/add/verify')">Back</div>
+   <div class="btn btn-small bg-yellow" ng-click="next('/schedule/add/sections')" ng-disabled="!info">Add section</div>
+</div>

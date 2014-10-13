@@ -46,10 +46,82 @@ angular
         controller: 'ScheduleCtrl'
        })
 
+      /*
+       * Course add states
+       */
+
       .state('schedule.add', {
         url: '/add',
-        templateUrl: 'views/course/add.html',
-        controller: 'CourseCtrl'
+        templateUrl: 'views/course/add/add.html',
+        controller: 'CourseAddCtrl'
+       })
+
+      .state('schedule.add.verify', {
+        url: '/verify',
+        templateUrl: 'views/course/add/verify.html'
+       })
+
+      .state('schedule.add.info', {
+        url: '/info',
+        templateUrl: 'views/course/add/info.html',
+        resolve: {
+          isValidated: function ($q, $rootScope) {
+            var deferred = $q.defer();
+            if (!$rootScope.validated) {
+              deferred.reject();
+            } else deferred.resolve();
+
+            return deferred.promise;
+          }
+        }
+       })
+
+      .state('schedule.add.sections', {
+        url: '/sections',
+        templateUrl: 'views/course/add/sections.html',
+        resolve: {
+          isValidated: function ($q, $rootScope) {
+            var deferred = $q.defer();
+            if (!$rootScope.validated) {
+              deferred.reject();
+            } else deferred.resolve();
+
+            return deferred.promise;
+          },
+
+          hasInfo: function ($q, $rootScope) {
+            var deferred = $q.defer();
+            if (!$rootScope.info) {
+              deferred.reject();
+            } else deferred.resolve();
+
+            return deferred.promise;
+          }
+        }
+       })
+
+      .state('schedule.add.completed', {
+        url: '/completed',
+        templateUrl: 'views/course/add/completed.html',
+        resolve: {
+          isValidated: function ($q, $rootScope) {
+            var deferred = $q.defer();
+            if (!$rootScope.validated) {
+              deferred.reject();
+            } else deferred.resolve();
+
+            return deferred.promise;
+          },
+
+          hasInfo: function ($q, $rootScope) {
+            var deferred = $q.defer();
+            if (!$rootScope.info) {
+              deferred.reject();
+            } else deferred.resolve();
+
+            return deferred.promise;
+          }
+        }
        })
 
       // Quick view of a course

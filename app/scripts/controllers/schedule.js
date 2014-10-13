@@ -16,7 +16,7 @@ angular.module('schedules')
     $scope.user = User;
 
     $scope.addCourse = function () {
-      $location.path('schedule/add');
+      $location.path('schedule/add/verify');
     }
 
     $scope.showStarred = function (show) {
