@@ -7,10 +7,28 @@
  * # ScheduleCtrl
  */
 angular.module('schedules')
-  .controller('ScheduleCtrl', function ($scope, Catalog, User, Calendar) {
+  .controller('ScheduleCtrl', function ($scope, $location, Catalog, User, Calendar) {
     $scope.availableCourses = Catalog['2014'];
+    $scope.showingStarred = false;
+
+
 
     $scope.user = User;
+
+    $scope.addCourse = function () {
+      $location.path('schedule/add');
+    }
+
+    $scope.showStarred = function (show) {
+      if (show) {
+        $scope.availableCourses = []; // replace this with user's faves
+        $scope.showingStarred = true;
+      } else {
+        $scope.availableCourses = Catalog['2014'];
+        $scope.showingStarred = false;
+      }
+
+    }
 
     $scope.pick = function (course) {
       //var index = $scope.availableCourses.indexOf(course);

@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="components/concise/dist/css/concise.css" />
         <link rel="stylesheet" href="components/animate.css/animate.css" />
         <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="components/molten/molten.css" />
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -26,10 +27,11 @@
         <![endif]-->
 
         <!-- Header (navigation, user) -->
-        <ng-include src="'templates/header.html'"></ng-include>
+       <!--  <ng-include src="'templates/header.html'"></ng-include> -->
 
         <!-- Main views -->
-        <div ui-view></div>
+        <div ui-view style="width: 100%; height: 100%"></div>
+
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
@@ -62,9 +64,11 @@
         <script src="scripts/controllers/catalog.js"></script>
         <script src="scripts/controllers/planned.js"></script>
         <script src="scripts/controllers/schedule.js"></script>
-         <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/course.js"></script>
         <script src="scripts/services/catalog.js"></script>
         <script src="scripts/services/user.js"></script>
+        <script src="scripts/services/school.js"></script>
         <script src="scripts/services/calendar.js"></script>
         <script src="scripts/directives/calendar.js"></script>
         <script src="scripts/directives/available.js"></script>

@@ -1,583 +1,78 @@
-<div id="schedule">
-  <div class="row" style="height: 100%">
-    <!-- List courses to choose -->
-    <div class="column-5 courses">
-      <div class="filter">
-        <div class="btn"><i class="fa fa-bookmark"></i></div>
-        <div class="btn active"><i class="fa fa-align-left"></i></div>
-
-         <!-- Search (course id, course name, professor) -->
-      <div class="search"><div class="search-icon"><i class="fa fa-search"></i></div><input type="text" name="name" ng-model="search" placeholder="Search" /></div>
-      </div>
+<div id="schedule" class="grid columns split250">
 
 
+    <!-- Schedule options -->
+    <div class="options-inner">
+       <h6>Time</h6>
+       <form>
+        <label for="time-night"><i class="fa fa-moon-o"></i></label>
+        <input type="radio" name="time-night" value="night" />
+       </form>
 
-      <!-- Filter options (major, time, day, show only open) -->
-
-      <!-- Courses -->
-      <div class="course-list">
-      <ul class="list-unstyled course-list">
-        <li ng-repeat="course in availableCourses | filter:search | orderBy:['id','name']" ng-class="{unavailable: course.availableSpots === 0, unavailable: course.picked}" ng-click="pick(course)">
-          <div class="row" style="height: 100%";>
+       <h6>Spread</h6>
 
 
-            <div class="column-16">
-              <small>{{course.id}}</small>
-              <small class="time">{{course.meets}}, {{course.time}}</small>
-              <h5>{{course.name}}</h5>
+    </div>
+
+    <div class="bar">
+        <!-- Available courses -->
+
+
+        <div class="courses">
+            <div class="filter">
+                <div class="btn" ng-class="{active: showingStarred}" ng-click="showStarred(true)"><i class="fa fa-star"></i></div>
+                <div class="btn" ng-class="{active: !showingStarred}" ng-click="showStarred(false)"><i class="fa fa-align-left"></i></div>
+
+                <!-- Search (course id, course name, professor) -->
+                <div class="search"><div class="search-icon"><i class="fa fa-search"></i></div><input type="text" name="name" ng-model="search" placeholder="" /></div>
             </div>
-          </div>
-        </li>
-      </ul>
-      </div>
-    </div>
 
-    <!-- Visually represent the schedule -->
-    <div class="column-7 overview">
-      <!-- <calendar></calendar> -->
-
-      <!-- Days row -->
-      <div class="days">
-        <div class="column">
-          <div class="day" ng-class="{filled: Calendar.mondays.length}">M</div>
-        </div>
-
-        <div class="column">
-          <div class="day" ng-class="{filled: Calendar.tuesdays.length}">T</div>
-        </div>
-
-        <div class="column">
-          <div class="day" ng-class="{filled: Calendar.wednesdays.length}">W</div>
-        </div>
-
-        <div class="column">
-          <div class="day" ng-class="{filled: Calendar.thursdays.length}">T</div>
-        </div>
-
-        <div class="column">
-          <div class="day" ng-class="{filled: Calendar.fridays.length}">F</div>
-        </div>
-
-        <div class="column">
-          <div class="day" ng-class="{filled: Calendar.saturdays.length}">S</div>
-        </div>
-      </div>
-
-      <!-- Hours column, days columns-->
-      <div class="slots">
-
-        <div class="day-slots">
-          <ul class="list-unstyled hours">
-            <li>8</li>
-            <li>9</li>
-            <li>10</li>
-            <li>11</li>
-            <li>noon</li>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <li>10</li>
-          </ul>
-
-
-          <div class="column-container">
-          <!-- Monday courses -->
-          <div class="column">
-            <event ng-repeat="course in Calendar.mondays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
-              <h5>{{course.id}}</h5>
-              <small>Beckman 201</small>
-            </event>
-
-            <ul class="list-unstyled">
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-          </ul>
-          </div>
-
-          <!-- Tuesday courses -->
-          <div class="column">
-            <event ng-repeat="course in Calendar.tuesdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
-              <h5>{{course.id}}</h5>
-              <small>Beckman 201</small>
-            </event>
-          <ul class="list-unstyled">
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-          </ul>
-          </div>
-
-          <!-- Wednesday courses -->
-          <div class="column">
-            <event ng-repeat="course in Calendar.wednesdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
-              <h5>{{course.id}}</h5>
-              <small>Beckman 201</small>
-            </event>
-          <ul class="list-unstyled">
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-          </ul>
-          </div>
-
-          <!-- Thursday courses -->
-          <div class="column">
-            <event ng-repeat="course in Calendar.thursdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
-              <h5>{{course.id}}</h5>
-              <small>Beckman 201</small>
-            </event>
-          <ul class="list-unstyled">
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-          </ul>
-          </div>
-
-          <!-- Friday courses -->
-          <div class="column">
-
-            <event ng-repeat="course in Calendar.fridays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
-              <h5>{{course.id}}</h5>
-              <small>Leatherby B13</small>
-            </event>
-          <ul class="list-unstyled">
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-          </ul>
-          </div>
-
-          <!-- Saturday courses -->
-          <div class="column">
-            <event ng-repeat="course in Calendar.saturdays" class="calendar-event" time="course.time" duration="course.duration" major="course.major">
-              <h5>{{course.id}}</h5>
-              <small>Beckman 201</small>
-            </event>
-          <ul class="list-unstyled">
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-            <li>
-              <div class="half"></div>
-              <div class="half"></div>
-            </li>
-          </ul>
-          </div>
-          </div>
-        </div> <!-- end dayslots-->
-      </div> <!-- end slots -->
-    </div> <!-- end overview-->
-
-    <!-- Summary of schedule -->
-    <div class="column-4 summary">
-      <!-- Visualization of time of day for classes-->
-      <div class="row visualization">
-
-        <div class="column-8">
-          <timesofday background="rgba(214,217,223,0.4)" evening="#0D1214"></timesofday>
-        </div>
-
-        <div class="column-8">
-          <h5 style="color: #FD5176;">{{user.schedule.morningClasses}} morning</h5>
-          <h5 style="color: #FBC17E;">{{user.schedule.afternoonClasses}} afternoon</h5>
-          <h5 style="color: #333356;">{{user.schedule.eveningClasses}} evening</h5>
-        </div>
-      </div>
-
-      <!-- Total courses and credits -->
-      <div class="row numbers">
-        <div class="column-8">
-          <h3 animate-on-change="user.schedule.register.length">{{user.schedule.register.length}}</h3>
-          <small>courses</small>
-        </div>
-
-        <div class="column-8">
-          <h3 animate-on-change="user.schedule.credits">{{user.schedule.credits}}</h3>
-          <small>credits</small>
-        </div>
-      </div>
-
-      <div class="row numbers">
-        <div class="column-8">
-          <h3>8AM</h3>
-          <small>earliest course</small>
-        </div>
-
-        <div class="column-8">
-          <h3>5:30PM</h3>
-          <small>latest course</small>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="column-16">
-          <ul class="list-unstyled course-list">
-            <li ng-repeat="course in user.schedule.register">
-              <div class="row">
-                <div class="column-2">
-                <i class="fa fa-clock-o"></i>
+            <!-- Courses -->
+            <div class="course-list">
+                <div class="no-results" ng-hide="filteredCourses.length">
+                  <h6>Course not there?</h6>
+                  <div class="btn btn-small" ng-click="addCourse()">Add It</div>
                 </div>
 
-                <div class="column-12">
-                  <small>{{course.id}}</small>
-                  <h5>{{course.name}}</h5>
-                </div>
+                <ul class="list-unstyled course-list">
+                    <li ng-repeat="course in filteredCourses = (availableCourses | filter:search | orderBy:['id','name'])" ng-class="{unavailable: course.availableSpots === 0, unavailable: course.picked}" ng-click="pick(course)">
+                        <div class="row" style="height: 100%";>
 
-                <div class="column-2">
-                  <i class="fa fa-times-circle"></i>
-                </div>
-              </div>
 
-            </li>
+                            <div class="column-16">
+                                <small>{{course.id}}</small>
+                                <small class="time">{{course.meets}}, {{course.time}}</small>
+                                <h5>{{course.name}}</h5>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
 
     </div>
+    <div class="content">
 
-  </div>
+        <div class="grid rows split60">
+            <div class="bar generated-schedules">
+                <!-- Option button -->
+                <div class="options">
+                    <i class="fa fa-cog"></i>
+
+                </div>
+                <!-- Schedules -->
+                <ul class="list-inline">
+                    <li class="active">A</li>
+                    <li>B</li>
+                    <li>C</li>
+                </ul>
+
+            </div>
+            <div class="content">
+                <calendar></calendar>
+            </div>
+        </div>
+    </div>
+    <!-- Show course modal -->
+    <div ui-view style="width: 100%; height: 100%"></div>
 </div>

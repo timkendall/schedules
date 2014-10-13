@@ -1,0 +1,32 @@
+<div class="course-container">
+  <div class="course">
+    <!-- Close button -->
+    <div class="close"><i class="fa fa-close" ng-click="close()"></i></div>
+    <!-- Favorite badge -->
+    <div class="fav"><i class="fa fa-star-o" ng-class="{'fa-star': user.favorited[course.id]}"></i></div>
+
+    <div class="header">
+      <!-- Course id and name -->
+      <h4>{{course.id}}</h4>
+      <h3>{{course.name}}</h3>
+
+      <!-- List sections -->
+      <ul class="list-inline sections">
+        <li><div>10AM</div><div>MWF</div></li>
+        <li><div>11AM</div><div>MWF</div></li>
+        <li><div>1PM</div><div>TTh</div></li>
+
+        <li class="add">Add</li>
+      </ul>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="list-inline tabs">
+      <li ui-sref-active="active"><a href ui-sref="schedule.course.overview">Overview</a></li>
+      <li ui-sref-active="active"><a href ui-sref="schedule.course.reviews">Reviews</a></li>
+      <li ui-sref-active="active"><a href ui-sref="schedule.course.updates">Updates</a></li>
+    </ul>
+
+    <div ui-view style="width: 100%; height: 100%; background: #F6F9FC"></div>
+  </div>
+</div>
