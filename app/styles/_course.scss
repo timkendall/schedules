@@ -90,7 +90,7 @@ $radius: 0px;
       }
     }
 
-    #info {
+    #info, #sections {
       .btn.back {
         position: absolute;
         bottom: 0;
@@ -98,7 +98,7 @@ $radius: 0px;
         width: 50%;
       }
 
-      .btn.bg-yellow {
+      .btn.bg-yellow, .btn.bg-green {
         position: absolute;
         bottom: 0;
         right: 0;

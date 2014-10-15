@@ -9,6 +9,7 @@ angular.module('schedules').controller('CourseAddCtrl', function($scope, $rootSc
     $rootScope.validated = false;
     $rootScope.info = false;
     $scope.course = {};
+    $scope.course.sections = [];
     $scope.course.credits = 3;
     $scope.completed = false;
     $scope.validMessage = 'Enter a course ID';
