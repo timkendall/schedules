@@ -7,7 +7,17 @@
  * # ScheduleCtrl
  */
 angular.module('schedules')
-  .controller('ScheduleCtrl', function ($scope, $location, Catalog, User, Calendar) {
+  .controller('ScheduleCtrl', function ($scope, $location, Catalog, User, Calendar, Course) {
+
+
+    Course.all().then(function (response) {
+        console.log(response);
+    });
+
+    var course    = Course.new({ name: "My First Post" , courseId: "CPSC-300"});
+    console.log(course)
+
+
     $scope.availableCourses = Catalog['2014'];
     $scope.showingStarred = false;
 

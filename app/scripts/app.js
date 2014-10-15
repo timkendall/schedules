@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ui.router',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ActiveResource'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     // Check if the user is connected
