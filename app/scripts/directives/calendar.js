@@ -11,6 +11,50 @@ angular.module('schedules').directive('calendar', function ($timeout) {
     restrict: 'E',
     templateUrl: 'templates/calendar.html',
 
+    controller: function ($scope) {
+      /*
+       * Options - these can be set by the user
+       */
+      $scope.options = {
+        earliest: 8,
+        latest: 21,
+        preferEvening: null,
+        preferAfternoon: null,
+        preferMorning: null,
+        minimizeGaps: null,
+        maximizeGaps: null,
+        minimizeDays: null,
+        maximizeDays: null
+      }
+       /*
+       * Calculate hours available
+       */
+      $scope.getHours = function () {
+        return new Array($scope.options.latest - $scope.options.earliest + 1);
+      }
+       /*
+       * Hold the generated schedules
+       */
+      $scope.schedules = [];
+
+
+      /*
+       * Primary function - generate array of schedules based on courses and options
+       */
+      function generateSchedules () {}
+
+      /*
+       * Course getter by day
+       */
+      function getCoursesOn (day) {
+        var courses = [];
+        self.courses.forEach(function (course, index) {
+          if (course.meets[day]) courses.push(course);
+        });
+        return courses;
+      }
+    },
+
     link: function (scope, element, attr) {
 
       var earliest = 7, // am

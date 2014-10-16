@@ -15,6 +15,7 @@ angular.module('schedules').factory('Course', ['ActiveResource',
 
            // Pull major from courseId (ex. 'CPSC'-200)
            // this.computedProperty('major', function () {
+           //  console.log(this)
            //    return this.courseId.substring(0, this.courseId.indexOf('-'));
            //  }, 'courseId');
 
@@ -32,7 +33,10 @@ angular.module('schedules').factory('Course', ['ActiveResource',
         Course.inherits(ActiveResource.Base);
 
         // Set API endpoints
-        Course.api.set('http://107.170.253.85:1337/');
+        Course.api.set('http://localhost:1337/').format('json');
+        Course.api.indexURL = 'http://localhost:1337/course';
+        Course.api.showURL = 'http://localhost:1337/course';
+        Course.api.createURL = 'http://localhost:1337/course/create';
 
         // Cleanup
         //Course.dependentDestroy('sections');

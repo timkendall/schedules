@@ -5,7 +5,7 @@
  * @description
  * # CatalogCtrl
  */
-angular.module('schedules').controller('CourseAddCtrl', function($scope, $rootScope, $location, Catalog) {
+angular.module('schedules').controller('CourseAddCtrl', function($scope, $rootScope, $location, Catalog, Course, $http) {
     $rootScope.validated = false;
     $rootScope.info = false;
     $scope.course = {};
@@ -73,12 +73,27 @@ angular.module('schedules').controller('CourseAddCtrl', function($scope, $rootSc
         $location.path(path);
     }
 
+    $http.post('http://localhost:1337/course/create', {"name": "Intro to Econ", "courseId": "ECON-101", "level": 100, "credits": 3}).
+  success(function(data, status, headers, config) {
+    // this callback will be called asynchronously
+    // when the response is available
+    console.log(data)
+  }).
+  error(function(data, status, headers, config) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    console.log(status)
+  });
 
     $scope.complete = function () {
       // Prevent local dupes
       if (!$scope.completed) {
         $scope.completed = true;
-        Catalog['2014'].push($scope.course);
+        //Catalog['2014'].push($scope.course);
+        var course = Course.new({"name": "Intro to Econ", "courseId": "ECON-101", "level": 100, "credits": 3});
+        course.$save().then(function (response) {
+            console.log(response)
+        });
         $location.path('/schedule');
       }
 

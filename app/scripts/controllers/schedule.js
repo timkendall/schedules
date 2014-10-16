@@ -14,6 +14,7 @@ angular.module('schedules')
         console.log(response);
     });
 
+
     var course    = Course.new({ name: "My First Post" , courseId: "CPSC-300"});
     console.log(course)
 
