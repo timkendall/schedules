@@ -16,7 +16,7 @@ angular
     'ui.router',
     'ngSanitize',
     'ngTouch',
-    'ActiveResource'
+    'angular-data.DS'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     // Check if the user is connected
@@ -131,13 +131,13 @@ angular
         templateUrl: 'views/course.html',
         controller: 'CourseCtrl',
         resolve: {
-          loadCourse: function ($q, $stateParams, Catalog, $window, $location) {
+          loadCourse: function ($q, $stateParams, Catalog, $window, $location, Course) {
             var deferred = $q.defer();
             console.log('resolving')
 
             // Try and find the requested device
-            var course = _.find(Catalog['2014'], function (course) {
-              return course.id == $stateParams.courseId
+            var course = _.find(Course.filter(), function (course) {
+              return course.courseId == $stateParams.courseId
             });
 
             if (course) {
@@ -207,10 +207,29 @@ angular
 
       $urlRouterProvider.otherwise('/schedule');
 
-  }).run(function ($rootScope) {
+  }).run(function ($rootScope, Course) {
     // Code to run before app is initalized
+
     // Catch state change errors
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       console.log(error)
     })
+
+    /*
+     * Populate $scope with courses
+     */
+    Course.findAll().then(function (courses) {
+
+    }).catch(function (error) {
+      console.log(error)
+    });
+
+    /*
+     * Update Course(s) collection when somebody adds one
+     */
+    //  socket.on('createCourse', function (course) {
+    //   // Someone in another browser created a new post
+    //   // Inject the new post into the data store of this browser
+    //   Course.inject(course);
+    // });
   });

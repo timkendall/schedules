@@ -1,46 +1,17 @@
 'use strict';
-//Articles service used for articles REST endpoint
-angular.module('schedules').factory('Course', ['ActiveResource',
-    function (ActiveResource) {
 
-        function Course (data) {
-           this.number('id'); // this is the primary key, gets set by DB
+angular.module('schedules').factory('Course', ['DS',
+    function (DS) {
+      var Course = DS.defineResource({
+        name: 'course',
+        baseUrl: 'http://localhost:1337/',
 
-           this.string('courseId');
-           this.string('name');
-           this.string('description');
-           //this.string('major');
-           //this.number('level');
-           this.number('credits');
+        methods: {
 
-           // Pull major from courseId (ex. 'CPSC'-200)
-           // this.computedProperty('major', function () {
-           //  console.log(this)
-           //    return this.courseId.substring(0, this.courseId.indexOf('-'));
-           //  }, 'courseId');
-
-           // // Pull level from courseID (ex. CPSC-'200')
-           // this.computedProperty('level', function () {
-           //    return this.courseId.substring(this.courseId.indexOf('-'), this.courseId.length - 1);
-           //  }, 'courseId');
+        }
+      });
 
 
-           // Relations
-           //this.hasMany('sections');
-        };
-
-        // Inherit ActiveResource functionality
-        Course.inherits(ActiveResource.Base);
-
-        // Set API endpoints
-        Course.api.set('http://localhost:1337/').format('json');
-        Course.api.indexURL = 'http://localhost:1337/course';
-        Course.api.showURL = 'http://localhost:1337/course';
-        Course.api.createURL = 'http://localhost:1337/course/create';
-
-        // Cleanup
-        //Course.dependentDestroy('sections');
-
-        return Course;
+      return Course;
     }
 ]);

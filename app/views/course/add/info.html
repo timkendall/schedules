@@ -4,7 +4,7 @@
 
         <div class="form-item">
           <label for="id">ID:</label>
-          <input ng-disabled="true" value="{{course.id}}" type="text" name="course-id"  />
+          <input ng-disabled="true" value="{{course.courseId}}" type="text" name="course-id"  />
         </div>
 
         <div class="form-item">
@@ -14,10 +14,7 @@
 
         <div class="form-item">
           <label for="credits">Credits:</label>
-           <select name="level" ng-model="course.credits">
-             <option name="0.5">3</option>
-             <option name="1">1</option>
-             <option name="3">0.5</option>
+           <select name="level" ng-options="credit.value as credit.value for credit in credits" ng-model="course.credits">
            </select>
         </div>
 

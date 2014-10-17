@@ -7,24 +7,15 @@
  * # ScheduleCtrl
  */
 angular.module('schedules')
-  .controller('ScheduleCtrl', function ($scope, $location, Catalog, User, Calendar, Course) {
+  .controller('ScheduleCtrl', function ($scope, $location, Course) {
 
+   //var course = Course.create({name: "Physicology", courseId: "PSY-800", level: 400, credits: 3 }); // { title: 'How to Cook', id: 45 }
+    // course.save().then(function (course) {
+    //   console.log(course)
+    // })
 
-    Course.all().then(function (response) {
-        console.log(response);
-    });
-
-
-    var course    = Course.new({ name: "My First Post" , courseId: "CPSC-300"});
-    console.log(course)
-
-
-    $scope.availableCourses = Catalog['2014'];
+    $scope.courses = [];
     $scope.showingStarred = false;
-
-
-
-    $scope.user = User;
 
     $scope.addCourse = function () {
       $location.path('schedule/add/verify');
@@ -32,13 +23,18 @@ angular.module('schedules')
 
     $scope.showStarred = function (show) {
       if (show) {
-        $scope.availableCourses = []; // replace this with user's faves
+        $scope.unbindCourses();
+        $scope.courses = []; // replace this with user's faves
         $scope.showingStarred = true;
       } else {
-        $scope.availableCourses = Catalog['2014'];
+        $scope.unbindCourses = Course.bindAll($scope, 'courses', {}); // Grab from local storage
         $scope.showingStarred = false;
       }
 
+    }
+
+    $scope.view = function (course) {
+      $location.path('/schedule/course/' + course.courseId);
     }
 
     $scope.pick = function (course) {
@@ -82,25 +78,5 @@ angular.module('schedules')
       }
     }
 
-    // Containers for calendar
-   $scope.Calendar = Calendar;
-
-    // Pluralization templates
-    $scope.courseMorningForms = {
-      0: 'No morning courses',
-      one: '{} morning course',
-      other: '{} morning courses'
-    };
-
-    $scope.courseAfternoonForms = {
-      0: 'No afteroon courses',
-      one: '{} afteroon course',
-      other: '{} afteroon courses'
-    };
-
-    $scope.courseEveningForms = {
-      0: 'No evening courses',
-      one: '{} evening course',
-      other: '{} evening courses'
-    };
+    $scope.unbindCourses = Course.bindAll($scope, 'courses', {});
   });
