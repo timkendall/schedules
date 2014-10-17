@@ -12,9 +12,12 @@
 
       <!-- List sections -->
       <ul class="list-inline sections">
-        <li><div>10AM</div><div>MWF</div></li>
+        <!-- <li><div>10AM</div><div>MWF</div></li>
         <li><div>11AM</div><div>MWF</div></li>
-        <li><div>1PM</div><div>TTh</div></li>
+        <li><div>1PM</div><div>TTh</div></li> -->
+        <li ng-repeat="section in course.sections">
+        <div>{{section.starts}}</div><div>{{section.meets}}</div>
+        </li>
 
         <li class="add">Add</li>
       </ul>
