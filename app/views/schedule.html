@@ -35,13 +35,13 @@
                 </div>
 
                 <ul class="list-unstyled course-list">
-                    <li ng-repeat="course in filteredCourses = (availableCourses | filter:search | orderBy:['id','name'])" ng-class="{unavailable: course.availableSpots === 0, unavailable: course.picked}" ng-click="pick(course)">
+                    <li ng-repeat="course in filteredCourses = (courses | filter:search | orderBy:['id','name'])" ng-class="{unavailable: course.availableSpots === 0, unavailable: course.picked}" ng-click="view(course)">
                         <div class="row" style="height: 100%";>
 
 
                             <div class="column-16">
-                                <small>{{course.id}}</small>
-                                <small class="time">{{course.meets}}, {{course.time}}</small>
+                                <small>{{course.courseId}}</small>
+                                <small class="time">{{course.credits}} credits</small>
                                 <h5>{{course.name}}</h5>
                             </div>
                         </div>

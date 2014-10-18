@@ -16,6 +16,11 @@
         </div>
 
         <div class="form-item">
+            <label for="location">Location:</label>
+            <input type="text" name="location"  ng-model="course.sections[sections.length].location" placeholder="ex. BK213" />
+        </div>
+
+        <div class="form-item">
             <label for="credits">Proffesor:</label>
             <select name="level" ng-model="course.sections[sections.length].professor">
                 <option name="german" value="0">Rene German</option>

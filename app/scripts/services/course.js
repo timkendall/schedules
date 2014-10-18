@@ -1,14 +1,17 @@
 'use strict';
 
-//Articles service used for articles REST endpoint
-angular.module('schedules').factory('Course', ['$resource',
-  function($resource) {
-    return $resource('course/:courseId', {
-      courseId: '@_id'
-    }, {
-      update: {
-        method: 'PUT'
-      }
-    });
-  }
+angular.module('schedules').factory('Course', ['DS',
+    function (DS) {
+      var Course = DS.defineResource({
+        name: 'course',
+        baseUrl: 'http://localhost:1337/',
+
+        methods: {
+
+        }
+      });
+
+
+      return Course;
+    }
 ]);
