@@ -10,11 +10,11 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $locatio
     // course.save().then(function (course) {
     //   console.log(course)
     // })
-    Course.find(33).then(function(course) {
-        console.log(course); // { title: 'How to Cook', id: 45 }
-        // document 45 has already been injected into the store at this point
-        console.log(Course.get(33)); // { title: 'How to Cook', id: 45 }
-    });
+    // Course.find(33).then(function(course) {
+    //     console.log(course); // { title: 'How to Cook', id: 45 }
+    //     // document 45 has already been injected into the store at this point
+    //     console.log(Course.get(33)); // { title: 'How to Cook', id: 45 }
+    // });
 
     $scope.courses = [];
     $scope.showingStarred = false;

@@ -7,7 +7,7 @@
  *
  * Config module of the application.
  */
-angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'angular-data.DS']).config(function($stateProvider, $urlRouterProvider) {
+angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'angular-data.DS', 'btford.socket-io']).config(function($stateProvider, $urlRouterProvider) {
     // Check if the user is connected
     var checkLoggedin = function($q, $timeout, $http, $location) {
         // Initialize a new promise
@@ -99,7 +99,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         templateUrl: 'views/course.html',
         controller: 'CourseCtrl',
         resolve: {
-            loadCourse: function($q, $stateParams, Catalog, $window, $location, Course) {
+            loadCourse: function($q, $stateParams, $window, $location, Course) {
                 var deferred = $q.defer();
                 console.log('resolving')
                 var course = null;
@@ -164,25 +164,39 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         controller: 'CourseCtrl'
     })
     $urlRouterProvider.otherwise('/schedule');
-}).run(function($rootScope, Course) {
-    // Code to run before app is initalized
-    // Catch state change errors
+}).run(function($rootScope, Course, Major, Socket) {
+    /*
+     * Catch state change errors (otherwise won't see)
+     */
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         console.log(error)
     })
     /*
-     * Populate $scope with courses
+     * Populate courses
      */
     Course.findAll().then(function(courses) {}).
     catch (function(error) {
         console.log(error)
     });
     /*
+     * Populate majors
+     */
+    Major.findAll().then(function(majors) {}).
+    catch (function(error) {
+        console.log(error)
+    });
+
+
+    /*
      * Update Course(s) collection when somebody adds one
      */
-    //  socket.on('createCourse', function (course) {
-    //   // Someone in another browser created a new post
-    //   // Inject the new post into the data store of this browser
-    //   Course.inject(course);
-    // });
+
+}).factory('Socket', function (socketFactory) {
+  var myIoSocket = io.connect('http://localhost:1337/');
+
+  var mySocket = socketFactory({
+    ioSocket: myIoSocket
+  });
+
+  return mySocket;
 });

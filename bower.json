@@ -17,7 +17,8 @@
     "angular-raven": "~0.5.6",
     "snap.svg": "~0.3.0",
     "molten": "~0.4.2",
-    "angular-data": "~1.0.1"
+    "angular-data": "~1.0.1",
+    "angular-socket-io": "~0.6.0"
   },
   "devDependencies": {}
 }
