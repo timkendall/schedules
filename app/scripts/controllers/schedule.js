@@ -16,6 +16,7 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $locatio
     //     console.log(Course.get(33)); // { title: 'How to Cook', id: 45 }
     // });
 
+    $scope.search = null;
     $scope.courses = [];
     $scope.showingStarred = false;
 

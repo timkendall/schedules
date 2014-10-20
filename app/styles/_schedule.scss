@@ -1,6 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Exo+2:400,300,500,600,700);
 
 #schedule {
+
+  .schedule {
+    padding-top: 65px;
+  }
+
   .options {
     position: absolute;
     top: 0;
@@ -12,7 +17,7 @@
     margin-top: 12px;
     padding: 0 14px;
     border-radius: 99px;
-    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
     i {
       color: #4B4B4B;
       position: relative;
@@ -57,10 +62,8 @@
     // overflow-y: auto;
     background: #19252D;
     height: 100%;
-
     .no-results {
       width: 250px;
-
       margin-top: 50px;
       h6 {
         color: #fff;
@@ -68,7 +71,6 @@
         margin: 0;
         margin-bottom: 10px;
       }
-
       .btn {
         display: block;
         background: none;
@@ -80,7 +82,6 @@
         text-align: center;
         @include transition(all 0.2s ease-in-out);
       }
-
       .btn:hover {
         background: #1D9BD6;
         @include transition(all 0.2s ease-in-out);
@@ -94,24 +95,7 @@
       background: darken(#19252D, 2%);
       height: 60px;
       z-index: 999;
-      .btn:first-child {
-        margin-right: -4px;
-      }
-      .btn {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 50px;
-        margin: 0;
-        background: darken(#19252D, 2%);
-        height: 60px;
-        line-height: 60px;
-        padding: 0;
-        color: rgba(255, 255, 255, 0.5);
-      }
-      .btn.active {
-        color: #1D9BD6;
-      }
-      .btn: last-child;
+      overflow: hidden;
     }
     .course-list {
       height: calc(100% -60px);
@@ -340,42 +324,165 @@ major {
   line-height: 20px;
 }
 
-.search {
-  display: inline-block;
-  height: 65px;
-  background: none;
-  width: calc(100% - 100px);
-  margin: 0px;
-  //hacky
-  margin-left: -4px;
-  @include transform(translateY(-7px));
-  //hacky
-  input[type="text"] {
-    margin: 0;
+.filter-buttons {
+  display: block;
+  //border: 1px solid green;
+  width: 102px;
+  float: right;
+  margin: 10px 0 0 10px;
+  @include transform(translateX(14px)); //hacky
+  @include transition(all 0.3s ease-in-out);
+  opacity: 1;
+
+  .btn {
+    border: none;
     height: 37px;
-    width: calc(100% - 55px);
-    background: #2C404F;
-    display: inline-block;
-    @include border-right-radius(99px);
-    @include transform(translateY(6px));
-    //hacky
-    color: #fff;
-    @include placeholder {
-      color: rgba(255, 255, 255, 0.5);
+    padding: 0 10px;
+    line-height: 39px;
+    color: #898F92;
+    background: none;
+  }
+  .btn.active {
+    //background: #898F92;
+    color: #1D9BD6;
+  }
+  .btn:first-child {
+    @include border-left-radius(6px);
+    margin-right: -4px;
+  }
+
+  .btn:last-child {
+    @include border-right-radius(6px);
+  }
+}
+
+.filter-results {
+  position: fixed;
+  //border: 1px solid red;
+  background: rgba(0,0,0,0.3);
+  width: 250px;
+  height: 100%;
+  //pointer-events: none;
+  @include animation-duration(0.2s);
+}
+
+.filter-results.fadeIn {
+  //pointer-events: default;
+}
+
+#course-results {
+  //border: 1px solid red;
+  background: none !important;
+  padding-top: 30px;
+  li {
+    background: rgba(24,36,44,0.9);
+    border-bottom: 1px solid lighten(#18242C, 10%);
+
+    small .time {
+        display: inline-block;
+        float: right;
+      }
+  }
+
+  // Should be .active, will add in a sec
+  li.active {
+    background: #1D9BD6 !important;
+
+    small {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .time {
+      color: #18242C;
     }
   }
-  .search-icon {
-    height: 37px;
-    display: inline-block;
-    line-height: 37px;
-    @include border-left-radius(99px);
-    @include transform(translateY(6px));
-    //hacky
-    width: 40px;
-    text-align: center;
-    background: #2C404F;
+
+  li:last-child {
+    border: none;
+  }
+}
+
+input[type="text"].active + .filter-buttons {
+  //@include transform(translateX(100px));
+  @include transform(translateX(100%));
+  opacity: 0;
+  @include transition(all 0.2s ease-in-out);
+}
+
+.filter .fa-search {
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  z-index: 999;
+  color: #959FA6;
+  font-size: 13px;
+}
+input[type="text"].add-course {
+  display: block;
+  z-index: 99;
+  background: none;
+  float: left;
+  //width: 100%;
+  //line-height: 48px; //hacky
+  //hacky
+  position: fixed;
+  margin: 4px 0 0 12px;
+  //margin-top: 5px; //hacky
+  padding-left: 30px;
+  height: 37px;
+  width: 140px;
+  background: #2C404F;
+  display: inline-block;
+  @include transition(all 0.2s ease-in-out);
+  border-radius: 6px;
+  @include transform(translateY(6px));
+  //hacky
+  color: #fff;
+  @include placeholder {
     color: rgba(255, 255, 255, 0.5);
   }
+}
+
+input[type="text"].add-course.active {
+  width: 166px;
+  @include transition(all 0.2s ease-in-out);
+}
+
+.search:before {
+  content: "\f002";
+  position: absolute;
+  font-family: FontAwesome;
+  font-size: 14px;
+  top: 6px;
+  left: 10px;
+  color: #959FA6;
+  z-index: 999;
+}
+
+.btn.cancel {
+  background: none;
+  display: block;
+  position: absolute;
+  height: 65px;
+  line-height: 63px;
+  padding-top: 0;
+  padding-bottom: 0;
+  top: 0;
+  right: -20px;
+  color: rgba(255,255,255,0.9);
+
+  opacity: 0;
+  @include transform(scale(0));
+  @include transition(all 0.3s ease-in-out);
+
+  // @include animation(zoomIn 0.3s ease-in-out);
+  // @include animation-fill-mode(both);
+}
+
+.btn.cancel.show {
+  opacity: 1;
+  @include transform(scale(1));
+  @include transition(all 0.3s ease-in-out);
 }
 
 .flip-modal {

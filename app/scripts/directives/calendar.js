@@ -12,6 +12,7 @@ angular.module('schedules').directive('calendar', function ($timeout) {
     templateUrl: 'templates/calendar.html',
 
     controller: function ($scope) {
+
       /*
        * Options - these can be set by the user
        */

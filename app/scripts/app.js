@@ -7,7 +7,7 @@
  *
  * Config module of the application.
  */
-angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'angular-data.DS', 'btford.socket-io']).config(function($stateProvider, $urlRouterProvider) {
+angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'angular-data.DS']).config(function($stateProvider, $urlRouterProvider) {
     // Check if the user is connected
     var checkLoggedin = function($q, $timeout, $http, $location) {
         // Initialize a new promise
@@ -164,7 +164,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         controller: 'CourseCtrl'
     })
     $urlRouterProvider.otherwise('/schedule');
-}).run(function($rootScope, Course, Major, Socket) {
+}).run(function($rootScope, Course, Major) {
     /*
      * Catch state change errors (otherwise won't see)
      */
@@ -191,12 +191,4 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
      * Update Course(s) collection when somebody adds one
      */
 
-}).factory('Socket', function (socketFactory) {
-  var myIoSocket = io.connect('http://localhost:1337/');
-
-  var mySocket = socketFactory({
-    ioSocket: myIoSocket
-  });
-
-  return mySocket;
 });

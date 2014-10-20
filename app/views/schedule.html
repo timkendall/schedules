@@ -20,15 +20,50 @@
 
         <div class="courses">
             <div class="filter">
+                <!-- Search (course id, course name, professor) -->
+                <i class="fa fa-search"></i>
+                <input ng-class="{active: addingCourse}" class="add-course" type="text" name="name" ng-model="search" ng-focus="addingCourse = true"  placeholder="Add courses" options="typeheadOptions" datasets="typeheadData" sf-typeahead />
+
+                <div class="filter-buttons">
+
                 <div class="btn" ng-class="{active: showingStarred}" ng-click="showStarred(true)"><i class="fa fa-star"></i></div>
                 <div class="btn" ng-class="{active: !showingStarred}" ng-click="showStarred(false)"><i class="fa fa-align-left"></i></div>
 
-                <!-- Search (course id, course name, professor) -->
-                <div class="search"><div class="search-icon"><i class="fa fa-search"></i></div><input type="text" name="name" ng-model="search" placeholder="" /></div>
+                </div>
+
+                <div class="btn btn-small cancel animated" ng-class="{show: addingCourse}" ng-click="addingCourse = false">Cancel</div>
+            </div>
+
+            <!-- Overlay the search results -->
+            <div class="filter-results animated" ng-class="{fadeIn: addingCourse, fadeOut: !addingCourse}">
+
+            <div class="results-list">
+                <!-- Display a template course if no results -->
+
+                <ul class="list-unstyled course-list" id="course-results" ng-hide="!search.length" results>
+                    <li ng-repeat="course in filteredCourses = (courses | filter:search | orderBy:['courseId']) track by $index" ng-class="{active: $index == focusIndex}" ng-click="view(course)">
+                        <div class="row" style="height: 100%";>
+
+
+                            <div class="column-16">
+                                <small>{{course.courseId}} <small class="time">{{course.sections.length}} sections</small></small>
+
+                                <h5>{{course.name}}</h5>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+            </div>
+
+            <div class="schedule">
+                <div class="no-results" >
+                  <h6>Nothing in your schedule</h6>
+                </div>
             </div>
 
             <!-- Courses -->
-            <div class="course-list">
+            <div class="course-list" ng-show="false">
                 <div class="no-results" ng-hide="filteredCourses.length">
                   <h6>Course not there?</h6>
                   <div class="btn btn-small" ng-click="addCourse()">Add It</div>
