@@ -414,6 +414,10 @@ major {
     border: none;
   }
 
+  li.template:hover, li.template:active {
+    background: rgba(24,36,44,0.5) !important;
+  }
+
   li.template {
     //border-left: 2px solid #FACE75;
     //background: lighten(#131E25, 5%) !important;

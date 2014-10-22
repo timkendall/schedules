@@ -17,8 +17,6 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
 
       $scope.changeFocusIndex = function (index) {
         $scope.focusIndex = index;
-        console.log('sss')
-        //$scope.$digest();
       }
 
       /*

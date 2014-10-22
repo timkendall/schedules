@@ -5,7 +5,7 @@
  * @description
  * # ScheduleCtrl
  */
-angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootScope, $location, Course) {
+angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootScope, $location, $timeout, Course) {
     //var course = Course.create({name: "Physicology", courseId: "PSY-800", level: 400, credits: 3 }); // { title: 'How to Cook', id: 45 }
     // course.save().then(function (course) {
     //   console.log(course)
@@ -154,8 +154,15 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
              */
             console.log($scope.course)
             Course.create($scope.course).then(function(course) {
+
+                   // Remove the course from $scope.courses
+                var newCourse = (_.remove($scope.courses, function(_course) { return _course.courseId == course.courseId; }))[0];
+                // Add course to users courses
+                $scope.chosen.push(newCourse);
                 // Good to go, course saved
                 $scope.cancel();
+
+
             }).
             catch (function(error) {
                 $scope.error = error;
