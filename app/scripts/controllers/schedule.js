@@ -5,7 +5,7 @@
  * @description
  * # ScheduleCtrl
  */
-angular.module('schedules').controller('ScheduleCtrl', function($scope, $location, Course) {
+angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootScope, $location, Course) {
     //var course = Course.create({name: "Physicology", courseId: "PSY-800", level: 400, credits: 3 }); // { title: 'How to Cook', id: 45 }
     // course.save().then(function (course) {
     //   console.log(course)
@@ -15,15 +15,13 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $locatio
     //     // document 45 has already been injected into the store at this point
     //     console.log(Course.get(33)); // { title: 'How to Cook', id: 45 }
     // });
-
     $scope.search = null;
     $scope.courses = [];
     $scope.showingStarred = false;
-
+    $scope.chosen = [];
     $scope.addCourse = function() {
         $location.path('schedule/add/verify');
     }
-
     $scope.showStarred = function(show) {
         if (show) {
             $scope.unbindCourses();
@@ -34,11 +32,9 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $locatio
             $scope.showingStarred = false;
         }
     }
-
     $scope.view = function(course) {
         $location.path('/schedule/course/' + course.courseId);
     }
-
     $scope.pick = function(course) {
         //var index = $scope.availableCourses.indexOf(course);
         // Lookup corresponding cours ein catalog
@@ -78,6 +74,81 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $locatio
             }
         }
     }
-
     $scope.unbindCourses = Course.bindAll($scope, 'courses', {});
+
+
+    /*
+     * Adding course stuff
+     */
+
+
+    $scope.course = {};
+    $scope.validated = false;
+    $scope.error = null;
+    $scope.addingCourse = false;
+    /*
+     * Dirty watch for now; should buold custom form validation directive
+     */
+    var idPattern = new RegExp("[A-Z]+-+[0-9]");
+    $scope.$watch('course.courseId', function(newVal, oldVal) {
+        if (newVal) {
+            var upper = newVal.toUpperCase();
+            $scope.course.courseId = upper;
+            // Invalid if doesn't match regex
+            if (!idPattern.test(upper)) {
+                $scope.validated = false;
+                $scope.error = 'Invalid course ID format; Ex. ECON-101';
+                return;
+            };
+            // Valid regex, see if we have it already
+            var course = _.find(Course.filter(), function(course) {
+                return course.courseId == upper;
+            });
+            if (!course) {
+                $scope.validated = true;
+                // Compute courseId (should be done in model)
+                var courseId = $scope.course.courseId;
+                /*
+                 * Compute course level
+                 */
+                $scope.course.level = parseInt(courseId.substring(courseId.indexOf('-') + 1, courseId.indexOf('-') + 2) + '00');
+
+            } else {
+                $scope.validated = false;
+                $scope.error = 'Course ' + $scope.course.courseId + ' already exists';
+            }
+        } else {}
+    });
+    $scope.cancel = function() {
+        $scope.validated = false;
+        // Bindings for our UI
+        $scope.addingCourse = false;
+        // CLear course model
+        $scope.course = {};
+        // Emit event for other UI changes and actions
+        $scope.$emit('AddCourse:cancel');
+    }
+    /*
+     * Save new course (local and remote)
+     */
+    $scope.complete = function() {
+        // Prevent local dupes
+        if ($scope.validated) {
+
+            /*
+             * Try to create the new Course
+             */
+            console.log($scope.course)
+            Course.create($scope.course).then(function(course) {
+                // Good to go, course saved
+                $scope.cancel();
+            }).
+            catch (function(error) {
+                $scope.error = error;
+                console.log(error);
+                alert($scope.error.data);
+
+            })
+        }
+    }
 });

@@ -101,7 +101,7 @@
       height: calc(100% -60px);
       overflow-y: scroll;
       background: #19252D;
-      margin-top: 30px;
+      margin-top: 0px;
       .add {
         h4 {
           text-align: center;
@@ -358,24 +358,33 @@ major {
 
 .filter-results {
   position: fixed;
+  z-index: 9999;
+  //border: 1px solid red;
+  margin-top: 60px;
   //border: 1px solid red;
   background: rgba(0,0,0,0.3);
   width: 250px;
   height: 100%;
-  //pointer-events: none;
+  pointer-events: none;
   @include animation-duration(0.2s);
 }
 
 .filter-results.fadeIn {
-  //pointer-events: default;
+  pointer-events: auto;
+}
+
+.blur {
+  @include filter(blur(10px));
 }
 
 #course-results {
+
   //border: 1px solid red;
   background: none !important;
-  padding-top: 30px;
+  //padding-top: -30px;
+  @include transform(translateY(0px)); //hacky
   li {
-    background: rgba(24,36,44,0.9);
+    background: rgba(24,36,44,0.5) !important;
     border-bottom: 1px solid lighten(#18242C, 10%);
 
     small .time {
@@ -397,8 +406,90 @@ major {
     }
   }
 
+  li:first-child {
+    //border-top: 1px solid lighten(#18242C, 5%);
+  }
+
   li:last-child {
     border: none;
+  }
+
+  li.template {
+    //border-left: 2px solid #FACE75;
+    //background: lighten(#131E25, 5%) !important;
+    cursor: default;
+
+    .btn {
+      width: 250px;
+      @include transform(translate(-20px, 20px)); //hacky
+      margin: 0;
+      height: 45px;
+      //background: #FACE75;
+      //color: darken(#FACE75, 40%);
+      color: lighten(#000, 60%);
+
+      i {
+        display: block;
+        opacity: 0;
+        @include transform(scale(0));
+        float: left;
+        line-height: 25px;
+
+        @include transition(all 0.2s ease-in-out);
+      }
+
+      i.show {
+        @include transform(scale(1));
+        opacity: 1;
+        @include transition(all 0.2s ease-in-out);
+      }
+    }
+
+    .btn.completed {
+      background: lighten(#23CA54, 15%);
+      color: darken(#23CA54, 30%);
+    }
+
+    h6 {
+      font-size: 12px;
+      padding: 5px 0;
+      margin: 0;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      text-transform: uppercase;
+      background: lighten(#18242C, 5%);
+      border-radius: 4px;
+    }
+
+    input {
+      background: none;
+      border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+      @include transition(all 0.2s ease-in-out);
+
+       @include placeholder {
+        color: rgba(255,255,255,0.4);
+      }
+    }
+
+    input::selection {
+      color: #131E25;
+      background: rgba(255,255,255,0.9); /* WebKit/Blink Browsers */
+      border-radius: 6px;
+    }
+
+    input:focus {
+      border-bottom: 1px solid rgba(255,255,255,0.4) !important;
+      @include transition(all 0.2s ease-in-out);
+    }
+
+    input#id {
+      width: 100px;
+    }
+
+    input#name {
+      width: 200px;
+    }
   }
 }
 

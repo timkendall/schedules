@@ -15,17 +15,23 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
 
       $scope.focusIndex = 0;
 
-      $scope.open = function ( index ) {
-        var record;
-        for ( var i = 0; i < $scope.records.length; i++ ) {
-          if ( $scope.records[ i ].navIndex !== index ) { continue; }
-          record = $scope.records[ i ];
-        }
-        console.log('opening : ', record );
+      $scope.add = function (index) {
+        $scope.chosen.push($scope.filteredCourses[index]);
+        $scope.addingCourse = false;
+        $scope.search = null;
+
+        $scope.$emit('AddCourse:cancel');
       };
 
       $scope.keys = [];
-      $scope.keys.push({ code: 13, action: function() { $scope.open( $scope.focusIndex ); }});
+      $scope.keys.push({ code: 13, action: function() {
+          // Make sure course is there to add
+          if ($scope.filteredCourses.length > 0 && $scope.filteredCourses[$scope.focusIndex]) $scope.add($scope.focusIndex);
+          else if ($scope.validated) {
+            $scope.complete(); // Create a new course
+          }
+        }
+      });
       $scope.keys.push({ code: 38, action: function() {
           $scope.focusIndex--;
           if ($scope.focusIndex < 0) $scope.focusIndex = 0;
