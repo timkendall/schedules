@@ -10,19 +10,20 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
   return {
     restrict: 'A',
 
-
     controller: function ($scope) {
 
+      // Foucs index - to highlight current course
       $scope.focusIndex = 0;
 
-      $scope.add = function (index) {
-        $scope.chosen.push($scope.filteredCourses[index]);
-        $scope.addingCourse = false;
-        $scope.search = null;
+      $scope.changeFocusIndex = function (index) {
+        $scope.focusIndex = index;
+        console.log('sss')
+        //$scope.$digest();
+      }
 
-        $scope.$emit('AddCourse:cancel');
-      };
-
+      /*
+       * Provide actions for keyboard events
+       */
       $scope.keys = [];
       $scope.keys.push({ code: 13, action: function() {
           // Make sure course is there to add
@@ -42,7 +43,14 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
           if ($scope.focusIndex > $scope.filteredCourses.length -1) $scope.focusIndex = 0;
         }
       });
+      $scope.keys.push({ code: 27, action: function() {
+          $scope.cancel();
+        }
+      });
 
+      /*
+       * Execute an action on a keystroke event
+       */
       $scope.$on('keydown', function( msg, code ) {
         $scope.keys.forEach(function(o) {
           if ( o.code !== code ) { return; }
@@ -53,8 +61,6 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
     },
 
     link: function (scope, element, attr) {
-      console.log('results direftive activated')
-
 
       // Doesn't work :\
       // element.bind('keydown', function (event) {
@@ -63,14 +69,14 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
 
       // });
 
+      /*
+       * Emit a keystroke event
+       */
       $document.bind('keydown', function (event) {
         console.log('keydown')
         scope.$broadcast('keydown', event.keyCode);
 
       });
-
-
-
      }
   };
 });

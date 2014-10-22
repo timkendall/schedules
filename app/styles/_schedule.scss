@@ -394,7 +394,7 @@ major {
   }
 
   // Should be .active, will add in a sec
-  li.active {
+  li.active, li:active, li:hover {
     background: #1D9BD6 !important;
 
     small {

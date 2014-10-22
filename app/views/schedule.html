@@ -55,7 +55,7 @@
                         </div>
                      </li>
 
-                    <li ng-repeat="course in filteredCourses = (courses | filter:search | orderBy:['courseId']) track by $index" ng-class="{active: $index == focusIndex}" ng-click="view(course)">
+                    <li ng-repeat="course in filteredCourses = (courses | filter:search | orderBy:['courseId']) track by $index" ng-class="{active: $index == focusIndex}" ng-click="add($index)" ng-mouseover="changeFocusIndex($index)">
                         <div class="row" style="height: 100%";>
                             <div class="column-16">
                                 <small>{{course.courseId}} <small class="time">{{course.sections.length}} sections</small></small>

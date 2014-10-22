@@ -119,8 +119,22 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
             }
         } else {}
     });
+
+     $scope.add = function (index) {
+        // Remove the course from $scope.courses
+        var course = (_.remove($scope.courses, function(course) { return course.courseId == $scope.filteredCourses[index].courseId; }))[0];
+        // Add course to users courses
+        $scope.chosen.push(course);
+        // Update UI
+        $scope.addingCourse = false;
+        $scope.search = null;
+
+        $scope.$emit('AddCourse:cancel');
+      };
+
     $scope.cancel = function() {
         $scope.validated = false;
+        $scope.search = null;
         // Bindings for our UI
         $scope.addingCourse = false;
         // CLear course model
