@@ -70,19 +70,94 @@
 
             <div class="schedule">
                 <!-- Courses -->
-            <div class="course-list" ng-show="true">
+            <div class="course-list">
 
 
                 <ul class="list-unstyled course-list" ng-class="{blur: addingCourse}">
-                    <li ng-repeat="course in chosen" ng-click="view(course)">
+                    <li section ng-class="{active: sectionsVisible}" ng-repeat="course in chosen" ng-click="toggleSections()">
+                        <!-- Always visible -->
                         <div class="row" style="height: 100%";>
-
-
                             <div class="column-16">
-                                <small>{{course.courseId}} <small class="time">{{course.sections.length}} sections</small></small>
+                                <small>{{course.courseId}}</small>
 
                                 <h5>{{course.name}}</h5>
                             </div>
+                        </div>
+
+                        <div style="overflow: hidden" ng-show="sectionsVisible">
+                        <div class="row key" >
+                            <div class="column-8">
+                                <span class="time">Meets</span>
+                            </div>
+
+                                    <div class="column-4">
+                                        <span class="time">Start</span>
+                                    </div>
+
+                                    <div class="column-4">
+                                         <span class="time">Finish</span>
+                                    </div>
+                                </div>
+
+                        <!-- Sections (collapsable) -->
+                        <ul class="sections" >
+
+                            <li>
+
+                               <div class="row">
+                                    <div class="column-8">
+                                         <span class="meets mwf">
+                                             MWF
+                                         </span>
+                                    </div>
+
+                                    <div class="column-4">
+                                        <span class="time">
+                                        <h6>10</h6>
+                                        <small>AM</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="column-4">
+                                         <span class="time">
+                                         <h6>10:50</h6>
+                                         <small>AM</small>
+                                         </span>
+                                    </div>
+                                </div>
+
+
+                            </li>
+
+                            <li>
+
+                               <div class="row">
+                                    <div class="column-8">
+                                         <span class="meets tth">
+                                             TTh
+                                         </span>
+                                    </div>
+
+                                    <div class="column-4">
+                                        <span class="time">
+                                        <h6>8</h6>
+                                        <small>AM</small>
+                                        </span>
+                                    </div>
+
+                                    <div class="column-4">
+                                         <span class="time">
+                                         <h6>9:15</h6>
+                                         <small>AM</small>
+                                         </span>
+                                    </div>
+                                </div>
+
+
+                            </li>
+
+
+                        </ul>
                         </div>
                     </li>
                 </ul>

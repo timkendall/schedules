@@ -25,8 +25,9 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
       $scope.keys = [];
       $scope.keys.push({ code: 13, action: function() {
           // Make sure course is there to add
-          if ($scope.filteredCourses.length > 0 && $scope.filteredCourses[$scope.focusIndex]) $scope.add($scope.focusIndex);
+          if ($scope.addingCourse && $scope.filteredCourses.length > 0 && $scope.filteredCourses[$scope.focusIndex]) $scope.add($scope.focusIndex);
           else if ($scope.validated) {
+            $scope.focusIndex = 0;
             $scope.complete(); // Create a new course
           }
         }
@@ -42,6 +43,7 @@ angular.module('schedules').directive('results', function ($timeout, $document) 
         }
       });
       $scope.keys.push({ code: 27, action: function() {
+          $scope.focusIndex = 0;
           $scope.cancel();
         }
       });

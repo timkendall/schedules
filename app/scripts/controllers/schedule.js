@@ -74,8 +74,8 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
             }
         }
     }
-    $scope.unbindCourses = Course.bindAll($scope, 'courses', {});
 
+    $scope.unbindCourses = Course.bindAll($scope, 'courses', {});
 
     /*
      * Adding course stuff
