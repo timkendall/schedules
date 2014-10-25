@@ -26,6 +26,12 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     };
     $stateProvider
     // Schedule builder + registration
+    .state('entry', {
+        url: '/',
+        templateUrl: 'views/entry.html',
+        controller: 'EntryCtrl'
+    })
+    // Schedule builder + registration
     .state('schedule', {
         url: '/schedule',
         templateUrl: 'views/schedule.html',

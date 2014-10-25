@@ -42,7 +42,14 @@ angular.module('schedules').directive('calendar', function ($timeout) {
       /*
        * Primary function - generate array of schedules based on courses and options
        */
-      function generateSchedules () {}
+      function generateSchedules () {
+        // Generate every combination of sections / remove conflicting schedules
+        $scope.user.courses.forEach(function (course, index) {
+          course.sections.forEach(function (section, index) {
+
+          });
+        });
+      }
 
       /*
        * Course getter by day
