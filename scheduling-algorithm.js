@@ -80,19 +80,45 @@ function Schedule (courses) {
 }
 
 function generateSchedules (courses) {
-  var schedules = [];
-
-  courses.forEach(function (course, index, array) {
-
-    course.sections.forEach(function (section, index, array) {
-
+  var schedules = []; //Array of working schedules
+  var schedulesGraph = new ScheduleGraph(courses);
+  //Iterate through each graph, and look for valid schedules
+  schedulesGraph.graphs.forEach(function(root, i){
+    //Take the root of the graph and recursively try to make a non-conlficting schedule
+    createSchedules(root, [], function(validSchedule){ //Valid schedules are sent through callback and appended to schedules array
+      var schedule = convertNodesToSections(validSchedule);
+      schedules.push(schedule);
+      console.log(schedule);
     });
   });
-
 }
 
-function createSchedule (course) {
+function createSchedules (node, arr, callback) {
+  arr.push(node); //push node on schedule array
+  if(node.edges.length === 0){ //Reached the last row of nodes (Yeay working schedule!)
+    callback(arr);
+    return;
+  }
+  //If not last row, then copy array, and only go to edges that are not conflicting.
+  node.edges.forEach(function(n, i){
+    var newArr = arr.slice(); //copy array
+    var conflict;
+    newArr.every(function(newArrNode){
+      conflict = conflicts(newArrNode.section, n.section);
+    });
+    if(conflict)
+        return;
+    else
+      createSchedules(n, newArr, callback);
+  });
+}
 
+function convertNodesToSections(nodes){
+  var sectionsSchedule = [];
+  nodes.forEach(function(node){
+    sectionsSchedule.push({ id: node.courseId, section: node.section } );
+  });
+  return sectionsSchedule;
 }
 
 function Timespan (start, end) {
@@ -139,15 +165,15 @@ function Timespan (start, end) {
 //console.log(new Date('2014','10','24', '13', '0'))
 
 function conflicts (sectionA, sectionB) {
-  console.log('sectionA: ');
-  console.log('starts: ' + sectionA.start);
-  console.log('ends: ' + sectionA.end);
+  // console.log('sectionA: ');
+  // console.log('starts: ' + sectionA.start);
+  // console.log('ends: ' + sectionA.end);
 
-  console.log('');
+  // console.log('');
 
-  console.log('sectionB: ');
-  console.log('starts: ' + sectionB.start);
-  console.log('ends: ' + sectionB.end);
+  // console.log('sectionB: ');
+  // console.log('starts: ' + sectionB.start);
+  // console.log('ends: ' + sectionB.end);
 
   var sameDays = _.intersection(sectionA.meets, sectionB.meets);
 
@@ -173,31 +199,45 @@ function allCombos(courses) {
   }
 }
 
-// For each section of a course, create a new schedule with each section of the next course
-var Stack = require('algorithms').DataStructure.Stack;
-var nextCourses = new Stack();
-// Add courses to nextCourses stack
-for (var i = 0; i < courses.length; ++i) {
-  nextCourses.push(courses[i]);
+function ScheduleGraph(courses){
+  this.courses = courses;
+  this.graphs = []; //Total number of graphs, corrisponds to first course sections
+  var self = this;
+  this.courses[0].sections.forEach(function(section){
+    self.graphs.push(new Node(courses[0], section));
+  });
+
+  this.courses.forEach(function(course, i){
+    if(i === 0) //Already created nodes for first section
+      return;
+    var sectionNodes = []; //Convert course.sections to Nodes
+    course.sections.forEach(function(section, j){
+      sectionNodes[j] = new Node(course, section);
+    });
+
+    //Iterate and push array of edges to lowest nodes
+    self.graphs.forEach(function(graph, k){
+      pushToLowestEdges(self.graphs[k], sectionNodes);
+    });
+  });
+
+  function pushToLowestEdges(node, newNodes){
+    if(node.edges.length === 0){ //We've reached the end of the graph
+      node.edges = newNodes;
+      return;
+    }
+    //Go through edges and look for last row of nodes
+    node.edges.forEach(function(n, i){
+      pushToLowestEdges(n, newNodes);
+    });
+  }
 }
 
-console.log(nextCourses.length)
-// function all (course, schedule, schedules) {
 
-//   for (var i = 0; i < course.sections.length; ++i) {
-//      schedule.push(course.sections[i]);
-//   }
+function Node(course, section){
+  this.courseId = course.id;
+  this.section = section;
+  this.edges = [];
+}
 
-//   while (nextCourses.length !== 0)
-// }
-
-// all(courses[0], [], []);
-
-
-
-
-//allCombos(courses);
-
-//var Graph = require('algorithms').DataStructure.Graph;
-//var g = new Graph(false);
-
+generateSchedules(courses);
