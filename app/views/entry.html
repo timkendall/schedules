@@ -8,8 +8,62 @@
     </ul>
   </div>
 
+  <div class="browser">
+    <div class="head">
+      <!-- Buttons -->
+      <ul class="list-inline">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+    <div class="body">
+      <div class="grid columns split250">
+        <div class="bar">
+          <div class="filter">
+          <i class="fa fa-search"></i>
+                <input ng-class="{active: addingCourse}" class="add-course" type="text" name="name" ng-model="search" ng-focus="addingCourse = true" losefocus placeholder="Add courses" />
+
+                <div class="filter-buttons">
+
+                <div class="btn" ng-class="{active: showingStarred}" ng-click="showStarred(true)"><i class="fa fa-star"></i></div>
+                <div class="btn" ng-class="{active: !showingStarred}" ng-click="showStarred(false)"><i class="fa fa-align-left"></i></div>
+
+                </div>
+          </div>
+
+          <ul class="list-unstyled">
+            <li ng-repeat="course in mockCourses">
+              <small>{{course.id}}</small>
+              <h4>{{course.name}}</h4>
+            </li>
+          </ul>
+        </div>
+
+        <div class="content">
+          <!-- fake for now-->
+          <div class="calendar-event red">
+          </div>
+
+          <div class="calendar-event red">
+          </div>
+
+           <div class="calendar-event">
+          </div>
+
+          <div class="calendar-event purple">
+          </div>
+
+          <calendar></calendar>
+          </div>
+      </div>
+    </div>
+  </div>
+
   <div class="primary">
     <h1>An open schedule builder for students.</h1>
+    <h3>Schedules leverages the power of user contributed content and web scrapping to provided an up-to-date course catalog for students to build their schedules on.</h3>
     <div class="btn" ng-click="choosing = true">Choose your school</div>
   </div>
 
@@ -36,23 +90,17 @@
 
   </div>
 </div>
-  <!-- <div class="choose-school-overlay">
-    <div class="school">
-      <i class="fa fa-university"></i>
-      <h5>Chapman University</h5>
-    </div>
+  <div class="choose-school-overlay">
+    <input type="text" name="school" ng-model="search" placeholder="Filter schools" />
 
-    <div class="school selected">
-      <i class="fa fa-check-circle"></i>
-      <i class="fa fa-university"></i>
-      <h5>UCI</h5>
+    <div class="schools">
+      <div class="school" ng-class="{selected: selectedSchool == school.id}" ng-repeat="school in schools | filter:search | orderBy:['name'] track by $index" ng-click="selectSchool(school)">
+        <i class="fa fa-check-circle"></i>
+        <i class="fa fa-university"></i>
+        <h5>{{school.name}}</h5>
+      </div>
     </div>
-
-    <div class="school">
-      <i class="fa fa-university"></i>
-      <h5>UCLA</h5>
-    </div>
-  </div> -->
+  </div>
 
   <div class="footer">
     <ul class="list-inline">
