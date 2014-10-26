@@ -8,7 +8,6 @@ var courses = [
     sections: [
       {
         meets: ['Tue', 'Thu'],
-        m: 'TTH',
         start: '5:30pm', // 5:30PM
         end: '6:45pm' // 6:45PM
       }
@@ -21,19 +20,16 @@ var courses = [
     sections: [
       {
         meets: ['Mon', 'Wed', 'Fri'],
-        m: 'MWF',
         start: '1pm', // 1PM
         end: '1:50pm' // 1:50PM
       },
       {
         meets: ['Mon', 'Wed', 'Fri'],
-        m: 'MWF',
         start: '10am', // 10AM
         end: '10:50am' // 10:50AM
       },
       {
         meets: ['Tue', 'Thu'],
-        m: 'TTH',
         start: '3pm', // 3PM
         end: '4:15pm' // 4:15PM
       }
@@ -46,14 +42,12 @@ var courses = [
     sections: [
       {
         meets: ['Tue', 'Thu'],
-        m: 'TTH',
         start: '5:30pm', // 5:30PM
         end: '6:45pm' // 6:45PM
       },
 
       {
         meets: ['Mon', 'Wed'],
-        m: 'MW',
         start: '5:30pm', // 5:30PM
         end: '6:45pm' // 6:45PM
       }
