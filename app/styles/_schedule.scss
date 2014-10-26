@@ -98,10 +98,10 @@
       overflow: hidden;
     }
     .course-list {
-      height: calc(100% -60px);
+      height: calc(100% - 60px);
       overflow-y: scroll;
       background: #19252D;
-      margin-top: 0px;
+      margin-top: -4px; //hacky
       .add {
         h4 {
           text-align: center;
@@ -276,6 +276,7 @@
 
 ul.course-list {
   padding: 0;
+
 
   li {
     padding: 20px 0px !important;

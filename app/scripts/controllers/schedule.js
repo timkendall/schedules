@@ -19,9 +19,7 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
     $scope.courses = [];
     $scope.showingStarred = false;
     $scope.chosen = [];
-    $scope.addCourse = function() {
-        $location.path('schedule/add/verify');
-    }
+
     $scope.showStarred = function(show) {
         if (show) {
             $scope.unbindCourses();
@@ -131,6 +129,13 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
 
         $scope.$emit('AddCourse:cancel');
       };
+
+    $scope.remove = function (_course) {
+         // Remove the course from users courses
+        var rcourse = (_.remove($scope.chosen, function(course) { return course.courseId == _course.courseId; }))[0];
+        // Add course back to $scope.courses
+        $scope.courses.push(rcourse);
+    }
 
     $scope.cancel = function() {
         $scope.validated = false;

@@ -10,14 +10,12 @@ angular.module('schedules').directive('event', function ($timeout) {
   return {
     restrict: 'E',
     scope: {
-      time: '=time',
-      duration: '=duration',
-      major: '=major'
+      start: '=start',
+      end: '=end',
+      color: '=color'
     },
 
     link: function (scope, element, attr) {
-      console.log(scope.time)
-      //console.log((parseInt((scope.time).match(/\d+/), 10)))
 
       // Choose a random color
       var colors = [
@@ -31,74 +29,7 @@ angular.module('schedules').directive('event', function ($timeout) {
       // Hide element while changes are made to position and height
       element.css('display', 'none');
 
-      switch(scope.major) {
-        case 'MATH':
-          element.addClass('yellow');
-          break;
-        case 'CPSC':
-          element.addClass('orange');
-          break;
-        case 'ECON':
-          element.addClass('purple');
-          break;
-        case 'MGMT':
-          element.addClass('green');
-          break;
-        case 'ACTG':
-          element.addClass('red');
-          break;
-        case 'FIN':
-          element.addClass('yellow');
-          break;
-        case 'MGSC':
-          element.addClass('orange');
-          break;
-        case 'SE':
-          element.addClass('purple');
-          break;
-        case 'PHYS':
-          element.addClass('green');
-          break;
-        case 'CHEM':
-          element.addClass('red');
-          break;
-        case 'ENG':
-          element.addClass('yellow');
-          break;
-        case 'BUS':
-          element.addClass('orange');
-          break;
-        case 'MKTG':
-          element.addClass('purple');
-          break;
-        case 'KINE':
-          element.addClass('green');
-          break;
-        case 'ART':
-          element.addClass('red');
-          break;
-        case 'HIST':
-          element.addClass('yellow');
-          break;
-        case 'DANC':
-          element.addClass('orange');
-          break;
-        case 'PSY':
-          element.addClass('purple');
-          break;
-        case 'SOC':
-          element.addClass('green');
-          break;
-        case 'BIOL':
-          element.addClass('red');
-          break;
-        case 'FTV':
-          element.addClass('orange');
-          break;
-        default:
-          break;
-      }
-
+      element.addClass(scope.color)
 
       /* Note: This is based on a height of 50px per hour */
       var heights = {
@@ -107,6 +38,9 @@ angular.module('schedules').directive('event', function ($timeout) {
         '170': 162, // 2hr 50min
         '230': 222 // 3hr 50min
       }
+
+      // hardcode for now
+      scope.duration = 50;
 
       // Set height
       switch (scope.duration) {
@@ -131,62 +65,63 @@ angular.module('schedules').directive('event', function ($timeout) {
         element.css('top', ammount + 'px');
       }
 
-      // Set position
-      var start = (scope.time).substr(0, (scope.time).indexOf('-'));
 
-      if (start.indexOf('8:00am') > -1) {
+      // Normalize timeformat ex.'09:00 AM'
+      var start = Time(scope.start).format('hh:mmAM')
+      // Set position
+      if (start.indexOf('8:00AM') > -1) {
         translateY(element, 0);
-      } else if (start.indexOf('8:30am') > -1) {
+      } else if (start.indexOf('8:30AM') > -1) {
         translateY(element, 25);
-      } else if (start.indexOf('9:00am') > -1) {
+      } else if (start.indexOf('9:00AM') > -1) {
         translateY(element, 50);
-      } else if (start.indexOf('9:30am') > -1) {
+      } else if (start.indexOf('9:30AM') > -1) {
         translateY(element, 75);
-      } else if (start.indexOf('10:00am') > -1) {
+      } else if (start.indexOf('10:00AM') > -1) {
         translateY(element, 100);
-      } else if (start.indexOf('10:30am') > -1) {
+      } else if (start.indexOf('10:30AM') > -1) {
         translateY(element, 125);
-      } else if (start.indexOf('11:00am') > -1) {
+      } else if (start.indexOf('11:00AM') > -1) {
         translateY(element, 150);
-      } else if (start.indexOf('11:30am') > -1) {
+      } else if (start.indexOf('11:30AM') > -1) {
         translateY(element, 175);
-      } else if (start.indexOf('12:00pm') > -1) {
+      } else if (start.indexOf('12:00PM') > -1) {
         translateY(element, 200);
-      } else if (start.indexOf('12:30pm') > -1) {
+      } else if (start.indexOf('12:30PM') > -1) {
         translateY(element, 225);
-      } else if (start.indexOf('1:00pm') > -1) {
+      } else if (start.indexOf('1:00PM') > -1) {
         translateY(element, 250);
-      } else if (start.indexOf('1:30pm') > -1) {
+      } else if (start.indexOf('1:30PM') > -1) {
         translateY(element, 275);
-      } else if (start.indexOf('2:00pm') > -1) {
+      } else if (start.indexOf('2:00PM') > -1) {
         translateY(element, 300);
-      } else if (start.indexOf('2:30pm') > -1) {
+      } else if (start.indexOf('2:30PM') > -1) {
         translateY(element, 325);
-      } else if (start.indexOf('3:00pm') > -1) {
+      } else if (start.indexOf('3:00PM') > -1) {
         translateY(element, 350);
-      } else if (start.indexOf('3:30pm') > -1) {
+      } else if (start.indexOf('3:30PM') > -1) {
         translateY(element, 375);
-      } else if (start.indexOf('4:00pm') > -1) {
+      } else if (start.indexOf('4:00PM') > -1) {
         translateY(element, 400);
-      } else if (start.indexOf('4:30pm') > -1) {
+      } else if (start.indexOf('4:30PM') > -1) {
         translateY(element, 425);
-      } else if (start.indexOf('5:00pm') > -1) {
+      } else if (start.indexOf('5:00PM') > -1) {
         translateY(element, 450);
-      } else if (start.indexOf('5:30pm') > -1) {
+      } else if (start.indexOf('5:30PM') > -1) {
         translateY(element, 475);
-      } else if (start.indexOf('6:00pm') > -1) {
+      } else if (start.indexOf('6:00PM') > -1) {
         translateY(element, 500);
-      } else if (start.indexOf('6:30pm') > -1) {
+      } else if (start.indexOf('6:30PM') > -1) {
         translateY(element, 525);
-      } else if (start.indexOf('7:00pm') > -1) {
+      } else if (start.indexOf('7:00PM') > -1) {
         translateY(element, 550);
-      } else if (start.indexOf('7:30pm') > -1) {
+      } else if (start.indexOf('7:30PM') > -1) {
         translateY(element, 575);
-      } else if (start.indexOf('8:00pm') > -1) {
+      } else if (start.indexOf('8:00PM') > -1) {
         translateY(element, 600);
-      } else if (start.indexOf('8:30pm') > -1) {
+      } else if (start.indexOf('8:30PM') > -1) {
         translateY(element, 625);
-      } else if (start.indexOf('9:00pm') > -1) {
+      } else if (start.indexOf('9:00PM') > -1) {
         translateY(element, 650);
       }
 

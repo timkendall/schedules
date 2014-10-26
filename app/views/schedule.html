@@ -78,7 +78,7 @@
                         <!-- Always visible -->
                         <div class="row" style="height: 100%";>
                             <div class="column-16">
-                                <small>{{course.courseId}}</small>
+                                <small>{{course.courseId}} <a style="float: right; padding-right: 20px;" href ng-click="remove(course)">remove</a></small>
 
                                 <h5>{{course.name}}</h5>
                             </div>
@@ -101,62 +101,29 @@
 
                         <!-- Sections (collapsable) -->
                         <ul class="sections" >
-
-                            <li>
-
+                            <li ng-repeat="section in course.sections">
                                <div class="row">
                                     <div class="column-8">
                                          <span class="meets mwf">
-                                             MWF
+                                             {{section.meets | days}}
                                          </span>
                                     </div>
 
                                     <div class="column-4">
                                         <span class="time">
-                                        <h6>10</h6>
-                                        <small>AM</small>
+                                        <h6>{{section.start | time}}</h6>
+                                        <small>{{section.start | period}}</small>
                                         </span>
                                     </div>
 
                                     <div class="column-4">
                                          <span class="time">
-                                         <h6>10:50</h6>
-                                         <small>AM</small>
+                                         <h6>{{section.end | time}}</h6>
+                                         <small>{{section.end | period}}</small>
                                          </span>
                                     </div>
                                 </div>
-
-
                             </li>
-
-                            <li>
-
-                               <div class="row">
-                                    <div class="column-8">
-                                         <span class="meets tth">
-                                             TTh
-                                         </span>
-                                    </div>
-
-                                    <div class="column-4">
-                                        <span class="time">
-                                        <h6>8</h6>
-                                        <small>AM</small>
-                                        </span>
-                                    </div>
-
-                                    <div class="column-4">
-                                         <span class="time">
-                                         <h6>9:15</h6>
-                                         <small>AM</small>
-                                         </span>
-                                    </div>
-                                </div>
-
-
-                            </li>
-
-
                         </ul>
                         </div>
                     </li>
@@ -169,26 +136,7 @@
 
     </div>
     <div class="content">
-
-        <div class="grid rows split60">
-            <div class="bar generated-schedules">
-                <!-- Option button -->
-                <div class="options">
-                    <i class="fa fa-cog"></i>
-
-                </div>
-                <!-- Schedules -->
-                <ul class="list-inline">
-                    <li class="active">A</li>
-                    <li>B</li>
-                    <li>C</li>
-                </ul>
-
-            </div>
-            <div class="content">
-                <calendar></calendar>
-            </div>
-        </div>
+        <calendar courses="chosen" preferences="prefs"></calendar>
     </div>
     <!-- Show course modal -->
     <div ui-view style="width: 100%; height: 100%"></div>

@@ -19,7 +19,8 @@
     "molten": "~0.4.2",
     "angular-data": "~1.0.1",
     "angular-socket-io": "~0.6.0",
-    "odometer": "~0.4.7"
+    "odometer": "~0.4.7",
+    "time-js": "*"
   },
   "devDependencies": {}
 }
