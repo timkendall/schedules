@@ -274,32 +274,12 @@ ul.numbers {
   -webkit-align-self: flex-end;
    align-self: flex-end;
 
-   .calendar-event {
-    width: 80px;
-    position: absolute;
-    top: 81px;
-    left: 410px;
-
-    h5, small {
-      display: none;
-    }
+   .generated-schedules {
+    height: 55px;
    }
-
-   .calendar-event:nth-child(2) {
-     top: 81px;
-    left: 600px;
-   }
-
-   .calendar-event:nth-child(3) {
-     top: 161px;
-    left: 500px;
-   }
-
-   .calendar-event:nth-child(4) {
-    height: 200px;
-     top: 161px;
-    left: 600px;
-   }
+  .generated-schedules * {
+    display: none;
+  }
 
   .head {
     width: 100%;

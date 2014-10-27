@@ -784,3 +784,14 @@ input[type="text"].add-course.active {
 .schedule-courses {
   background: lighten(#D1D4DA, 15%);
 }
+
+.new-section {
+  ul.list-unstyled {
+    li {
+      display: inline-block;
+      color:#fff;
+      border: none !important;
+      background: none !important;
+    }
+  }
+}

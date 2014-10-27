@@ -106,7 +106,7 @@ angular.module('schedules').directive('calendar', function($timeout) {
                    */
                   self.sections.forEach(function (section, index) {
                     // Weird naming
-                    section.color = colors[index];
+                    section.color = colors[Math.floor(Math.random() * colors.length -1) ];
                     section.section.meets.forEach(function (day) {
                       switch (day) {
                         case 'Mon':

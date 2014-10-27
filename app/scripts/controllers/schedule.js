@@ -73,7 +73,21 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
         }
     }
 
-    $scope.unbindCourses = Course.bindAll($scope, 'courses', {});
+    var params = {
+        where: {
+            school: {
+                '==': $rootScope.school
+            }
+        }
+    };
+    Course.findAll(params).then(function(courses) {
+        console.log(courses)
+    });
+    $scope.unbindCourses = Course.bindAll($scope, 'courses', {
+         where: {
+            school: $rootScope.school
+          }
+    });
 
     /*
      * Adding course stuff
@@ -154,10 +168,11 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
         // Prevent local dupes
         if ($scope.validated) {
 
+            $scope.course.school = $rootScope.school;
+
             /*
              * Try to create the new Course
              */
-            console.log($scope.course)
             Course.create($scope.course).then(function(course) {
 
                    // Remove the course from $scope.courses

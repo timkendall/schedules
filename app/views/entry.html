@@ -42,20 +42,9 @@
         </div>
 
         <div class="content">
-          <!-- fake for now-->
-          <div class="calendar-event red">
-          </div>
 
-          <div class="calendar-event red">
-          </div>
 
-           <div class="calendar-event">
-          </div>
-
-          <div class="calendar-event purple">
-          </div>
-
-          <calendar></calendar>
+            <calendar courses="mockChosen" preferences="prefs"></calendar>
           </div>
       </div>
     </div>
@@ -100,6 +89,8 @@
         <h5>{{school.name}}</h5>
       </div>
     </div>
+
+    <div class="btn btn-small" ng-click="go()" ng-show"selectedSchool">Start building schedules</div>
   </div>
 
   <div class="footer">

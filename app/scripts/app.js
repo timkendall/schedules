@@ -43,12 +43,20 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         templateUrl: 'views/course.html',
         controller: 'CourseCtrl',
         resolve: {
-            loadCourse: function($q, $stateParams, $window, $location, Course) {
+            loadCourse: function($q, $stateParams, $window, $location, $rootScope, Course) {
                 var deferred = $q.defer();
-                console.log('resolving')
+
+                var params = {
+                  where: {
+                    school: {
+                      '==': $rootScope.school
+                    }
+                  }
+                };
+
                 var course = null;
                 // Try and find the requested course
-                Course.findAll().then(function(courses) {
+                Course.findAll(params).then(function(courses) {
                     course = _.find(Course.filter(), function(course) {
                         return course.courseId == $stateParams.courseId
                     });

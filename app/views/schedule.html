@@ -74,9 +74,9 @@
 
 
                 <ul class="list-unstyled course-list" ng-class="{blur: addingCourse}">
-                    <li section ng-class="{active: sectionsVisible}" ng-repeat="course in chosen" ng-click="toggleSections()">
+                    <li section ng-class="{active: sectionsVisible}" ng-repeat="course in chosen">
                         <!-- Always visible -->
-                        <div class="row" style="height: 100%";>
+                        <div class="row" style="height: 100%"; ng-click="toggleSections()">
                             <div class="column-16">
                                 <small>{{course.courseId}} <a style="float: right; padding-right: 20px;" href ng-click="remove(course)">remove</a></small>
 
@@ -125,6 +125,20 @@
                                 </div>
                             </li>
                         </ul>
+
+                        <div class="new-section">
+                            <input type="text" ng-model="section.start" placeholder="Begins ex. 8am">
+                            <input type="text" ng-model="section.end" placeholder="End ex. 8:50am">
+                            <ul class="list-unstyled">
+                                <li><label for="mon">Mon:</label><input type="checkbox" name="mon" value="monday" ng-model="days.mon" /></li>
+                                <li><label for="tue">Tue:</label><input type="checkbox" name="tue" value="tuesday" ng-model="days.tue" /></li>
+                                <li><label for="wed">Wed:</label><input type="checkbox" name="wed" value="wednesday" ng-model="days.wed" /></li>
+                                <li><label for="thu">Thu:</label><input type="checkbox" name="thu" value="thursday" ng-model="days.thu" /></li>
+                                <li><label for="fri">Fri:</label><input type="checkbox" name="fri" value="friday" ng-model="days.fri" /></li>
+                                <li><label for="sat">Sat:</label><input type="checkbox" name="sat" value="saturday" ng-model="days.sat" /></li>
+                            </ul>
+                            <div class="btn btn-small" ng-disabled="!createEnabled" ng-click="create()">Add</div>
+                        </div>
                         </div>
                     </li>
                 </ul>
