@@ -1,0 +1,20 @@
+{
+  "name": "molten",
+  "version": "0.4.2",
+  "description": "A fixed-fluid web application css grid volcano.",
+  "main": "Gruntfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-less": "~0.5.0",
+    "grunt-contrib-watch": "~0.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scottcorgan/molten.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "readmeFilename": "README",
+  "gitHead": "cb3b30108b71dd5a981e92a91910405bf7e1731c"
+}

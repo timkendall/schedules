@@ -1,7 +1,7 @@
 {
   "name": "concise",
   "description": "A lightweight front-end framework that provides functionality without the bloat.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "ignore": [
     ".gitignore",
     "LICENSE",
@@ -24,14 +24,13 @@
     "dist/css/concise.css",
     "dist/js/concise.js"
   ],
-  "_release": "1.1.0",
+  "_release": "1.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v1.1.0",
-    "commit": "2a61f63265a717cef5c9a86fb57762a21cac8afb"
+    "tag": "v1.1.1",
+    "commit": "1db6b82e64280c24e9db719396a4a4b22b2ec7f5"
   },
   "_source": "git://github.com/ConciseCSS/concise.css.git",
   "_target": "~1.1.0",
-  "_originalSource": "concise",
-  "_direct": true
+  "_originalSource": "concise"
 }

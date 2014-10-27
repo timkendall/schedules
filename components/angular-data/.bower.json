@@ -1,0 +1,45 @@
+{
+  "author": "Jason Dobry",
+  "name": "angular-data",
+  "description": "Data store for Angular.js.",
+  "version": "1.0.1",
+  "homepage": "http://angular-data.pseudobry.com/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jmdobry/angular-data.git"
+  },
+  "main": "./dist/angular-data.min.js",
+  "ignore": [
+    ".idea/",
+    ".*",
+    "*.iml",
+    "src/",
+    "lib/",
+    "doc/",
+    "guide/",
+    "coverage/",
+    "Gruntfile.js",
+    "node_modules/",
+    "test/",
+    "package.json",
+    "karma.conf.js",
+    "karma.start.js"
+  ],
+  "devDependencies": {
+    "angular": "1.2.25",
+    "angular-mocks": "1.2.25",
+    "angular-cache": "3.1.1",
+    "observe-js": "0.3.4",
+    "angular-data-mocks": "1.0.0",
+    "bootstrap": "3.2.0"
+  },
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.1",
+    "commit": "75b3b499d55b0f56e3e8a9f35e8893b3778e4de4"
+  },
+  "_source": "git://github.com/jmdobry/angular-data.git",
+  "_target": "~1.0.1",
+  "_originalSource": "angular-data"
+}

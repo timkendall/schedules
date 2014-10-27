@@ -30,6 +30,5 @@
   },
   "_source": "git://github.com/adobe-webplatform/Snap.svg.git",
   "_target": "~0.3.0",
-  "_originalSource": "snap.svg",
-  "_direct": true
+  "_originalSource": "snap.svg"
 }

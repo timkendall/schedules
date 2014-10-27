@@ -1,0 +1,16 @@
+{
+  "name": "time-js",
+  "main": "./time.js",
+  "dependencies": {},
+  "homepage": "https://github.com/zever/time",
+  "_release": "305f38fd7c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "305f38fd7c5db501029b81a21916347de766ddcf"
+  },
+  "_source": "git://github.com/zever/time.git",
+  "_target": "*",
+  "_originalSource": "time-js",
+  "_direct": true
+}

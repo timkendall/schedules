@@ -1,0 +1,104 @@
+<div id="entry" ng-class="{slideUp: choosing}">
+<div class="full-intro">
+  <div class="header">
+    <ul class="list-inline">
+     <li><a href="/contribute"><i class="fa fa-question-circle"></i> How it works</a></li>
+      <li><a href="/api"><i class="fa fa-tasks"></i> Features</a></li>
+      <li><a href="/contribute"><i class="fa fa-university"></i> Schools</a></li>
+    </ul>
+  </div>
+
+  <div class="browser">
+    <div class="head">
+      <!-- Buttons -->
+      <ul class="list-inline">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+    <div class="body">
+      <div class="grid columns split250">
+        <div class="bar">
+          <div class="filter">
+          <i class="fa fa-search"></i>
+                <input ng-class="{active: addingCourse}" class="add-course" type="text" name="name" ng-model="search" ng-focus="addingCourse = true" losefocus placeholder="Add courses" />
+
+                <div class="filter-buttons">
+
+                <div class="btn" ng-class="{active: showingStarred}" ng-click="showStarred(true)"><i class="fa fa-star"></i></div>
+                <div class="btn" ng-class="{active: !showingStarred}" ng-click="showStarred(false)"><i class="fa fa-align-left"></i></div>
+
+                </div>
+          </div>
+
+          <ul class="list-unstyled">
+            <li ng-repeat="course in mockCourses">
+              <small>{{course.id}}</small>
+              <h4>{{course.name}}</h4>
+            </li>
+          </ul>
+        </div>
+
+        <div class="content">
+
+
+            <calendar courses="mockChosen" preferences="prefs"></calendar>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="primary">
+    <h1>An open schedule builder for students.</h1>
+    <h3>Schedules leverages the power of user contributed content and web scrapping to provided an up-to-date course catalog for students to build their schedules on.</h3>
+    <div class="btn" ng-click="choosing = true">Choose your school</div>
+  </div>
+
+  <div class="offshoot">
+    <div class="section">
+      <h4>Schedules <small>created</small></h4>
+      <ul class="list-inline numbers">
+        <li>0</li>
+        <li>5</li>
+        <li>1</li>
+        <li>8</li>
+      </ul>
+    </div>
+
+    <div class="section">
+       <h4>Schools <small>supported</small></h4>
+      <ul class="list-inline numbers">
+        <li>0</li>
+        <li>3</li>
+        <li>0</li>
+        <li>1</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+  <div class="choose-school-overlay">
+    <input type="text" name="school" ng-model="search" placeholder="Filter schools" />
+
+    <div class="schools">
+      <div class="school" ng-class="{selected: selectedSchool == school.id}" ng-repeat="school in schools | filter:search | orderBy:['name'] track by $index" ng-click="selectSchool(school)">
+        <i class="fa fa-check-circle"></i>
+        <i class="fa fa-university"></i>
+        <h5>{{school.name}}</h5>
+      </div>
+    </div>
+
+    <div class="btn btn-small" ng-click="go()" ng-show"selectedSchool">Start building schedules</div>
+  </div>
+
+  <div class="footer">
+    <ul class="list-inline">
+      <li><a href="/api">API</a></li>
+      <li><a href="/contribute">Contribute</a></li>
+      <li><a href="/help">Help</a></li>
+    </ul>
+  </div>
+</div>
+

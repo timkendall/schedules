@@ -1,5 +1,10 @@
 <!-- Simple two column view -->
 <div id="catalog">
+  <div class="header">
+    <div class="search"><div class="search-icon"><i class="fa fa-search"></i></div><input type="text" name="name" ng-model="search" placeholder="Search" /></div>
+
+  </div>
+
   <div class="row">
      <!-- List courses to choose -->
     <div class="column-4">
@@ -10,6 +15,7 @@
       <!-- Courses -->
       <ul class="list-unstyled">
         <li ng-repeat="course in courses">
+          <!-- {{course.name}} -->
         </li>
       </ul>
     </div>

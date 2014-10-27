@@ -1,0 +1,16 @@
+{
+  "name": "molten",
+  "version": "0.4.2",
+  "main": "./molten/molten.css",
+  "description": "A fixed-fluid web application css grid volcano",
+  "homepage": "https://github.com/scottcorgan/molten",
+  "_release": "0.4.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.4.2",
+    "commit": "bea52eae17548457fcfca72addea7785ec7ba31f"
+  },
+  "_source": "git://github.com/scottcorgan/molten.git",
+  "_target": "~0.4.2",
+  "_originalSource": "molten"
+}

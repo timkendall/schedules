@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title></title>
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        
+        <link rel="stylesheet" href="normalize.css">
+        <link rel="stylesheet" href="../molten/molten.css">
+        
+        <style>
+            .grid{
+                background:pink;
+            }
+            
+            .columns{
+                background:black;
+            }
+            
+            .columns .bar{
+                background:green;
+            }
+            
+            .columns .content{
+                background:yellow;
+            }
+            
+            .rows{
+                background:black;
+            }
+            
+            .rows .bar{
+                background:orange;
+            }
+            
+            .rows .content{
+                background:teal;
+            }
+            
+            [class*="col"]{
+                background:gray;
+            }
+        </style>
+        
+    </head>
+    <body>
+        
+
+        <div class="grid columns split250">
+            
+            <aside class="bar">
+                <div class="grid rows split30">
+                    <header class="bar">sidebar left header</header>
+                    <div class="content">sidebar left content</div>
+                </div>
+            </aside>
+            
+            <section class="content">
+                <div class="grid columns split250 right">
+                    
+                    <aside class="bar">
+                        <div class="grid rows split100 bottom">
+                            <header class="bar">sidebar right header</header>
+                            <div class="content">sidebar right content</div>
+                        </div>
+                    </aside>
+                    
+                    <div class="content">
+                        <div class="grid grid-pad">
+                             <div class="col-1-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, debitis, rerum, eos blanditiis vel sunt tenetur sequi perferendis veniam molestiae aspernatur repellendus animi voluptates delectus et esse modi vero cupiditate.</div>
+                             <div class="col6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, quis, fugit, velit quos ipsum voluptate magnam reprehenderit consectetur quo laborum accusamus itaque natus rem praesentium dolorem dolore consequuntur autem aut.</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            
+        </div>
+    </body>
+</html>

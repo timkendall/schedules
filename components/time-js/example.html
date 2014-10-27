@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>time example</title>
+    <script src="time.js"></script>
+  </head>
+  <body>
+
+    <!-- instant example -->
+    <p id='instant'>
+      instant: <input autofocus>
+      <span></span>
+      <script>
+        var instant = function() {
+          var root = document.getElementById('instant')
+            , input = root.getElementsByTagName('input')[0]
+            , result = root.getElementsByTagName('span')[0];
+
+          result.innerText = Time().toString();
+
+          input.onkeyup = function() {
+            result.innerText = Time(input.value);
+          };
+        };
+      </script>
+    </p>
+
+    <!-- validation example -->
+    <p id='validation'>
+      validation: <input> <button disabled>submit</button>
+      <span></span>
+      <script>
+        var validation = function() {
+          var root = document.getElementById('validation')
+            , input = root.getElementsByTagName('input')[0]
+            , result = root.getElementsByTagName('span')[0]
+            , submit = root.getElementsByTagName('button')[0];
+
+          submit.onclick = function() {
+            result.innerText = Time(input.value);
+          };
+
+          input.onkeyup = function() {
+            submit.disabled = !Time.isValid(input.value);
+          };
+        };
+      </script>
+    </p>
+
+    <!-- nextDate example -->
+    <p id='nextdate'>
+      next date: <input> <button disabled>next date</button>
+      <span></span>
+      <script>
+        var nextDate = function() {
+          var root = document.getElementById('nextdate')
+            , input = root.getElementsByTagName('input')[0]
+            , result = root.getElementsByTagName('span')[0]
+            , submit = root.getElementsByTagName('button')[0];
+
+          submit.onclick = function() {
+            result.innerText = Time(input.value).nextDate();
+          };
+
+          input.onkeyup = function() {
+            submit.disabled = !Time.isValid(input.value);
+          };
+        };
+      </script>
+    </p>
+
+    <script>
+      window.onload = function() {
+        instant();
+        validation();
+        nextDate();
+      };
+    </script>
+  </body>
+</html>

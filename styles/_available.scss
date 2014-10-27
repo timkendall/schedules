@@ -1,0 +1,21 @@
+available {
+  width: 100%;
+  height: 100%;
+  //border: 1px solid red;
+
+  @include transform(rotate(180deg));
+  @include display(flex);
+  @include align-items(center);
+  @include flex-direction(row);
+  @include justify-content(center);
+
+  svg {
+    display: block;
+  }
+}
+
+available:hover {
+  svg {
+    opacity: 0;
+  }
+}

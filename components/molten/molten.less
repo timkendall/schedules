@@ -1,0 +1,260 @@
+@grid-count: 12;
+@gutter: 20px;
+
+// Set up layout column according to width
+
+.column(@bar-width: 200px) {
+    
+    & > .bar{
+        width:@bar-width;
+    }
+    & > .content{
+        padding-left:@bar-width;
+        // *************************************************************************
+        // Not sure if we keep this consistent and use "calc()" or use
+        // padding for the width issues. For some reason, the browser renders
+        // the scroll bar correction with horizontal padding
+        // but inconrrectly on vertical padding.
+        // 
+        // Maybe we do so that we can get rid of the z-index hack for columns
+        
+        // left:@bar-width;
+        // width:~"calc(100% - @{bar-width})";
+        
+        // *************************************************************************
+        
+    }
+    
+    &.right{
+        & > .bar{
+            left:100%;
+            margin-left:-@bar-width;
+        }
+        
+        & > .content{
+            padding-left:0;
+            padding-right:@bar-width;
+        }
+    }
+    
+}
+
+.row(@bar-height: 60px){
+    & > .bar{ 
+        height:@bar-height;
+        line-height:@bar-height;
+    }
+    & > .content{
+        height:~"-webkit-calc(100% - @{bar-height})"; /* hack for safari 6 */
+        height:~"calc(100% - @{bar-height})";
+        top:@bar-height;
+    }
+    
+    &.bottom{
+        & > .bar{ 
+            margin-top:-@bar-height;
+            top:100%;
+        }
+        & > .content{
+            height:~"-webkit-calc(100% - @{bar-height})"; /* hack for safari 6 */
+            height:~"calc(100% - @{bar-height})";
+            top:0;
+        }
+    }
+}
+
+.box-sizing() {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+////////////////////////////////////////////////
+
+
+body,
+html{
+    height:100%;
+    max-height:100%;
+    max-width:100%;
+    width:100%;
+}
+
+.grid{
+    overflow:hidden;
+    width:100%;
+    z-index:1;
+    
+    .box-sizing();
+}
+
+.grid{
+    margin:0 0 @gutter 0;
+    position:relative;
+    
+    &.grid-pad{
+        padding: @gutter 0 @gutter @gutter;
+        
+        & > [class*="col"]:last-of-type{
+            padding-right:@gutter;
+        }
+    }
+    
+    &:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    & > [class*="col"]{
+        float:left;
+        padding-right:@gutter;
+        position:relative;
+        vertical-align:top;
+
+        .box-sizing();
+                
+        &:last-of-type{
+            padding-right:0;
+        }
+    }
+    
+    // Based off of a 12 column grid
+    
+    & > .col1{ width:8.33%; }
+    & > .col2{ width:16.66%; }
+    & > .col3{ width:25%; }
+    & > .col4{ width:33.33%; }
+    & > .col5{ width:41.66%; }
+    & > .col6{ width:50%; }
+    & > .col7{ width:58.33%; }
+    & > .col8{ width:66.66%; }
+    & > .col9{ width:75%; }
+    & > .col10{ width:83.33%; }
+    & > .col11{ width:91.66%; }
+    & > .col12{ width:100%; }
+    
+    
+    // Better class names?
+    
+    & > .col-2-3{ width:66.66%; }
+    & > .col-1-3{ width:33.33%; }
+    
+    & > .col-1-2{ width:50%; }
+    
+    & > .col-1-4{ width:25%; }
+    & > .col-3-4{ width:75%; }
+    
+    & > .col-1-5{ width:20%; }
+    & > .col-2-5{ width:40%; }
+    & > .col-3-5{ width:60%; }
+    & > .col-4-5{ width:80%; }
+}
+
+/* Column styles */
+.grid.columns{
+    height:100%;
+    margin:0;
+    
+    & > .bar,
+    & > .content{
+        height:100%;
+        left:0;
+        overflow:auto;
+        position:absolute;
+        top:0;
+        width:100%;
+        
+        .box-sizing();
+    }
+    
+    &.split50{ .column(50px); }
+    &.split100{ .column(100px); }
+    &.split150{ .column(150px); }
+    &.split200{ .column(200px); }
+    &.split225{ .column(225px); }
+    &.split250{ .column(250px); }
+    &.split275{ .column(275px); }
+    &.split300{ .column(300px); }
+    &.split325{ .column(325px); }
+    &.split350{ .column(350px); }
+    &.split375{ .column(375px); }
+    &.split400{ .column(400px); }
+    
+    & > .bar{
+        z-index:2;
+    }
+    
+    & > .content{
+        z-index:1;
+    }
+    
+    &.collapse{
+        & > .bar{
+            width:0;
+        }
+        
+        & > .content{
+            padding-left:0;
+        }
+    }
+    
+    &.right.collapse{
+        & > .bar{
+            margin-left:0;
+        }
+        
+        & > .content{
+            padding-right:0;
+        }
+    }
+}
+
+/* Row styles */
+.grid.rows{
+    height:100%;
+    margin:0;
+    
+    & > .bar,
+    & > .content{
+        left:0;
+        overflow:auto;
+        position:absolute;
+        top:0;
+        width:100%;
+    }
+    
+    &.split10{ .row(10px); }
+    &.split20{ .row(20px); }
+    &.split30{ .row(30px); }
+    &.split40{ .row(40px); }
+    &.split50{ .row(50px); }
+    &.split60{ .row(60px); }
+    &.split70{ .row(70px); }
+    &.split80{ .row(80px); }
+    &.split90{ .row(90px); }
+    &.split100{ .row(100px); }
+    &.split200{ .row(200px); }
+    &.split300{ .row(300px); }
+    
+    &.collapse{
+        & > .bar{
+            height:0;
+        }
+        
+        & > .content{
+            height:100%;
+            top:0;
+        }
+    }
+    
+    &.bottom.collapse{
+        & > .bar{
+            height:0;
+        }
+        
+        & > .content{
+            height:100%;
+        }
+    }
+}
