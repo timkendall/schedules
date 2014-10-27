@@ -35,7 +35,21 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     .state('schedule', {
         url: '/schedule',
         templateUrl: 'views/schedule.html',
-        controller: 'ScheduleCtrl'
+        controller: 'ScheduleCtrl',
+        resolve: {
+            checkSchool: function ($rootScope, $location, School) {
+                /*
+                 * Make sure the school exists (for course creation)
+                 */
+                if (!$rootScope.school) $location.path('/');
+                else {
+                    School.find($rootScope.school).then(function (school) {
+                        if (!school) $location.path('/');
+                        console.log(school)
+                    });
+                }
+            }
+        }
     })
     // Quick view of a course
     .state('schedule.course', {
@@ -105,21 +119,6 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         console.log(error)
     })
-    /*
-     * Populate courses
-     */
-    Course.findAll().then(function(courses) {}).
-    catch (function(error) {
-        console.log(error)
-    });
-    /*
-     * Populate majors
-     */
-    Major.findAll().then(function(majors) {}).
-    catch (function(error) {
-        console.log(error)
-    });
-
 
     /*
      * Update Course(s) collection when somebody adds one

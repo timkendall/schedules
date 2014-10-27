@@ -53,7 +53,7 @@
   <div class="primary">
     <h1>An open schedule builder for students.</h1>
     <h3>Schedules leverages the power of user contributed content and web scrapping to provided an up-to-date course catalog for students to build their schedules on.</h3>
-    <div class="btn" ng-click="choosing = true">Choose your school</div>
+    <div class="btn" ng-click="goToSchools()">Choose your school</div>
   </div>
 
   <div class="offshoot">
@@ -79,7 +79,8 @@
 
   </div>
 </div>
-  <div class="choose-school-overlay">
+  <div id="schools" class="choose-school-overlay">
+
     <input type="text" name="school" ng-model="search" placeholder="Filter schools" />
 
     <div class="schools">
@@ -90,7 +91,7 @@
       </div>
     </div>
 
-    <div class="btn btn-small" ng-click="go()" ng-show"selectedSchool">Start building schedules</div>
+    <div style="clear:both;"class="btn btn-small" ng-click="go()" ng-show"selectedSchool">Start building schedules</div>
   </div>
 
   <div class="footer">

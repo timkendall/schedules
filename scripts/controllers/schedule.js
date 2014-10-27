@@ -6,15 +6,7 @@
  * # ScheduleCtrl
  */
 angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootScope, $location, $timeout, Course) {
-    //var course = Course.create({name: "Physicology", courseId: "PSY-800", level: 400, credits: 3 }); // { title: 'How to Cook', id: 45 }
-    // course.save().then(function (course) {
-    //   console.log(course)
-    // })
-    // Course.find(33).then(function(course) {
-    //     console.log(course); // { title: 'How to Cook', id: 45 }
-    //     // document 45 has already been injected into the store at this point
-    //     console.log(Course.get(33)); // { title: 'How to Cook', id: 45 }
-    // });
+
     $scope.search = null;
     $scope.courses = [];
     $scope.showingStarred = false;
@@ -75,19 +67,24 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
 
     var params = {
         where: {
-            school: {
-                '==': $rootScope.school
+            level: {
+                '==': 100
             }
         }
     };
-    Course.findAll(params).then(function(courses) {
+    console.log($rootScope.school)
+    Course.ejectAll();
+    Course.findAll({school: $rootScope.school}).then(function(courses) {
         console.log(courses)
+        $scope.courses = courses;
+        console.log($scope.courses)
     });
-    $scope.unbindCourses = Course.bindAll($scope, 'courses', {
-         where: {
-            school: $rootScope.school
-          }
-    });
+    $scope.unbindCourses = Course.bindAll($scope, 'courses');
+
+
+
+
+
 
     /*
      * Adding course stuff
@@ -168,20 +165,24 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
         // Prevent local dupes
         if ($scope.validated) {
 
+            console.log($rootScope.school)
+
             $scope.course.school = $rootScope.school;
+             console.log($scope.course.school)
+
 
             /*
              * Try to create the new Course
              */
             Course.create($scope.course).then(function(course) {
 
-                   // Remove the course from $scope.courses
+                // Remove the course from $scope.courses
                 var newCourse = (_.remove($scope.courses, function(_course) { return _course.courseId == course.courseId; }))[0];
                 // Add course to users courses
+                newCourse.sections = [];
                 $scope.chosen.push(newCourse);
                 // Good to go, course saved
                 $scope.cancel();
-
 
             }).
             catch (function(error) {

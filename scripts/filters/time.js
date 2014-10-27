@@ -7,12 +7,14 @@
 
 angular.module('schedules').filter('time', function () {
   return function (time) {
+    // Fix format
+    var formattedTime = Time(time).format('hh:mm AM');
 
-    var indexAM = time.indexOf('A'),
-      indexPM = time.indexOf('P');
+    var indexAM = formattedTime.indexOf('A'),
+      indexPM = formattedTime.indexOf('P');
 
-    if (indexAM !== -1)  return time.substring(0, indexAM);
-    else if (indexPM !== -1) return time.substring(0, indexPM);
+    if (indexAM !== -1)  return formattedTime.substring(0, indexAM);
+    else if (indexPM !== -1) return formattedTime.substring(0, indexPM);
     else throw new Error('Invalid time format');
 
   }
