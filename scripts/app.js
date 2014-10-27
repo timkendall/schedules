@@ -97,7 +97,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         templateUrl: 'views/course.html',
         controller: 'CourseCtrl'
     })
-    $urlRouterProvider.otherwise('/schedule');
+    $urlRouterProvider.otherwise('/');
 }).run(function($rootScope, Course, Major) {
     /*
      * Catch state change errors (otherwise won't see)
