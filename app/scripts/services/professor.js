@@ -4,7 +4,7 @@ angular.module('schedules').factory('Professor', ['DS',
     function (DS) {
       var Professor = DS.defineResource({
         name: 'professor',
-        baseUrl: 'http://localhost:1337/',
+        baseUrl: 'http://107.170.253.85:1337/',
 
         methods: {
 

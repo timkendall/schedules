@@ -7,7 +7,7 @@
  * # CatalogCtrl
  */
 angular.module('schedules')
-  .controller('EntryCtrl', function ($rootScope, $scope, $location, School) {
+  .controller('EntryCtrl', function ($rootScope, $scope, $location, $anchorScroll, School) {
 
     // Load up all schools
     School.findAll();
@@ -15,6 +15,12 @@ angular.module('schedules')
 
 
     $scope.selectedSchool = null;
+
+    $scope.goToSchools = function () {
+      console.log('ddd')
+      $location.hash('schools');
+      $anchorScroll();
+    }
 
     $scope.selectSchool = function (school) {
       $scope.selectedSchool = school.id;

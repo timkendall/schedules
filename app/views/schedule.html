@@ -73,7 +73,7 @@
             <div class="course-list">
 
 
-                <ul class="list-unstyled course-list" ng-class="{blur: addingCourse}">
+                <ul class="list-unstyled course-list" style="height: 100%" ng-class="{blur: addingCourse}">
                     <li section ng-class="{active: sectionsVisible}" ng-repeat="course in chosen">
                         <!-- Always visible -->
                         <div class="row" style="height: 100%"; ng-click="toggleSections()">
@@ -127,6 +127,7 @@
                         </ul>
 
                         <div class="new-section">
+                            <input type="text" ng-model="section.sectionNumber" placeholder="Section ex. 01">
                             <input type="text" ng-model="section.start" placeholder="Begins ex. 8am">
                             <input type="text" ng-model="section.end" placeholder="End ex. 8:50am">
                             <ul class="list-unstyled">

@@ -4,7 +4,7 @@ angular.module('schedules').factory('Major', ['DS',
     function (DS) {
       var Major = DS.defineResource({
         name: 'major',
-        baseUrl: 'http://localhost:1337/',
+        baseUrl: 'http://107.170.253.85:1337/',
 
         methods: {
 

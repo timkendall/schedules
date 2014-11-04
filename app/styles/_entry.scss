@@ -9,6 +9,7 @@
   @include transition(all 0.3s ease-in-out);
 
 .full-intro {
+  overflow: hidden;
   height: 700px;
   @include display(flex);
   @include align-items(center);
@@ -125,7 +126,11 @@
 
 
 
-
+  .darken {
+    z-index: 999;
+    background: #485664 !important;
+    @include transition(all 0.3s ease-in-out);
+  }
 
   .header {
     position: fixed;
@@ -134,10 +139,21 @@
     right: 0;
     background: none;
     height: 70px;
+    @include transition(all 0.3s ease-in-out);
 
     ul {
       float: right;
       margin-right: 40px;
+      height:70px;
+      margin-top: 0;
+
+      li {
+        display: inline-block;
+        height: 70px;
+        padding-top: 0;
+        margin-top: 0;
+        line-height: 70px;
+      }
 
       li a {
         color: rgba(255,255,255,0.8);
@@ -152,6 +168,7 @@
     right: 0;
     background: #fff;
     height: 70px;
+    z-index: 9999;
 
     ul {
       float: right;

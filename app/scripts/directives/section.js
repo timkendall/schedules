@@ -12,6 +12,7 @@ angular.module('schedules').directive('section', function (Section) {
             scope.days = {};
             scope.section = {
               course: scope.course.id,
+              sectionNumber: '',
               start: '',
               end: '',
               meets: []
