@@ -1,5 +1,59 @@
 $radius: 0px;
 
+.table-responsive {
+  border: 1px solid #D1D5D8;
+  border-radius: 6px;
+  //margin: 40px;
+}
+
+thead {
+  font-size: 12px;
+  color: #7A7E81;
+  text-transform: uppercase;
+  font-weight: 300;
+  line-height: 55px;
+  border-bottom: 1px solid #D1D5D8;
+
+  td:first-child {
+      padding-left: 20px;
+    }
+}
+
+tbody {
+  font-size: 15px;
+  color: #515558;
+
+  .fa-heart-o {
+    color: #D1D5D8;
+     @include transition(all 0.2s ease-in-out);
+  }
+
+  .fa-heart-o:hover {
+    color: darken(#D1D5D8, 10%);
+    @include transition(all 0.2s ease-in-out);
+  }
+
+  .fa-heart {
+    color: #F7308E;
+  }
+
+  tr {
+    line-height: 47px;
+    td:first-child {
+      padding-left: 20px;
+    }
+
+    [type="checkbox"]:not(:checked) + label:after,
+    [type="checkbox"]:checked + label:after {
+      top: -22px;
+    }
+  }
+
+  tr:nth-child(odd) {
+    background: #F8F9FB;
+  }
+}
+
 .course-container {
   display: none;
   position: fixed;

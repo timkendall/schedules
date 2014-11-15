@@ -24,9 +24,214 @@ body {
 @import 'calendar';
 @import 'calendar-event';
 
+.main {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+
+   @include display(flex);
+  @include align-items(center);
+  @include flex-direction(row);
+  @include justify-content(center);
+}
+
+.primary {
+  width: calc(100% - 300px);
+  height: 100%;
+  background: #fff;
+  padding: 40px;
+   position: relative;
+
+  .pills {
+    float: right;
+    margin-bottom: 40px;
+  }
+
+  .search {
+    float: left;
+    position: relative;
+     input {
+      display: block;
+      border-radius: 99px;
+      border: 1px solid #D1D5D8;
+      height: 30px;
+      padding: 0 20px 0 30px;
+      position: relative;
+      color: #818587;
+      background: #fff;
+      font-size: 12px;
+      width: 200px;
+
+      @include placeholder {
+        opacity: 0;
+      }
+    }
+  }
+
+
+  .search:before {
+    content: "\f002";
+    font-family: 'FontAwesome';
+    width: 20px;
+    height: 65px;
+    padding: 0 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 30px;
+     color: lighten(#D1D5D8, 5%);
+  }
+}
+
+.secondary {
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(#5C3588, #0B8793);
+  padding: 25px;
+  color: rgba(255,255,255,0.8);
+
+  .select {
+    border-color: rgba(255,255,255,0.15);
+    @include transition(all 0.2s ease-in-out);
+  }
+
+  .select:first-child {
+    border-top: 1px solid rgba(255,255,255,0.15) !important;
+  }
+
+  .select:hover {
+    color: rgba(255,255,255,1);
+    @include transition(all 0.2s ease-in-out);
+  }
+}
+
+.third {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: #F6F6F6; background: #fff;
+  padding: 0 40px;
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.2);
+
+  .btn-green {
+    float: right;
+  }
+
+  .btn {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+
+}
+
+.btn-circle {
+  border-radius: 100%;
+  width: 34px;
+  height: 34px;
+  padding:0;
+  text-align: center;
+  line-height: 34px;
+  font-size: 14px;
+  color: #464646;
+  background: none;
+}
+
+.btn-green {
+  background: #72D277;
+  color: #fff;
+}
+
 .blurred {
   @include filter(blur(5px));
   @include transition(all 0.3s ease-in-out);
+}
+
+.pills {
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 0 14px;
+    line-height: 30px;
+    border: 1px solid #D1D5D8;
+    color: #7A7E81;
+    margin-right: -4px;
+    border-radius: none;
+    cursor: pointer;
+    @include transition(all 0.2s ease-in-out);
+  }
+
+  .pill:hover {
+    color: darken(#7A7E81, 10%);
+    border-color: darken(#D1D5D8, 20%);
+  }
+
+  .pill:first-child {
+    @include border-right-radius(0px);
+    @include border-left-radius(99px);
+  }
+
+  .pill:last-child {
+    @include border-left-radius(0px);
+    @include border-right-radius(99px);
+     border-left: none;
+  }
+
+  .pill.active {
+    border-color: lighten(#188792, 10%);
+    color: lighten(#188792, 10%);
+  }
+}
+
+.select {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    border-radius: 0px;
+    overflow: hidden;
+    background: none;
+    height: 48px;
+    line-height: 48px;
+    position: relative;
+    cursor: pointer;
+}
+
+.select:after {
+  content: "\f107";
+  font-family: 'FontAwesome';
+  position: absolute;
+  height: 48px;
+  line-height: 48px;
+  top: 0px;
+  right: 10px;
+  font-size: 14px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.select select {
+    padding: 0 10px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.select select:focus {
+    outline: none;
+}
+
+h5 {
+  text-transform: uppercase;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin: 25px 0;
 }
 
 .overlay {
@@ -39,4 +244,80 @@ body {
   z-index: 99;
   background: rgba(0,0,0,0.5);
   @include animation(fadeIn 0.2s ease-in-out);
+}
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: -5px;
+  width: 13px; height: 13px;
+  border: 1px solid #C9CACE;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.1)
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: "\f00c";
+  font-family: 'FontAwesome';
+  position: absolute;
+  top: -26px; left: 2px;
+  font-size: 10px;
+  color: #fff;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* checked checkbox */
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:checked + label:before {
+  background: lighten(#198692, 10%);
+  border-color: #198692;
+  box-shadow: none;
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  //border: 1px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  //border: 1px solid #4778d9!important;
 }

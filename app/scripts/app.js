@@ -24,6 +24,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         });
         return deferred.promise;
     };
+
     $stateProvider
     // Schedule builder + registration
     .state('entry', {
@@ -31,29 +32,14 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         templateUrl: 'views/entry.html',
         controller: 'EntryCtrl'
     })
-    // Schedule builder + registration
-    .state('schedule', {
-        url: '/schedule',
-        templateUrl: 'views/schedule.html',
-        controller: 'ScheduleCtrl',
-        resolve: {
-            checkSchool: function ($rootScope, $location, School) {
-                /*
-                 * Make sure the school exists (for course creation)
-                 */
-                if (!$rootScope.school) $location.path('/');
-                else {
-                    School.find($rootScope.school).then(function (school) {
-                        if (!school) $location.path('/');
-                        console.log(school)
-                    });
-                }
-            }
-        }
+    .state('courses', {
+        url: '/courses',
+        templateUrl: 'views/courses.html',
+        controller: 'CourseCtrl'
     })
-    // Quick view of a course
-    .state('schedule.course', {
-        url: '/course/:courseId',
+    // Individual course
+    .state('courses.course', {
+        url: '/courses/:courseId',
         templateUrl: 'views/course.html',
         controller: 'CourseCtrl',
         resolve: {
@@ -89,29 +75,28 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
                 return deferred.promise;
             }
         }
-    }).state('schedule.course.overview', {
-        url: '/overview',
-        templateUrl: 'views/course/overview.html'
-    }).state('schedule.course.reviews', {
-        url: '/reviews',
-        templateUrl: 'views/course/reviews.html'
-    }).state('schedule.course.updates', {
-        url: '/updates',
-        templateUrl: 'views/course/updates.html'
     })
-    // Entire, searhable course catalog for school
-    .state('catalog', {
-        url: '/catalog',
-        templateUrl: 'views/catalog.html',
-        controller: 'CatalogCtrl'
-    })
-    // An individual course
-    .state('catalog.course', {
-        url: '/:courseName',
-        templateUrl: 'views/course.html',
-        controller: 'CourseCtrl'
-    })
-    $urlRouterProvider.otherwise('/');
+    // Schedule builder + registration
+    .state('schedule', {
+        url: '/schedule',
+        templateUrl: 'views/schedule.html',
+        controller: 'ScheduleCtrl',
+        resolve: {
+            checkSchool: function ($rootScope, $location, School) {
+                /*
+                 * Make sure the school exists (for course creation)
+                 */
+                // if (!$rootScope.school) $location.path('/');
+                // else {
+                //     School.find($rootScope.school).then(function (school) {
+                //         if (!school) $location.path('/');
+                //         console.log(school)
+                //     });
+                // }
+            }
+        }
+    });
+    $urlRouterProvider.otherwise('/schedule');
 }).run(function($rootScope, Course, Major) {
     /*
      * Catch state change errors (otherwise won't see)
