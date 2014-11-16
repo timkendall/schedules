@@ -28,6 +28,7 @@ body {
   width: 100%;
   height: 100%;
   background: #fff;
+  position: fixed;
 
    @include display(flex);
   @include align-items(center);
@@ -40,7 +41,9 @@ body {
   height: 100%;
   background: #fff;
   padding: 40px;
+  padding-top: 25px;
    position: relative;
+   @include transition(all 0.2s ease-in-out);
 
   .pills {
     float: right;
@@ -89,10 +92,90 @@ body {
   background: linear-gradient(#5C3588, #0B8793);
   padding: 25px;
   color: rgba(255,255,255,0.8);
+  position: relative;
+
+  .user {
+    height: 80px;
+    width: 100%;
+    background: darken(#0E8493, 5%);
+    //border-bottom: 1px solid rgba(255,255,255,0.18);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    @include display(flex);
+    @include align-items(center);
+    @include flex-direction(row);
+    @include justify-content(center);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
+    z-index: 99999999999;
+
+    .pills {
+      //float: right;
+      //margin: 13px 25px 0 0;
+      //margin-bottom: 20px;
+      .pill {
+        border-color: rgba(255,255,255,0.48);
+        color: rgba(255,255,255,0.68);
+      }
+
+      .pill:hover {
+        border-color: rgba(255,255,255,0.68);
+        color: rgba(255,255,255,0.88);
+      }
+    }
+  }
+
+  h5 {
+    margin-bottom: 0;
+  }
+
+  h5:first-child {
+    margin: 0px 0 10px 0;
+  }
+
+  .select-days {
+    margin-top: 0px;
+
+    li {
+      display: inline-block;
+
+      label:before {
+        display: inline-block;
+      }
+
+      /* checkbox */
+      [type="checkbox"]:not(:checked) + label:before,
+      [type="checkbox"]:checked + label:before {
+        top: 0;
+       background: none;
+       border-color: rgba(255,255,255,0.38);
+      }
+      /* checked checkbox */
+      [type="checkbox"]:checked + label:before,
+      [type="checkbox"]:checked + label:before {
+        background: rgba(255,255,255,0.6);
+        border-color: rgba(255,255,255,0.0);
+        box-shadow: none;
+      }
+      /* check */
+      [type="checkbox"]:not(:checked) + label:after,
+      [type="checkbox"]:checked + label:after {
+        color: #26708F;
+        text-shadow: none;
+        top: -7px;
+      }
+      label {
+        font-size: 13px;
+        padding: 0 0 0 20px;
+        display: inline;
+      }
+    }
+  }
 
   .select {
     border-color: rgba(255,255,255,0.15);
     @include transition(all 0.2s ease-in-out);
+    font-size: 14px;
   }
 
   .select:first-child {
@@ -105,7 +188,7 @@ body {
   }
 
   .slider {
-    margin-top: 40px;
+    margin-top: 20px;
   }
 }
 
@@ -118,6 +201,7 @@ body {
   background: #F6F6F6; background: #fff;
   padding: 0 40px;
   box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.2);
+  z-index: 99999999999;
 
   .btn-green {
     float: right;
@@ -252,6 +336,10 @@ input.slider {
   background: none;
 }
 
+.btn-circle:hover {
+  background: lighten(#CACACA, 10%);
+}
+
 .btn-green {
   background: #72D277;
   color: #fff;
@@ -344,6 +432,28 @@ h5 {
   font-size: 13px;
   color: rgba(255,255,255,0.5);
   margin: 25px 0;
+}
+
+#hidden-courses {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 300px);
+  height: calc(100% - 80px);
+  padding: 25px 80px;
+  @include animation(fadeInDown 0.7s ease-in-out);
+
+  h1 {
+    color: #515558;
+    font-weight: 300;
+  }
+
+  .table-responsive {
+    width: calc(100% - 160px);
+    max-height: calc(100% - 150px);
+    margin-top: 25px;
+  }
+
 }
 
 .overlay {
@@ -559,4 +669,60 @@ label:hover:before {
   margin-bottom: -5px;
   border-width: 5px 5px 0;
   border-top-color: #000;
+}
+
+/* ANIMATIONS
+============================================================================= */
+
+/* leaving animations ----------------------------------------- */
+/* rotate and fall */
+@keyframes rotateFall {
+  0%    { transform: rotateZ(0deg); }
+  20%   { transform: rotateZ(10deg); animation-timing-function: ease-out; }
+  40%   { transform: rotateZ(17deg); }
+  60%   { transform: rotateZ(16deg); }
+  100%  { transform: translateY(100%) rotateZ(17deg); }
+}
+
+/* slide in from the bottom */
+@keyframes slideOutLeft {
+  to    { transform: translateX(-100%); }
+}
+
+/* rotate out newspaper */
+@keyframes rotateOutNewspaper {
+  to    { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+}
+
+/* entering animations --------------------------------------- */
+/* scale up */
+@keyframes scaleUp {
+  from  { opacity: 0.3; -webkit-transform: scale(0.8); }
+}
+
+/* slide in from the right */
+@keyframes slideInRight {
+  from  { transform:translateX(100%); }
+  to    { transform: translateX(0); }
+}
+
+/* slide in from the bottom */
+@keyframes slideInUp {
+  from  { transform:translateY(100%); }
+  to    { transform: translateY(0); }
+}
+
+
+.animateSlide.ng-enter       {
+  animation: slideInRight 0.3s both ease-in; z-index: 8888;
+  @include animation-delay(0.3s);
+  display: inline-block;
+}
+.animateSlide.ng-leave       {
+  animation: slideOutLeft 0.3s both ease-in; z-index: 9999;
+  display: inline-block;
+}
+
+.animateSlideOut.ng-leave {
+  @include animation(fadeOutUp 0.4s ease-in-out);
 }

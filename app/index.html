@@ -12,7 +12,8 @@
         <link rel="stylesheet" href="components/concise/dist/css/concise.css" />
         <link rel="stylesheet" href="components/animate.css/animate.css" />
         <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="components/molten/molten.css" />
+        <link rel="stylesheet" href="components/molten/molten/molten.css" />
+        <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
         <!-- endbower -->
         <!-- endbuild -->
@@ -30,115 +31,72 @@
         <!-- Header (navigation, user) -->
        <!--  <ng-include src="'templates/header.html'"></ng-include> -->
 
-       <div class="main">
+       <div class="main" ng-controller="MainCtrl">
         <div class="primary">
-            <div ui-view style="width: 100%; height: 100%"></div>
+            <div ui-view="primary" ng-class="{blur: blurPrimary}" style="width: 100%; height: 100%"></div>
 
             <!-- Actions -->
              <nav class="third">
-                <div class="btn btn-circle"><i class="fa fa-list"></i></div>
+                <div class="btn btn-circle" ng-click="togglePrimary()"><i class="fa fa-list"></i></div>
                 <div class="btn btn-circle btn-green"><i class="fa fa-calendar"></i></div>
              </nav>
         </div>
 
+        <div id="hidden-courses" class="animateSlideOut" ng-show="blurPrimary">
+            <h1>My courses</h1>
+
+            <div class="table-responsive">
+                <table class="table-full">
+
+       <thead>
+          <tr>
+            <td>
+              <input type="checkbox" id="my-courses-all" />
+              <label for="my-courses-all"></label>
+            </td>
+            <td>Course</td>
+            <td>Days</td>
+            <td>Start</td>
+            <td>End</td>
+            <td>Professor</td>
+            <td>Location</td>
+            <td>Likes</td>
+            <td><!-- for like button --></td>
+          </tr>
+       </thead>
+
+       <tbody>
+        <tr ng-repeat="section in user.picked.sections">
+            <td>
+              <input type="checkbox" id="{{section.id}}" />
+              <label for="{{section.id}}"></label>
+            </td>
+            <td>{{section.course}}</td>
+            <td>{{section.days}}</td>
+            <td>{{section.start}}</td>
+            <td>{{section.end}}</td>
+            <td>{{section.professor}}</td>
+            <td>{{section.location}}</td>
+            <td>{{section.likes}}</td>
+            <td><i class="fa fa-heart-o" ng-click="like(section)"></i></td>
+          </tr>
+
+       </tbody>
+    </table>
+            </div>
+        </div>
+
         <div class="secondary">
-            <!-- Search -->
+            <!-- user account stuff -->
+            <div class="user">
+                 <div class="pills">
+                    <div class="pill">Register</div>
+                    <div class="pill">Login</div>
+                  </div>
+            </div>
 
-
-            <!-- Sort -->
-
-            <h5>Filter</h5>
-            <!-- Filter -->
-            <div class="select" style="border-top: 1px solid rgba(255,255,255,0.15)">
-                <select>
-                   <option name="any">Any Major</option>
-                 </select>
-             </div>
-
-            <div class="select">
-                 <select>
-                   <option name="any">Any GE</option>
-                 </select>
-             </div>
-
-            <div class="select">
-                 <select>
-                   <option name="any">Any Level</option>
-                 </select>
-             </div>
-
-             <input class="slider" value=""  type="text" id="mySlider1" slider data-slider-min="8" data-slider-max="22" data-slider-step="0.5" data-slider-value="[8,21]" />
-             <ul class="slider-scale list-unstyled">
-                <li class="long" slider-scale="8">
-                    <span>
-                        <h6>8</h6>
-                        <small>am</small>
-                    </span>
-                </li>
-                <li class="short" slider-scale="8.5"></li>
-                <li class="long" slider-scale="9"></li>
-                <li class="short" slider-scale="9.5"></li>
-                <li class="long" slider-scale="10">
-                    <span>
-                        <h6>10</h6>
-                        <small>am</small>
-                    </span>
-                </li>
-                <li class="short" slider-scale="10.5"></li>
-                <li class="long" slider-scale="11"></li>
-                <li class="short" slider-scale="11.5"></li>
-                <li class="long" slider-scale="12">
-                    <span>
-                        <h6>12</h6>
-                        <small>pm</small>
-                    </span>
-                </li>
-                <li class="short" slider-scale="12.5"></li>
-                <li class="long" slider-scale="13"></li>
-                <li class="short" slider-scale="13.5"></li>
-                <li class="long" slider-scale="14">
-                    <span>
-                        <h6>2</h6>
-                        <small>pm</small>
-                    </span>
-                </li>
-                <li class="short" slider-scale="14.5"></li>
-                <li class="long" slider-scale="15"></li>
-                <li class="short" slider-scale="15.5"></li>
-                <li class="long" slider-scale="16">
-                    <span>
-                        <h6>4</h6>
-                        <small>pm</small>
-                    </span>
-                </li>
-                <li class="short" slider-scale="16.5"></li>
-                <li class="long" slider-scale="17"></li>
-                <li class="short" slider-scale="17.5"></li>
-                <li class="long" slider-scale="18">
-                    <span>
-                        <h6>6</h6>
-                        <small>pm</small>
-                    </span>
-                </li>
-                <li class="short" slider-scale="18.5"></li>
-                <li class="long" slider-scale="19"></li>
-                <li class="short" slider-scale="19.5"></li>
-                <li class="long" slider-scale="20">
-                    <span>
-                        <h6>8</h6>
-                        <small>pm</small>
-                    </span>
-                </li>
-                <li class="short" slider-scale="20.5"></li>
-                <li class="long" slider-scale="21"></li>
-                <li class="short" slider-scale="21.5"></li>
-                <li class="long" slider-scale="22">
-                    <span>
-                        <h6>10</h6>
-                        <small>pm</small>
-                    </span>
-                </li>
-             </ul>
+            <!-- seconday helper views -->
+            <div ui-view="secondary"></div>
         </div>
        </div>
 
@@ -160,6 +118,8 @@
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="components/modernizr/modernizr.js"></script>
+        <script src="components/jquery/dist/jquery.js"></script>
         <script src="components/angular/angular.js"></script>
         <script src="components/angular-resource/angular-resource.js"></script>
         <script src="components/angular-cookies/angular-cookies.js"></script>
@@ -175,6 +135,8 @@
         <script src="components/angular-socket-io/socket.js"></script>
         <script src="components/odometer/odometer.js"></script>
         <script src="components/time-js/time.js"></script>
+        <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="components/jquery-bridget/jquery.bridget.js"></script>
         <script src="components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
@@ -182,9 +144,9 @@
         <!-- build:js scripts/main.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/entry.js"></script>
-        <script src="scripts/controllers/planned.js"></script>
+        <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/schedule.js"></script>
-        <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/courses.js"></script>
         <script src="scripts/controllers/course.js"></script>
         <script src="scripts/controllers/section.js"></script>
         <script src="scripts/services/user.js"></script>
@@ -202,6 +164,7 @@
         <script src="scripts/directives/scroll.js"></script>
         <script src="scripts/directives/section.js"></script>
         <script src="scripts/directives/slider.js"></script>
+        <script src="scripts/directives/when-scrolled.js"></script>
         <script src="scripts/filters/days.js"></script>
         <script src="scripts/filters/time.js"></script>
         <script src="scripts/filters/period.js"></script>

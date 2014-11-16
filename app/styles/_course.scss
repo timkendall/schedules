@@ -1,9 +1,23 @@
 $radius: 0px;
 
 .table-responsive {
+  // Magic calc's allow for responsive table
+  position: absolute;
+  top: 100px;
   border: 1px solid #D1D5D8;
   border-radius: 6px;
-  //margin: 40px;
+  width: calc(100% - 80px);
+  max-height: calc(100% - 200px);
+  overflow: hidden;
+
+  @include transition(all 0.2s ease-in-out);
+
+
+   table thead {
+    //position: sticky;
+   }
+
+
 }
 
 thead {
@@ -13,6 +27,7 @@ thead {
   font-weight: 300;
   line-height: 55px;
   border-bottom: 1px solid #D1D5D8;
+  position: sticky;
 
   td:first-child {
       padding-left: 20px;
@@ -39,6 +54,7 @@ tbody {
 
   tr {
     line-height: 47px;
+    cursor: pointer;
     td:first-child {
       padding-left: 20px;
     }
@@ -51,6 +67,10 @@ tbody {
 
   tr:nth-child(odd) {
     background: #F8F9FB;
+  }
+
+  tr:hover {
+    background: darken(#F8F9FB, 5%);
   }
 }
 

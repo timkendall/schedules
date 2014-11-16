@@ -24,54 +24,81 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         });
         return deferred.promise;
     };
-
     $stateProvider
     // Schedule builder + registration
     .state('entry', {
         url: '/',
         templateUrl: 'views/entry.html',
         controller: 'EntryCtrl'
-    })
-    .state('courses', {
+    }).state('courses', {
         url: '/courses',
-        templateUrl: 'views/courses.html',
-        controller: 'CourseCtrl'
+        views: {
+          'secondary': {
+                templateUrl: 'views/courses-secondary.html',
+                controller: 'CoursesCtrl'
+            },
+          'primary': {
+                templateUrl: 'views/courses.html',
+                controller: 'CoursesCtrl',
+                resolve: {
+                    pass: function($location) {
+                        // I'm sure theres a better way to do this
+                        $location.path('/courses/list');
+                    }
+                }
+          }
+        }
+    })
+    // List courses
+    .state('courses.list', {
+        url: '/list',
+        templateUrl: 'views/courses-list.html'
     })
     // Individual course
     .state('courses.course', {
-        url: '/courses/:courseId',
-        templateUrl: 'views/course.html',
+        url: '/:courseId',
+        templateUrl: 'views/courses-single.html',
         controller: 'CourseCtrl',
         resolve: {
             loadCourse: function($q, $stateParams, $window, $location, $rootScope, Course) {
                 var deferred = $q.defer();
-
-                var params = {
-                  where: {
-                    school: {
-                      '==': $rootScope.school
-                    }
-                  }
-                };
-
-                var course = null;
-                // Try and find the requested course
-                Course.findAll(params).then(function(courses) {
-                    course = _.find(Course.filter(), function(course) {
-                        return course.courseId == $stateParams.courseId
-                    });
-                    if (course) {
-                        console.log(course)
-                        deferred.resolve(course);
-                    } else {
-                        $location.path('/schedule')
-                        deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
-                        //$window.history.back(); //need this?
-                    }
-                }).
-                catch (function(error) {
-                    console.log(error)
+                // var params = {
+                //   where: {
+                //     school: {
+                //       '==': $rootScope.school
+                //     }
+                //   }
+                // };
+                // var course = null;
+                // // Try and find the requested course
+                // Course.findAll(params).then(function(courses) {
+                //     course = _.find(Course.filter(), function(course) {
+                //         return course.courseId == $stateParams.courseId
+                //     });
+                //     if (course) {
+                //         console.log(course)
+                //         deferred.resolve(course);
+                //     } else {
+                //         $location.path('/schedule')
+                //         deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
+                //         //$window.history.back(); //need this?
+                //     }
+                // }).
+                // catch (function(error) {
+                //     console.log(error)
+                //});
+                var course = _.find($rootScope.courses, function(course) {
+                    return course.id == $stateParams.courseId
                 });
+                if (course) {
+                    console.log('found course')
+                    deferred.resolve(course);
+                } else {
+                    console.log('no course there :(')
+                    $location.path('/courses/list')
+                    deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
+                    //$window.history.back(); //need this?
+                }
                 return deferred.promise;
             }
         }
@@ -82,7 +109,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         templateUrl: 'views/schedule.html',
         controller: 'ScheduleCtrl',
         resolve: {
-            checkSchool: function ($rootScope, $location, School) {
+            checkSchool: function($rootScope, $location, School) {
                 /*
                  * Make sure the school exists (for course creation)
                  */
@@ -96,7 +123,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
             }
         }
     });
-    $urlRouterProvider.otherwise('/schedule');
+    $urlRouterProvider.otherwise('/courses/list');
 }).run(function($rootScope, Course, Major) {
     /*
      * Catch state change errors (otherwise won't see)
@@ -104,9 +131,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         console.log(error)
     })
-
     /*
      * Update Course(s) collection when somebody adds one
      */
-
 });

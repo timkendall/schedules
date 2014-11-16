@@ -1,0 +1,35 @@
+ <table class="table-full">
+
+       <thead>
+          <tr>
+            <td>
+              <input type="checkbox" id="all" />
+              <label for="all"></label>
+            </td>
+            <td>Term</td>
+            <td>Course</td>
+            <td>GE</td>
+            <td>Title</td>
+            <td>Sections</td>
+            <td>Likes</td>
+            <td><!-- for like button --></td>
+          </tr>
+       </thead>
+
+       <tbody when-scrolled="console.log('scrolled past yo')">
+        <tr ng-repeat="course in courses | filter:search" ng-click="go(course)">
+            <td>
+              <input type="checkbox" id="{{course.id}}" />
+              <label for="{{course.id}}"></label>
+            </td>
+            <td>{{course.term}}</td>
+            <td>{{course.course}}</td>
+            <td>{{course.GEs}}</td>
+            <td>{{course.title}}</td>
+            <td>{{course.sections.length}}</td>
+            <td>{{course.likes}} likes</td>
+            <td><i class="fa fa-heart-o"></i></td>
+          </tr>
+
+       </tbody>
+    </table>
