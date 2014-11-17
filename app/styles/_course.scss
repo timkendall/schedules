@@ -8,7 +8,11 @@ $radius: 0px;
   border-radius: 6px;
   width: calc(100% - 80px);
   max-height: calc(100% - 200px);
-  overflow: hidden;
+  overflow-x: hidden;
+
+  table {
+    overflow: hidden;
+  }
 
   @include transition(all 0.2s ease-in-out);
 

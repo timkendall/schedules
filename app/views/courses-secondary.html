@@ -22,15 +22,24 @@
 
              <h5>Days</h5>
              <!-- days -->
-             <ul class="select-days list-inline">
-                <li><input type="checkbox" ng-click="allDaysClicked()" id="days-all" /><label for="days-all">All</label></li>
-                <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('mon') > -1" id="mon" /><label for="mon">Mon</label></li>
-                <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('tue') > -1" id="tue" /><label for="tue">Tue</label></li>
-                <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('wed') > -1" id="wed" /><label for="wed">Wed</label></li>
-                <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('thu') > -1" id="thu" /><label for="thu">Thu</label></li>
-                <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('fri') > -1" id="fri" /><label for="fri">Fri</label></li>
-                <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('sat') > -1" id="sat" /><label for="sat">Sat</label></li>
-             </ul>
+             <div class="row select-days">
+                <div class="column-4">
+                    <div><input type="checkbox" ng-click="allDaysClicked()" id="days-all" /><label for="days-all">All</label></div>
+                </div>
+                 <div class="column-4">
+                    <div><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('mon') > -1" id="mon" /><label for="mon">Mon</label></div>
+                    <div><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('tue') > -1" id="tue" /><label for="tue">Tue</label></div>
+                </div>
+                 <div class="column-4">
+                    <div><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('wed') > -1" id="wed" /><label for="wed">Wed</label></div>
+                    <div><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('thu') > -1" id="thu" /><label for="thu">Thu</label></div>
+                </div>
+                 <div class="column-4">
+                    <div><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('fri') > -1" id="fri" /><label for="fri">Fri</label></div>
+                    <div><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('sat') > -1" id="sat" /><label for="sat">Sat</label></div>
+                </div>
+             </div>
+
 
              <h5>Start</h5>
             <!-- slider -->

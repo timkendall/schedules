@@ -109,6 +109,28 @@ body {
     box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
     z-index: 99999999999;
 
+    img {
+      width: 34px;
+      height: 34px;
+      border-radius: 99px;
+      box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);
+     margin-right: 10px;
+     position: absolute;
+     top: 22px;
+     left: 25px;
+    }
+
+    div .pills {
+      position: absolute;
+     top: 26px;
+     left: 75px;
+      .pill {
+        font-size: 10px;
+        line-height: 26px;
+        padding: 0 10px;
+      }
+    }
+
     .pills {
       //float: right;
       //margin: 13px 25px 0 0;
@@ -134,9 +156,11 @@ body {
   }
 
   .select-days {
-    margin-top: 0px;
+    margin-top: 6px;
+    //border: 1px solid red;
+    margin-left: 0px;
 
-    li {
+    div {
       display: inline-block;
 
       label:before {
@@ -162,7 +186,7 @@ body {
       [type="checkbox"]:checked + label:after {
         color: #26708F;
         text-shadow: none;
-        top: -7px;
+        top: 0px;
       }
       label {
         font-size: 13px;
@@ -441,7 +465,7 @@ h5 {
   width: calc(100% - 300px);
   height: calc(100% - 80px);
   padding: 25px 80px;
-  @include animation(fadeInDown 0.7s ease-in-out);
+  @include animation(fadeInDown 0.5s ease-in-out);
 
   h1 {
     color: #515558;

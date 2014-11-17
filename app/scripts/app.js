@@ -7,23 +7,19 @@
  *
  * Config module of the application.
  */
-angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'angular-data.DS']).config(function($stateProvider, $urlRouterProvider) {
-    // Check if the user is connected
-    var checkLoggedin = function($q, $timeout, $http, $location) {
-        // Initialize a new promise
-        var deferred = $q.defer();
-        // Make an AJAX call to check if the user is logged in
-        $http.get('/loggedin').success(function(user) {
-            // Authenticated
-            if (user !== '0') $timeout(deferred.resolve);
-            // Not Authenticated
-            else {
-                $timeout(deferred.reject);
-                $location.url('/login');
-            }
-        });
-        return deferred.promise;
-    };
+angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', , 'angular-storage', 'angular-jwt', 'angular-data.DS']).config(function($stateProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
+    // Configure Auth0 authentication
+    authProvider.init({
+        domain: 'schedules.auth0.com',
+        clientID: 'hHXmSgTUz2Cfv1LwjTLPgVcUoY8QBnls'
+    });
+    // Configure $http interceptors (send user's token for every API call)
+    jwtInterceptorProvider.tokenGetter = function(store) {
+        // Return the saved token
+        return store.get('token');
+    }
+    $httpProvider.interceptors.push('jwtInterceptor');
+    // Configure states (routes)
     $stateProvider
     // Schedule builder + registration
     .state('entry', {
@@ -33,11 +29,11 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     }).state('courses', {
         url: '/courses',
         views: {
-          'secondary': {
+            'secondary': {
                 templateUrl: 'views/courses-secondary.html',
                 controller: 'CoursesCtrl'
             },
-          'primary': {
+            'primary': {
                 templateUrl: 'views/courses.html',
                 controller: 'CoursesCtrl',
                 resolve: {
@@ -46,7 +42,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
                         $location.path('/courses/list');
                     }
                 }
-          }
+            }
         }
     })
     // List courses
@@ -123,15 +119,28 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
             }
         }
     });
+    // Set default route
     $urlRouterProvider.otherwise('/courses/list');
-}).run(function($rootScope, Course, Major) {
-    /*
-     * Catch state change errors (otherwise won't see)
-     */
+    // Code to run at startup
+}).run(function($rootScope, auth, store, jwtHelper, Course, Major) {
+    // Catch state change errors
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         console.log(error)
-    })
-    /*
-     * Update Course(s) collection when somebody adds one
-     */
+    });
+    // This hooks all auth events to check everything as soon as the app starts
+    auth.hookEvents();
+    // Maintain a user's login on page refresh
+    $rootScope.$on('$locationChangeStart', function() {
+        if (!auth.isAuthenticated) {
+            var token = store.get('token');
+            if (token) {
+                if (!jwtHelper.isTokenExpired(token)) {
+                    auth.authenticate(store.get('profile'), token);
+                } else {
+                    // Either show Login page or use the refresh token to get a new idToken
+                    $location.path('/');
+                }
+            }
+        }
+    });
 });

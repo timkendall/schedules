@@ -21,7 +21,8 @@
     "angular-socket-io": "~0.6.0",
     "odometer": "~0.4.7",
     "time-js": "*",
-    "seiyria-bootstrap-slider": "~4.2.0"
+    "seiyria-bootstrap-slider": "~4.2.0",
+    "angular-jwt": "~0.0.4"
   },
   "devDependencies": {}
 }
