@@ -21,37 +21,55 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     $httpProvider.interceptors.push('jwtInterceptor');
     // Configure states (routes)
     $stateProvider
-    // Schedule builder + registration
+    // Spalsh page
     .state('entry', {
         url: '/',
         templateUrl: 'views/entry.html',
         controller: 'EntryCtrl'
-    }).state('courses', {
-        url: '/courses',
-        views: {
+    })
+    // Find courses to add
+    .state('find', {
+        url: '/find',
+       views: {
             'secondary': {
-                templateUrl: 'views/courses-secondary.html',
+                templateUrl: 'views/find-secondary.html',
                 controller: 'CoursesCtrl'
             },
             'primary': {
-                templateUrl: 'views/courses.html',
-                controller: 'CoursesCtrl',
-                resolve: {
-                    pass: function($location) {
-                        // I'm sure theres a better way to do this
-                        $location.path('/courses/list');
-                    }
-                }
+                templateUrl: 'views/find.html',
+                controller: 'CoursesCtrl'
             }
         }
     })
-    // List courses
-    .state('courses.list', {
-        url: '/list',
-        templateUrl: 'views/courses-list.html'
+    // View current and saved schedules
+    .state('schedules', {
+        url: '/schedules',
+        views: {
+            'secondary': {
+                templateUrl: 'views/schedules-secondary.html',
+                controller: 'ScheduleCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/schedule.html',
+                controller: 'ScheduleCtrl'
+            }
+        }
     })
-    // Individual course
-    .state('courses.course', {
+     // View current and saved schedules
+    .state('likes', {
+        url: '/likes',
+        views: {
+            'secondary': {
+                templateUrl: 'views/likes-secondary.html',
+                controller: 'CoursesCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/likes.html',
+                controller: 'CoursesCtrl'
+            }
+        }
+    })
+    .state('find.course', {
         url: '/:courseId',
         templateUrl: 'views/courses-single.html',
         controller: 'CourseCtrl',
@@ -91,7 +109,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
                     deferred.resolve(course);
                 } else {
                     console.log('no course there :(')
-                    $location.path('/courses/list')
+                    $location.path('/courses/catalog/all')
                     deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
                     //$window.history.back(); //need this?
                 }
@@ -99,28 +117,17 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
             }
         }
     })
-    // Schedule builder + registration
-    .state('schedule', {
-        url: '/schedule',
-        templateUrl: 'views/schedule.html',
+    .state('me', {
+        url: '/me',
+        templateUrl: 'views/me.html',
         controller: 'ScheduleCtrl',
-        resolve: {
-            checkSchool: function($rootScope, $location, School) {
-                /*
-                 * Make sure the school exists (for course creation)
-                 */
-                // if (!$rootScope.school) $location.path('/');
-                // else {
-                //     School.find($rootScope.school).then(function (school) {
-                //         if (!school) $location.path('/');
-                //         console.log(school)
-                //     });
-                // }
-            }
+        data: {
+          requiresLogin: true
         }
     });
+
     // Set default route
-    $urlRouterProvider.otherwise('/courses/list');
+    $urlRouterProvider.otherwise('/courses/catalog');
     // Code to run at startup
 }).run(function($rootScope, auth, store, jwtHelper, Course, Major) {
     // Catch state change errors

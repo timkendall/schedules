@@ -3,11 +3,11 @@ $radius: 0px;
 .table-responsive {
   // Magic calc's allow for responsive table
   position: absolute;
-  top: 100px;
-  border: 1px solid #D1D5D8;
-  border-radius: 6px;
+  top: 60px;
+  //border: 1px solid #D1D5D8;
+  //border-radius: 6px;
   width: calc(100% - 80px);
-  max-height: calc(100% - 200px);
+  max-height: calc(100% - 100px);
   overflow-x: hidden;
 
   table {
@@ -38,6 +38,10 @@ thead {
     }
 }
 
+.picked {
+  opacity: 0.5;
+}
+
 tbody {
   font-size: 15px;
   color: #515558;
@@ -53,12 +57,34 @@ tbody {
   }
 
   .fa-heart {
-    color: #F7308E;
+    //color: #F7308E; super pink
+    color: #FA5C4F; // orange-ish
+    @include animation(pulse 0.3s ease-in-out);
+  }
+
+  .fa-plus-square-o, .fa-minus-square-o {
+    color: darken(#D6DADC, 10%);
+    margin-right: 0px;
+   //margin-left: -20px;
+    @include transition(all 0.2s ease-in-out);
+  }
+
+  .fa-plus-square-o:hover, .fa-minus-square-o:hover {
+    color: #515558;
+    @include transition(all 0.2s ease-in-out);
+  }
+
+  .picked .fa-plus-square-o:hover {
+     color: darken(#D6DADC, 10%);
   }
 
   tr {
-    line-height: 47px;
+    font-size: 14px;
+    //line-height: 52px;
     cursor: pointer;
+    td {
+      padding: 20px 0;
+    }
     td:first-child {
       padding-left: 20px;
     }

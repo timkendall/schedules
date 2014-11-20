@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="components/concise/dist/css/concise.css" />
         <link rel="stylesheet" href="components/animate.css/animate.css" />
         <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="components/entypo/font/entypo.css" />
         <link rel="stylesheet" href="components/molten/molten.css" />
         <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
@@ -36,80 +37,33 @@
 
        <div class="main" ng-controller="MainCtrl">
         <div class="primary">
-            <div ui-view="primary" ng-class="{blur: blurPrimary}" style="width: 100%; height: 100%"></div>
+            <!-- Primary View -->
+            <div ui-view="primary" class="animateFade" style="width: 100%; height: 100%"></div>
 
             <!-- Actions -->
              <nav class="third">
-                <div class="btn btn-circle" ng-click="togglePrimary()"><i class="fa fa-list"></i></div>
-                <div class="btn btn-circle btn-green"><i class="fa fa-calendar"></i></div>
+                <ul class="list-inline">
+                    <li><a href ui-sref-active="active" ui-sref="find"><i class="icon-search"></i></a></li>
+                    <li><a href ui-sref-active="active" ui-sref="schedules"><i class="icon-calendar"></i> <div class="badge" event-class="{pulse: 'added course'}">{{picked.length}}</div></a> </li>
+                    <li><a href ui-sref-active="active" ui-sref="likes"><i class="icon-heart-empty"></i></a></li>
+                    <li><a href ui-sref-active="active" ui-sref="plans"><i class="icon-chart-line"></i></a></li>
+                    <li><a href ui-sref-active="active" ui-sref="help"><i class="icon-chat"></i> <div class="badge-dot" ng-show="messages.unread.length" event-class="{pulse: 'message recieved'}"></div></a></li>
+                </ul>
              </nav>
-        </div>
-
-        <div id="hidden-courses" class="animateSlideOut" ng-show="blurPrimary">
-            <h1>My courses</h1>
-
-            <div class="table-responsive">
-                <table class="table-full">
-
-       <thead>
-          <tr>
-            <td>
-              <input type="checkbox" id="my-courses-all" />
-              <label for="my-courses-all"></label>
-            </td>
-            <td>Course</td>
-            <td>Days</td>
-            <td>Start</td>
-            <td>End</td>
-            <td>Professor</td>
-            <td>Location</td>
-            <td>Likes</td>
-            <td><!-- for like button --></td>
-          </tr>
-       </thead>
-
-       <tbody>
-        <tr ng-repeat="section in user.picked.sections">
-            <td>
-              <input type="checkbox" id="{{section.id}}" />
-              <label for="{{section.id}}"></label>
-            </td>
-            <td>{{section.course}}</td>
-            <td>{{section.days}}</td>
-            <td>{{section.start}}</td>
-            <td>{{section.end}}</td>
-            <td>{{section.professor}}</td>
-            <td>{{section.location}}</td>
-            <td>{{section.likes}}</td>
-            <td><i class="fa fa-heart-o" ng-click="like(section)"></i></td>
-          </tr>
-
-       </tbody>
-    </table>
-            </div>
         </div>
 
         <div class="secondary">
             <!-- user account stuff -->
-            <div class="user" ng-controller="LoginCtrl">
-                 <div class="pills" ng-show="!auth.isAuthenticated">
-                    <div class="pill" ng-click="signup()">Register</div>
-                    <div class="pill" ng-click="login()">Login</div>
-                  </div>
+            <div class="user" ng-controller="LoginCtrl" ng-click="login()">
+
 
                   <div ng-show="auth.isAuthenticated">
-                      <img src="{{auth.profile.picture}}" alt="{{auth.profile.nickname}}" height="34" width="34">
-
-                      <div class="pills">
-                        <div class="pill" ng-click="signup()">{{auth.profile.nickname}}</div>
-                        <div class="pill" ng-click="logout()">Logout</div>
-                      </div>
-
+                      <h4>{{auth.profile.nickname}} <i class="icon-down-open-mini"></i></h4>
                   </div>
             </div>
 
-            <!-- seconday helper views -->
-            <div ui-view="secondary"></div>
+             <!-- Secondary View -->
+            <div class="animateFade" ui-view="secondary"></div>
         </div>
        </div>
 
@@ -185,6 +139,7 @@
         <script src="scripts/directives/section.js"></script>
         <script src="scripts/directives/slider.js"></script>
         <script src="scripts/directives/when-scrolled.js"></script>
+         <script src="scripts/directives/event-class.js"></script>
         <script src="scripts/filters/days.js"></script>
         <script src="scripts/filters/time.js"></script>
         <script src="scripts/filters/period.js"></script>

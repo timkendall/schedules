@@ -1,0 +1,51 @@
+<div>
+
+  <!-- Search -->
+  <div class="search">
+    <input type="text" ng-model="search" name="search" placeholder="Find courses" />
+  </div>
+
+  <!-- Catalog/wishlist toggle -->
+  <div class="pills">
+    <div class="pill">Sections</div>
+    <div class="pill active">Courses</div>
+  </div>
+
+  <h1 class="placeholder" ng-show="!liked.length">Nothing here yet, click the <i class="fa fa-heart-o"></i> next to a course or section to see it here.</h1>
+
+  <div ng-hide="!liked.length" class="table-responsive">
+     <!-- swap between courses and sections views -->
+       <table class="table-full">
+
+       <thead>
+          <tr>
+            <td></td>
+            <td>Term</td>
+            <td>Course</td>
+            <td>GE</td>
+            <td>Title</td>
+            <td>Sections</td>
+            <td>Likes</td>
+            <td><!-- for like button --></td>
+          </tr>
+       </thead>
+
+       <tbody>
+        <tr ng-repeat="course in liked | filter:search" ng-class="{picked: isPickedCourse(course)}">
+
+            <td>
+              <i class="fa fa-plus-square-o" ng-click="addToSchedule(course)"></i>
+            </td>
+            <td><span class="term {{course.term}}">{{course.term}}</span></td>
+            <td>{{course.course}}</td>
+            <td>{{course.GEs}}</td>
+            <td>{{course.title}}</td>
+            <td>{{course.sections.length}}</td>
+            <td>{{course.likes}} likes</td>
+            <td><i class="fa" ng-class="{'fa-heart-o': !isLikedCourse(course), 'fa-heart': isLikedCourse(course)}"  ng-click="likeCourse(course)"></i></td>
+          </tr>
+
+       </tbody>
+    </table>
+  </div>
+</div>

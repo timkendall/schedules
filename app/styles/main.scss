@@ -45,6 +45,18 @@ body {
    position: relative;
    @include transition(all 0.2s ease-in-out);
 
+   .center {
+    //border-bottom: 1px solid lighten(#666666, 40%);
+    height: 30px;
+    margin-bottom: 10px;
+    .pills {
+      margin-top: 15px;
+      .pill:first-child {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
+   }
   .pills {
     float: right;
     margin-bottom: 40px;
@@ -95,7 +107,7 @@ body {
   position: relative;
 
   .user {
-    height: 80px;
+    height: 56px;
     width: 100%;
     background: darken(#0E8493, 5%);
     //border-bottom: 1px solid rgba(255,255,255,0.18);
@@ -116,13 +128,13 @@ body {
       box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);
      margin-right: 10px;
      position: absolute;
-     top: 22px;
+     top: 12px;
      left: 25px;
     }
 
     div .pills {
       position: absolute;
-     top: 26px;
+     top: 15px;
      left: 75px;
       .pill {
         font-size: 10px;
@@ -144,11 +156,20 @@ body {
         border-color: rgba(255,255,255,0.68);
         color: rgba(255,255,255,0.88);
       }
+
     }
   }
 
   h5 {
     margin-bottom: 0;
+  }
+
+  h5 small {
+    text-transform: none;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    display: block;
+    margin-top: 6px;
   }
 
   h5:first-child {
@@ -160,9 +181,39 @@ body {
     //border: 1px solid red;
     margin-left: 0px;
 
-    div {
-      display: inline-block;
+    li:first-child {
+      label {
+        @include border-left-radius(4px);
+      }
+    }
 
+    li:last-child {
+      label {
+        @include border-right-radius(4px);
+        border-right: 1px solid rgba(255,255,255,0.15);
+      }
+    }
+
+    li {
+      display: inline-block;
+      width: 42px;
+      height: 30px;
+      margin: 0 -4px 0 0;
+      padding: 0;
+
+
+      label {
+        display: block;
+        width: 100%;
+        padding-left: 0;
+        line-height:  30px;
+        background: none;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-right: none;
+        //box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
+        @include transition(all 0.2s ease-in-out);
+      }
       label:before {
         display: inline-block;
       }
@@ -170,9 +221,11 @@ body {
       /* checkbox */
       [type="checkbox"]:not(:checked) + label:before,
       [type="checkbox"]:checked + label:before {
+        opacity: 0;
         top: 0;
        background: none;
        border-color: rgba(255,255,255,0.38);
+
       }
       /* checked checkbox */
       [type="checkbox"]:checked + label:before,
@@ -180,6 +233,7 @@ body {
         background: rgba(255,255,255,0.6);
         border-color: rgba(255,255,255,0.0);
         box-shadow: none;
+
       }
       /* check */
       [type="checkbox"]:not(:checked) + label:after,
@@ -187,19 +241,23 @@ body {
         color: #26708F;
         text-shadow: none;
         top: 0px;
+        opacity: 0;
       }
-      label {
-        font-size: 13px;
-        padding: 0 0 0 20px;
-        display: inline;
+
+      [type="checkbox"]:checked + label,
+      [type="checkbox"]:checked + label {
+       background: rgba(255,255,255,0.10);
+       box-shadow: none;
+       @include transition(all 0.2s ease-in-out);
       }
+
     }
   }
 
   .select {
     border-color: rgba(255,255,255,0.15);
     @include transition(all 0.2s ease-in-out);
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .select:first-child {
@@ -216,16 +274,106 @@ body {
   }
 }
 
-.third {
+
+.term {
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 99px;
+  padding: 2px 5px;
+  border: 1px solid #515558;
+  color: #515558;
+}
+
+.term.Fall {
+  border: 1px solid #EA8927;
+  color: #EA8927;
+}
+
+.term.Interterm {
+  border: 1px solid #3CC4E7;
+  color: #3CC4E7;
+}
+
+.term.Spring {
+  border: 1px solid #5FD571;
+  color: #5FD571;
+}
+
+.term.Summer {
+  border: 1px solid #E9B860;
+  color: #E9B860;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #1FB0BE;
+  border-radius: 100%;
+}
+nav.third {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 56px;
   background: #F6F6F6; background: #fff;
   padding: 0 40px;
   box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.2);
   z-index: 99999999999;
+
+  @include display(flex);
+  @include align-items(center);
+  @include flex-direction(row);
+  @include justify-content(center);
+
+  .badge {
+    position: absolute;
+    top: 22px;
+    right: -5px;
+    border: 2px solid #fff;
+    font-weight: 300;
+    background: #1FB0BE;
+   // @include animation(pulse 0.3s ease-in-out);
+   @include animation-duration(0.3s);
+  }
+
+  .badge-dot {
+     position: absolute;
+    top: 30px;
+    right: 0px;
+  }
+
+  // Nav icons
+  ul {
+
+    li {
+      width: 60px;
+      margin-right: -4px;
+      padding: 0 40px;
+      position: relative;
+
+      a {
+        font-size: 26px;
+        color: #666;
+        line-height: 65px;
+      }
+
+      a:hover {
+
+      }
+
+      a.active {
+        color: lighten(#1E7B91, 20%);
+
+        // Icon gradient
+        i:before {
+          @include linear-gradient(-30deg, lighten(#127F92, 10%), lighten(#5A3688, 20%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        }
+      }
+    }
+  }
 
   .btn-green {
     float: right;
@@ -233,6 +381,22 @@ body {
 
   .btn {
     margin-top: 24px;
+  }
+}
+
+.placeholder {
+  text-align: center !important;
+  font-size: 22px;
+  color: #666666;
+  margin-top: 40px;
+  clear: both;
+}
+
+.tip {
+  font-size: 16px;
+
+  small {
+    font-size: 16px !important;
   }
 }
 
@@ -375,6 +539,9 @@ input.slider {
 }
 
 .pills {
+  border-radius: 4px;
+  //overflow: hidden;
+
   .pill {
     display: inline-block;
     font-size: 11px;
@@ -384,9 +551,18 @@ input.slider {
     border: 1px solid #D1D5D8;
     color: #7A7E81;
     margin-right: -4px;
-    border-radius: none;
     cursor: pointer;
+    border-radius: 0px;
     @include transition(all 0.2s ease-in-out);
+  }
+
+  .pill:first-child {
+    border-right: none;
+    @include border-left-radius(4px);
+  }
+
+  .pill:last-child {
+    @include border-right-radius(4px);
   }
 
   .pill:hover {
@@ -394,20 +570,14 @@ input.slider {
     border-color: darken(#D1D5D8, 20%);
   }
 
-  .pill:first-child {
-    @include border-right-radius(0px);
-    @include border-left-radius(99px);
-  }
-
-  .pill:last-child {
-    @include border-left-radius(0px);
-    @include border-right-radius(99px);
-     border-left: none;
-  }
-
   .pill.active {
-    border-color: lighten(#188792, 10%);
-    color: lighten(#188792, 10%);
+    background: lighten(#188792, 10%);
+    color: #fff;
+    border-color:lighten(#188792, 10%);
+  }
+
+  .pill.active + .pill {
+    border-left: none;
   }
 }
 
@@ -431,7 +601,7 @@ input.slider {
   line-height: 48px;
   top: 0px;
   right: 10px;
-  font-size: 14px;
+  font-size: 16px;
   color: #ccc;
   cursor: pointer;
 }
@@ -736,17 +906,55 @@ label:hover:before {
   to    { transform: translateY(0); }
 }
 
+.animateFade.ng-enter {
+  @include animation(fadeIn 0.3s ease-in-out);
+}
+
+.animateFade.ng-leave {
+  @include animation(fadeOut 0.3s ease-in-out);
+}
 
 .animateSlide.ng-enter       {
   animation: slideInRight 0.3s both ease-in; z-index: 8888;
   @include animation-delay(0.3s);
-  display: inline-block;
+
 }
 .animateSlide.ng-leave       {
   animation: slideOutLeft 0.3s both ease-in; z-index: 9999;
-  display: inline-block;
+
 }
 
 .animateSlideOut.ng-leave {
   @include animation(fadeOutUp 0.4s ease-in-out);
+}
+
+.center {
+   @include display(flex);
+  @include align-items(center);
+  @include flex-direction(row);
+  @include justify-content(center);
+}
+
+ul.schedules {
+  li {
+    font-size: 18px;
+    height: 48px;
+    line-height: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    i {
+      float: right;
+      opacity: 0.5;
+      cursor: pointer;
+      @include transition(all 0.2s ease-in-out);
+    }
+
+    i:hover {
+      opacity: 1;
+      @include transition(all 0.2s ease-in-out);
+    }
+  }
+
+  li:first-child {
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
 }
