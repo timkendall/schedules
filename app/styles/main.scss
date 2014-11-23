@@ -101,7 +101,8 @@ body {
 .secondary {
   width: 300px;
   height: 100%;
-  background: linear-gradient(#5C3588, #0B8793);
+  background: linear-gradient(#5C3588, #0B8793); // fancy
+  //background: #EBEAE6; // icalendar, plain
   padding: 25px;
   color: rgba(255,255,255,0.8);
   position: relative;
@@ -544,14 +545,15 @@ input.slider {
 
   .pill {
     display: inline-block;
-    font-size: 11px;
-    text-transform: uppercase;
+    font-size: 14px;
+    //text-transform: uppercase;
     padding: 0 14px;
-    line-height: 30px;
+    line-height: 26px;
     border: 1px solid #D1D5D8;
     color: #7A7E81;
     margin-right: -4px;
     cursor: pointer;
+    font-weight: bold;
     border-radius: 0px;
     @include transition(all 0.2s ease-in-out);
   }
@@ -573,6 +575,7 @@ input.slider {
   .pill.active {
     background: lighten(#188792, 10%);
     color: #fff;
+    font-weight: normal;
     border-color:lighten(#188792, 10%);
   }
 
@@ -580,6 +583,30 @@ input.slider {
     border-left: none;
   }
 }
+
+.calendar-view {
+  .btn-icon {
+    margin-top: -20px;
+
+  }
+}
+
+.dropdown-menu {
+  li a {
+    text-transform: none;
+  }
+}
+.btn-icon {
+  background: none;
+  color: #1FB0BE;
+  font-size: 18px;
+
+}
+
+.btn-icon:hover {
+    background: none;
+    color: darken(#1FB0BE, 20%);
+  }
 
 .select {
     border-bottom: 1px solid #ccc;

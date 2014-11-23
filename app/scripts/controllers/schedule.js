@@ -12,6 +12,8 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
     $scope.showingStarred = false;
     $scope.chosen = [];
 
+    $scope.calendarView = true;
+
     $scope.showStarred = function(show) {
         if (show) {
             $scope.unbindCourses();

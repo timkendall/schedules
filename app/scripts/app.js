@@ -7,7 +7,7 @@
  *
  * Config module of the application.
  */
-angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', , 'angular-storage', 'angular-jwt', 'angular-data.DS']).config(function($stateProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
+angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', , 'angular-storage', 'angular-jwt', 'angular-data.DS', 'ui.bootstrap']).config(function($stateProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
     // Configure Auth0 authentication
     authProvider.init({
         domain: 'schedules.auth0.com',

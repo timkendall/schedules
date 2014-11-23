@@ -1,15 +1,70 @@
-<div>
+<div class="calendar-view">
 
   <!-- Catalog/wishlist toggle -->
   <div class="center">
+    <!-- Calendar Action -->
+    <div class="btn btn-icon" dropdown is-open="status.isopen">
+      <i dropdown-toggle ng-disabled="disabled" class="icon-download"></i>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Download</a></li>
+        <li><a href="#">Export to Google Calendar</a></li>
+        <li><a href="#">Export to iCloud Calendar</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Save</a></li>
+      </ul>
+    </div>
+
+      <!-- Calendar View -->
     <div class="pills">
-      <div class="pill">List</div>
-      <div class="pill active">Calendar</div>
+      <div class="pill" ng-class="{active: !calendarView}" ng-click="calendarView = false">List</div>
+      <div class="pill" ng-class="{active: calendarView}" ng-click="calendarView = true">Calendar</div>
+    </div>
+
+      <!-- Calendar Action -->
+     <div class="btn btn-icon"><i class="icon-share"></i></div>
+
     </div>
   </div>
 
-  <calendar courses="picked" preferences="prefs"></calendar>
-</div>
+  <calendar ng-show="calendarView" courses="picked" preferences="prefs"></calendar>
 
+  <div ng-show="!calendarView" class="table-responsive animateFade">
+   <table class="table-full">
+
+       <thead>
+          <tr>
+            <td>
+
+            </td>
+            <td>Course</td>
+            <td>Days</td>
+            <td>Start</td>
+            <td>End</td>
+            <td>Professor</td>
+            <td>Location</td>
+            <td>Likes</td>
+            <td><!-- for like button --></td>
+          </tr>
+       </thead>
+
+       <tbody>
+        <tr ng-repeat="section in picked[0].sections">
+            <td>
+              <i class="fa fa-eye" ng-click="hide(section)"></i>
+            </td>
+            <td>{{section.course}}</td>
+            <td>{{section.days}}</td>
+            <td>{{section.start}}</td>
+            <td>{{section.end}}</td>
+            <td>{{section.professor}}</td>
+            <td>{{section.location}}</td>
+            <td>{{section.likes}}</td>
+            <td><i class="fa fa-heart-o" ng-click="like(section)"></i></td>
+          </tr>
+
+       </tbody>
+    </table>
+    </div>
+</div>
 
 

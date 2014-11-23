@@ -58,7 +58,8 @@ tbody {
 
   .fa-heart {
     //color: #F7308E; super pink
-    color: #FA5C4F; // orange-ish
+   // color: #FA5C4F; // orange-ish
+    color: #FC5663; // red
     @include animation(pulse 0.3s ease-in-out);
   }
 

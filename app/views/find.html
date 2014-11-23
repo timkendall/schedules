@@ -31,8 +31,8 @@
        <tbody when-scrolled="console.log('scrolled past yo')">
         <tr ng-repeat="course in courses | filter:search" ng-class="{picked: isPickedCourse(course)}">
 
-            <td>
-              <i class="fa fa-plus-square-o" ng-click="addToSchedule(course)"></i>
+            <td ng-click="addToSchedule(course)">
+              <i class="fa fa-plus-square-o" ></i>
             </td>
             <td><span class="term {{course.term}}">{{course.term}}</span></td>
             <td>{{course.course}}</td>
