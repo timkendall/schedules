@@ -67,3 +67,27 @@
     color: #AA646A;
   }
 }
+
+.event-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+  background: darken(rgba(255,237,210,1), 15%);
+}
+
+.event-dot.red {
+  background: darken(rgba(235,182,190,1), 15%);
+}
+
+.event-dot.purple {
+  background: darken(rgba(212,187,213,1), 15%);
+}
+
+.event-dot.green {
+  background: darken(rgba(197,225,177,1), 15%);
+}
+
+.event-dot.orange {
+  background: darken(rgba(251,202,179,1), 15%);
+}

@@ -2,6 +2,7 @@
 
             <h5>Filters</h5>
             <!-- Filter -->
+            <div class="container-test">
             <div class="select" style="border-top: 1px solid rgba(255,255,255,0.15)">
                 <select>
                    <option name="any">Any Major</option>
@@ -19,12 +20,12 @@
                    <option name="any">Any Level</option>
                  </select>
              </div>
+             </div>
 
              <h5>Days</h5>
+
              <!-- days -->
              <ul class="select-days list-inline">
-
-
 
                     <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('mon') > -1" id="mon" /><label for="mon">Mon</label></li>
                     <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('tue') > -1" id="tue" /><label for="tue">Tue</label></li>
@@ -42,6 +43,7 @@
 
              <h5>Start</h5>
             <!-- slider -->
+            <div class="container-test">
              <input class="slider" value=""  type="text" id="mySlider1" slider data-slider-min="8" data-slider-max="22" data-slider-step="0.5" data-slider-value="[8,21]" />
              <ul class="slider-scale list-unstyled">
                 <li class="long" slider-scale="8">
@@ -114,3 +116,4 @@
                     </span>
                 </li>
              </ul>
+             </div>

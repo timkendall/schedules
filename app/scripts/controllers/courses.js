@@ -12,7 +12,7 @@ angular.module('schedules')
 
     // Handle table clicks
     $scope.go = function (course) {
-      $location.path('/courses/catalog/' + course.id);
+      $location.path('/find/' + course.id);
     }
 
   });

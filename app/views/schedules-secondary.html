@@ -1,8 +1,41 @@
-<!-- <h5>Possible schedules</h5> -->
-<!-- resolve conflicts? -->
-<h5>Saved Schedules</h5>
+<h5>Courses</h5>
+<ul class="list-unstyled courses-list">
+  <li ng-class="{selected: course.id == selectedCourse.id}" ng-repeat="course in picked" ng-click="selectCourse(course)">
+    <span class="event-dot {{course.color}}"></span>
+    <small>{{course.course}}</small>
+    <h4>{{course.title}}</h4>
 
-<ul class="schedules list-unstyled">
+    <!-- Event actions -->
+    <div class="btn btn-icon" dropdown is-open="status.isopen">
+      <i dropdown-toggle ng-disabled="disabled" class="icon-cog"></i>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-click="removeFromPicked(course)">Remove</li>
+        <li>Hide</li>
+        <li>Save for later</li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
+<ul class="list-unstyled" id="selected-sections">
+  <li ng-repeat="section in selectedCourse.sections">
+    <div class="number-bubble">{{$index}}</div>
+    <small><b>{{section.meets | days}}</b> {{section.start}} <i class="icon-right-thin"></i> {{section.end}}</small>
+    <h4>{{section.professor}}</h4>
+
+    <div class="radio">
+      <input id="check1" type="radio" name="check" value="check1">
+      <label for="check1"></label>
+    </div>
+
+  </li>
+</ul>
+
+<!-- resolve conflicts? -->
+<!-- <h5>Saved Schedules</h5> -->
+
+<!-- <ul class="schedules list-unstyled">
   <li>11/17/2014 <i class="icon-share"></i></li>
   <li>11/12/2014 <i class="icon-share"></i></li>
 </ul>
+

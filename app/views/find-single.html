@@ -1,0 +1,27 @@
+
+    <table class="table-full">
+        <thead>
+            <tr>
+                <td>Course</td>
+                <td>Days</td>
+                <td>Start</td>
+                <td>End</td>
+                <td>Professor</td>
+                <td>Location</td>
+                <td>Likes</td>
+                <td><!-- for like button --></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="section in course.sections">
+                <td>{{section.course}}</td>
+                <td>{{section.days}}</td>
+                <td>{{section.start}}</td>
+                <td>{{section.end}}</td>
+                <td>{{section.professor}}</td>
+                <td>{{section.location}}</td>
+                <td>{{section.likes}}</td>
+                <td><i class="fa fa-heart-o" ng-click="like(section)"></i></td>
+            </tr>
+        </tbody>
+    </table>

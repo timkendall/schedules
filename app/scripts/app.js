@@ -29,7 +29,8 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     })
     // Find courses to add
     .state('find', {
-        url: '/find',
+       abstract: true,
+       url: '/find',
        views: {
             'secondary': {
                 templateUrl: 'views/find-secondary.html',
@@ -41,37 +42,15 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
             }
         }
     })
-    // View current and saved schedules
-    .state('schedules', {
-        url: '/schedules',
-        views: {
-            'secondary': {
-                templateUrl: 'views/schedules-secondary.html',
-                controller: 'ScheduleCtrl'
-            },
-            'primary': {
-                templateUrl: 'views/schedule.html',
-                controller: 'ScheduleCtrl'
-            }
-        }
+
+    // Find courses to add
+    .state('find.all', {
+        url: '/all',
+        templateUrl: 'views/find-all.html'
     })
-     // View current and saved schedules
-    .state('likes', {
-        url: '/likes',
-        views: {
-            'secondary': {
-                templateUrl: 'views/likes-secondary.html',
-                controller: 'CoursesCtrl'
-            },
-            'primary': {
-                templateUrl: 'views/likes.html',
-                controller: 'CoursesCtrl'
-            }
-        }
-    })
-    .state('find.course', {
+     .state('find.single', {
         url: '/:courseId',
-        templateUrl: 'views/courses-single.html',
+        templateUrl: 'views/find-single.html',
         controller: 'CourseCtrl',
         resolve: {
             loadCourse: function($q, $stateParams, $window, $location, $rootScope, Course) {
@@ -117,6 +96,48 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
             }
         }
     })
+    // View current and saved schedules
+    .state('schedules', {
+        url: '/schedules',
+        views: {
+            'secondary': {
+                templateUrl: 'views/schedules-secondary.html',
+                controller: 'ScheduleCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/schedule.html',
+                controller: 'ScheduleCtrl'
+            }
+        }
+    })
+     // View current and saved schedules
+    .state('likes', {
+        url: '/likes',
+        views: {
+            'secondary': {
+                templateUrl: 'views/likes-secondary.html',
+                controller: 'CoursesCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/likes.html',
+                controller: 'CoursesCtrl'
+            }
+        }
+    })
+    // View current and saved schedules
+    .state('plans', {
+        url: '/likes',
+        views: {
+            'secondary': {
+                templateUrl: 'views/likes-secondary.html',
+                controller: 'CoursesCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/likes.html',
+                controller: 'CoursesCtrl'
+            }
+        }
+    })
     .state('me', {
         url: '/me',
         templateUrl: 'views/me.html',
@@ -127,9 +148,9 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     });
 
     // Set default route
-    $urlRouterProvider.otherwise('/courses/catalog');
+    $urlRouterProvider.otherwise('/find/all');
     // Code to run at startup
-}).run(function($rootScope, auth, store, jwtHelper, Course, Major) {
+}).run(function($rootScope, $location, auth, store, jwtHelper, Course, Major) {
     // Catch state change errors
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         console.log(error)

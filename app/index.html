@@ -43,11 +43,11 @@
             <!-- Actions -->
              <nav class="third">
                 <ul class="list-inline">
-                    <li><a href ui-sref-active="active" ui-sref="find"><i class="icon-search"></i></a></li>
-                    <li><a href ui-sref-active="active" ui-sref="schedules"><i class="icon-calendar"></i> <div class="badge" event-class="{pulse: 'added course'}">{{picked.length}}</div></a> </li>
+                    <li><a href ng-class="{active: $state.includes('find')}" ui-sref="find.all"><i class="icon-search"></i></a></li>
+                    <li><a href ui-sref-active="active" ui-sref="schedules"><i class="icon-calendar"></i> <div class="badge" event-class="{pulse: 'added course'}" ng-cloak>{{picked.length}}</div></a> </li>
                     <li><a href ui-sref-active="active" ui-sref="likes"><i class="icon-heart-empty"></i></a></li>
                     <li><a href ui-sref-active="active" ui-sref="plans"><i class="icon-chart-line"></i></a></li>
-                    <li><a href ui-sref-active="active" ui-sref="help"><i class="icon-chat"></i> <div class="badge-dot" ng-show="messages.unread.length" event-class="{pulse: 'message recieved'}"></div></a></li>
+                    <!-- <li><a href ui-sref-active="active" ui-sref="help"><i class="icon-chat"></i> <div class="badge-dot" ng-show="messages.unread.length" event-class="{pulse: 'message recieved'}"></div></a></li> -->
                 </ul>
              </nav>
         </div>

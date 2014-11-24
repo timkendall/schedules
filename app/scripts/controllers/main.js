@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('schedules')
-  .controller('MainCtrl', function ($scope, $location, Course, Section, $rootScope, auth) {
+  .controller('MainCtrl', function ($scope, $location, $state, Course, Section, $rootScope, auth) {
+    $scope.$state = $state;
     $scope.messages = {};
     $scope.messages.unread = [{ id: 1, from: 'Debbie Smith', message: 'Sure, I can help!'}]
 //start: 28800, end: 31788,
     $rootScope.courses = [
       { id: 1, term: 'Fall 2014', course: 'CPSC-353', GEs: '', major: 'CPSC', level: 300, title: 'Computer Networks', likes: 3, sections: [
-        { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['Mon', 'Wed', 'Fri'], start: '10AM', end: '11AM', professor: 'M. Fahy', location: 'Leatherby B13', likes: 12}
+        { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['Mon', 'Wed', 'Fri'], start: '10AM', end: '11AM', professor: 'M. Fahy', location: 'Leatherby B13', likes: 12},
+        { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['Tue', 'Thu'], start: '12AM', end: '1:15PM', professor: 'M. Fahy', location: 'Leatherby B13', likes: 12}
       ] },
       { id: 2, term: 'Fall 2014', course: 'ECON-411', GEs: '', major: 'ECON', level: 400, title: 'American Economic History', likes: 55, sections: [] },
       { id: 3, term: 'Fall 2014', course: 'ECON-101', GEs: '7EI', major: 'ECON', level: 100, title: 'Macroeconomics', likes: 4, sections: [] },
@@ -64,6 +66,8 @@ angular.module('schedules')
        else return false;
      }
 
+      var colors = ['yellow', 'orange', 'purple', 'green', 'red'];
+
      $scope.addToSchedule = function (_course) {
       // Make sure it's not already there
       var pickedCourse = _.find($rootScope.picked, function (course) {
@@ -71,11 +75,17 @@ angular.module('schedules')
       });
 
       if (pickedCourse) {
+        // Reclaim the color
+        colors.push(_course.color);
+        _course.color = null;
         // remove it
         _.remove($rootScope.picked, function (course) { return course.id == _course.id; });
-         $rootScope.$emit('added course')
+        $rootScope.$emit('added course'); // should be 'removed course'
         return;
       }
+
+      // Assign it a color
+      _course.color = colors.pop();
       // Add it
       $rootScope.picked.push(_course);
       // Emit add event

@@ -89,14 +89,6 @@ angular.module('schedules').directive('calendar', function($timeout) {
                 this.fridays = [];
                 this.saturdays = [];
 
-                var colors = [
-                  'yellow',
-                  'orange',
-                  'purple',
-                  'green',
-                  'red'
-                ];
-
                 /*
                  * Run to generate metrics
                  */
@@ -106,7 +98,7 @@ angular.module('schedules').directive('calendar', function($timeout) {
                    */
                   self.sections.forEach(function (section, index) {
                     // Weird naming
-                    section.color = colors[Math.floor(Math.random() * colors.length -1) ];
+
                     section.section.meets.forEach(function (day) {
                       switch (day) {
                         case 'Mon':
@@ -176,9 +168,11 @@ angular.module('schedules').directive('calendar', function($timeout) {
             function convertNodesToSections(nodes) {
                 var sectionsSchedule = [];
                 nodes.forEach(function(node) {
+
                     sectionsSchedule.push({
-                        id: node.courseId,
-                        section: node.section
+                        id: node.course,
+                        section: node.section,
+                        color: node.color
                     });
                 });
                 return sectionsSchedule;
@@ -273,7 +267,8 @@ angular.module('schedules').directive('calendar', function($timeout) {
             }
 
             function Node(course, section) {
-                this.courseId = course.courseId;
+                this.courseId = course.course;
+                this.color = course.color;
                 this.section = section;
                 this.edges = [];
             }
