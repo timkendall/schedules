@@ -7,7 +7,7 @@
  *
  * Config module of the application.
  */
-angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', , 'angular-storage', 'angular-jwt', 'angular-data.DS', 'ui.bootstrap']).config(function($stateProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
+angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', 'angular-storage', 'angular-jwt', 'angular-data.DS', 'ui.bootstrap']).config(function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
     // Configure Auth0 authentication
     authProvider.init({
         domain: 'schedules.auth0.com',
@@ -149,6 +149,8 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
 
     // Set default route
     $urlRouterProvider.otherwise('/find/all');
+    // use the HTML5 History API
+    //$locationProvider.html5Mode(true);
     // Code to run at startup
 }).run(function($rootScope, $location, auth, store, jwtHelper, Course, Major) {
     // Catch state change errors
@@ -166,7 +168,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
                     auth.authenticate(store.get('profile'), token);
                 } else {
                     // Either show Login page or use the refresh token to get a new idToken
-                    $location.path('/');
+                    //$location.path('/');
                 }
             }
         }

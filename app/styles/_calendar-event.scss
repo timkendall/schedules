@@ -16,7 +16,7 @@
 
   height: 50px;
 
-  @include animation(flipInX 0.5s cubic-bezier(1, .25, .40, .34));
+  @include animation(fadeIn 0.25s cubic-bezier(1, .25, .40, .34));
 
   h5 {
     font-weight: 700;
@@ -65,6 +65,29 @@
   border-left: 3px solid darken(#EBB6BE, 15%);
   h5 {
     color: #AA646A;
+  }
+}
+
+.calendar-event-optional {
+   background: rgba(255,237,210,0.35);
+  border-top: 1px dashed darken(rgba(255,237,210,1), 15%);
+  border-right: 1px dashed darken(rgba(255,237,210,1), 15%);
+  border-bottom: 1px dashed darken(rgba(255,237,210,1), 15%);
+
+  color: lighten(#A66100, 25%);
+   h5 {
+    color: lighten(#A66100, 25%);
+  }
+}
+
+.calendar-event-optional.red {
+  background: rgba(235,182,190,0.35);
+  border:1px dashed darken(rgba(235,182,190,0.7), 15%);
+  border-left: 3px solid darken(#EBB6BE, 5%);
+
+  color: lighten(#AA646A, 15%);
+   h5 {
+    color: lighten(#AA646A, 15%);
   }
 }
 

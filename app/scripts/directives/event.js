@@ -6,30 +6,20 @@
 
 'use strict';
 
-angular.module('schedules').directive('event', function ($timeout) {
+angular.module('schedules').directive('event', function ($timeout, $rootScope) {
   return {
-    restrict: 'E',
+    restrict: 'A',
     scope: {
-      start: '=start',
-      end: '=end',
-      color: '=color'
+      event: '=event'
     },
 
     link: function (scope, element, attr) {
 
-      // Choose a random color
-      var colors = [
-        'yellow',
-        'orange',
-        'purple',
-        'green',
-        'red'
-      ]
 
       // Hide element while changes are made to position and height
       element.css('display', 'none');
 
-      element.addClass(scope.color)
+      element.addClass(scope.event.color)
 
       /* Note: This is based on a height of 50px per hour */
       var heights = {
@@ -40,10 +30,10 @@ angular.module('schedules').directive('event', function ($timeout) {
       }
 
       // hardcode for now
-      scope.duration = 50;
+      var duration = 50;
 
       // Set height
-      switch (scope.duration) {
+      switch (duration) {
       case 50:
         element.css('height', heights['50'] + 'px');
         break;
@@ -67,7 +57,7 @@ angular.module('schedules').directive('event', function ($timeout) {
 
 
       // Normalize timeformat ex.'09:00 AM'
-      var start = Time(scope.start).format('hh:mmAM')
+      var start = Time(scope.event.start).format('hh:mmAM')
       // Set position
       if (start.indexOf('8:00AM') > -1) {
         translateY(element, 0);
@@ -128,6 +118,34 @@ angular.module('schedules').directive('event', function ($timeout) {
       // Show element
       element.css('display', 'block');
 
+      // Emit event on hover
+      element.on('mouseover', function () {
+        if (scope.event.selected) {
+          $rootScope.$emit('show all sections', { course: scope.event.course});
+        }
+      });
+
+      element.on('mouseleave', function () {
+        if (scope.event.selected) $rootScope.$emit('hide all sections', { course: scope.event.course});
+      });
+
+      // Show the event
+      $rootScope.$on('show all sections', function (event, data) {
+        if (scope.event.course === data.course && !scope.event.selected) {
+          element.css('display', 'block');
+        }
+      });
+
+      // Hide the event
+      $rootScope.$on('hide all sections', function (event, data) {
+        if (scope.event.course === data.course && !scope.event.selected) {
+          element.addClass('fadeOut');
+          setTimeout(function () {
+            element.css('display', 'none');
+          },250)
+
+        }
+      });
     }
   };
 });

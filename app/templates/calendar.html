@@ -45,10 +45,10 @@
             <div class="column-container">
                 <!-- Monday courses -->
                 <div class="column">
-                    <event ng-repeat="course in chosenSchedule.mondays" class="calendar-event" start="course.section.start" end="course.section.end" color="course.color">
-                    <h5>{{course.section.course}}</h5>
-                    <small>{{course.section.location}}</small>
-                    </event>
+                    <div event="section" ng-class="{'calendar-event-optional': !section.selected}" ng-repeat="section in schedule.mondays" class="calendar-event">
+                    <h5>{{section.course}}</h5>
+                    <small>{{section.location}}</small>
+                    </div>
                     <ul class="list-unstyled">
                         <li ng-repeat="hour in getHours() track by $index">
                             <div class="half"></div>
@@ -58,10 +58,10 @@
                 </div>
                 <!-- Tuesday courses -->
                 <div class="column">
-                    <event ng-repeat="course in chosenSchedule.tuesdays" class="calendar-event" class="calendar-event" start="course.section.start" end="course.section.end" color="course.color">
-                    <h5>{{course.section.course}}</h5>
-                    <small>{{course.section.location}}</small>
-                    </event>
+                    <div event="section" ng-class="{'calendar-event-optional': !section.selected}" ng-repeat="section in schedule.tuesdays" class="calendar-event">
+                    <h5>{{section.course}}</h5>
+                    <small>{{section.location}}</small>
+                    </div>
                     <ul class="list-unstyled">
                         <li ng-repeat="hour in getHours() track by $index">
                             <div class="half"></div>
@@ -71,10 +71,10 @@
                 </div>
                 <!-- Wednesday courses -->
                 <div class="column">
-                    <event ng-repeat="course in chosenSchedule.wednesdays" class="calendar-event" class="calendar-event" start="course.section.start" end="course.section.end" color="course.color">
-                    <h5>{{course.section.course}}</h5>
-                    <small>{{course.section.location}}</small>
-                    </event>
+                    <div event="section" ng-class="{'calendar-event-optional': !section.selected}" ng-repeat="section in schedule.wednesdays" class="calendar-event">
+                    <h5>{{section.course}}</h5>
+                    <small>{{section.location}}</small>
+                    </div>
                     <ul class="list-unstyled">
                         <li ng-repeat="hour in getHours() track by $index">
                             <div class="half"></div>
@@ -84,10 +84,10 @@
                 </div>
                 <!-- Thursday courses -->
                 <div class="column">
-                    <event ng-repeat="course in chosenSchedule.thursdays" class="calendar-event" class="calendar-event" start="course.section.start" end="course.section.end" color="course.color">
-                    <h5>{{course.section.course}}</h5>
-                    <small>{{course.section.location}}</small>
-                    </event>
+                    <div event="section" ng-class="{'calendar-event-optional': !section.selected}" ng-repeat="section in schedule.thursdays" class="calendar-event">
+                    <h5>{{section.course}}</h5>
+                    <small>{{section.location}}</small>
+                    </div>
                     <ul class="list-unstyled">
                         <li ng-repeat="hour in getHours() track by $index">
                             <div class="half"></div>
@@ -97,10 +97,10 @@
                 </div>
                 <!-- Friday courses -->
                 <div class="column">
-                    <event ng-repeat="course in chosenSchedule.fridays" class="calendar-event" class="calendar-event" start="course.section.start" end="course.section.end" color="course.color">
-                    <h5>{{course.section.course}}</h5>
-                    <small>{{course.section.location}}</small>
-                    </event>
+                    <div event="section" ng-class="{'calendar-event-optional': !section.selected}" ng-repeat="section in schedule.fridays" class="calendar-event">
+                    <h5>{{section.course}}</h5>
+                    <small>{{section.location}}</small>
+                    </div>
                     <ul class="list-unstyled">
                         <li ng-repeat="hour in getHours() track by $index">
                             <div class="half"></div>
@@ -110,10 +110,10 @@
                 </div>
                 <!-- Saturday courses -->
                 <div class="column">
-                    <event ng-repeat="course in chosenSchedule.saturdays" class="calendar-event" class="calendar-event" start="course.section.start" end="course.section.end" color="course.color">
-                    <h5>{{course.section.course}}</h5>
-                    <small>{{course.section.location}}</small>
-                    </event>
+                    <div event="section" ng-class="{'calendar-event-optional': !section.selected}" ng-repeat="section in schedule.saturdays" class="calendar-event">
+                    <h5>{{section.course}}</h5>
+                    <small>{{section.location}}</small>
+                    </div>
                     <ul class="list-unstyled">
                         <li ng-repeat="hour in getHours() track by $index">
                             <div class="half"></div>

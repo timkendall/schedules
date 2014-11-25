@@ -406,7 +406,7 @@ nav.third {
 
 .placeholder {
   text-align: center !important;
-  font-size: 22px;
+  font-size: 14px;
   color: #666666;
   margin-top: 40px;
   clear: both;
@@ -1059,6 +1059,14 @@ ul.schedules {
   li.selected, li.selected:hover {
     background: rgba(166,149,132,0.15);
     @include transition(all 0.2s ease-in-out);
+
+    small {
+      color: rgba(0,0,0,0.5);
+    }
+
+    h4 {
+      color: rgba(0,0,0,0.75);
+    }
 
     .btn-icon {
       color: rgba(0,0,0,0.5);

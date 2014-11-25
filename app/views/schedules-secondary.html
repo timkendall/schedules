@@ -19,17 +19,19 @@
 
 <ul class="list-unstyled" id="selected-sections">
   <li ng-repeat="section in selectedCourse.sections">
-    <div class="number-bubble">{{$index}}</div>
+    <div class="number-bubble">{{$index + 1}}</div>
     <small><b>{{section.meets | days}}</b> {{section.start}} <i class="icon-right-thin"></i> {{section.end}}</small>
     <h4>{{section.professor}}</h4>
 
     <div class="radio">
-      <input id="check1" type="radio" name="check" value="check1">
-      <label for="check1"></label>
+      <input type="radio" id="section-{{section.id}}" name="check" value="{{section.id}}" ng-model="section.selected">
+      <label for="section-{{section.id}}"></label>
     </div>
 
   </li>
 </ul>
+
+<div class="placeholder" ng-show="!!!selectedCourse.sections.length && selectedCourse">Darn, no sections for {{selectedCourse.course}} yet.</div>
 
 <!-- resolve conflicts? -->
 <!-- <h5>Saved Schedules</h5> -->

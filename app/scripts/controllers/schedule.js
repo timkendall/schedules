@@ -15,4 +15,6 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
   $scope.selectCourse = function (course) {
     $scope.selectedCourse = course;
   }
+
+
 });

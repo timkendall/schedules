@@ -15,39 +15,41 @@ angular.module('schedules').directive('calendar', function($timeout) {
              /*
              * Hold the generated schedules
              */
-            $scope.schedules = [];
-            $scope.organizedSchedules = [];
+            $scope.schedule = createSchedule($scope.courses);
             /*
              * Run generateSchedules() everytime the user's picked courses has changed
              */
-            $scope.$watch('courses', function(newVal, oldVal) {
+            $scope.$watch('courses', function (newVal, oldVal) {
                 if (newVal.length === 0) {
-                  $scope.organizedSchedules.length = 0;
-                  $scope.schedules.length = 0;
-                  $scope.chosenSchedule = null;
-                } else if (newVal.length > 0) {
-                  // Clear old array
-                  $scope.organizedSchedules.length = 0;
-                  // Grab freshly generated schedules
+                  // Clear current schedule
+                  $scope.schedule = null;
+                } else {
+                  // Create a new schedule
                   $scope.schedules = generateSchedules(newVal);
-                  /*
-                   * This should be done on the fly; slot sections into days and generate metrics
-                   */
-                  $scope.schedules.forEach(function (schedule) {
-                    $scope.organizedSchedules.push(new Schedule(schedule));
-                  });
-
-                  $scope.chosenSchedule = $scope.organizedSchedules[0];
                 }
             }, true);
-
             /*
-             * Switch between schedules
+             * Create a schedule with params
              */
-             $scope.chooseSchedule = function (index) {
-              console.log($scope.organizedSchedules[index])
-                $scope.chosenSchedule = $scope.organizedSchedules[index];
+            function createSchedule(courses) {
+
+              // Choose first section in each course
+              for (var i = 0; i < courses.length; ++i) {
+                courses[i].sections[0].selected = true;
               }
+
+              // Add all sections to schedule (for UI purposes)
+              var sections = [];
+              for (var i = 0; i < courses.length; ++i) {
+                for (var j = 0; j < courses[i].sections.length; ++j) {
+                  courses[i].sections[j].color = courses[i].color; // set color, kinda hacky
+                  sections.push(courses[i].sections[j]);
+                }
+                //sections.push.apply(sections, courses[i].sections);
+              }
+
+              return new Schedule(sections);
+            }
 
             /*
              * Options - these can be set by the user
@@ -99,7 +101,7 @@ angular.module('schedules').directive('calendar', function($timeout) {
                   self.sections.forEach(function (section, index) {
                     // Weird naming
 
-                    section.section.meets.forEach(function (day) {
+                    section.meets.forEach(function (day) {
                       switch (day) {
                         case 'Mon':
                           self.mondays.push(section);
