@@ -35,7 +35,7 @@ angular.module('schedules').directive('calendar', function($timeout) {
 
               // Choose first section in each course
               for (var i = 0; i < courses.length; ++i) {
-                courses[i].sections[0].selected = true;
+                if(courses[i].sections.length > 0) courses[i].sections[0].selected = true;
               }
 
               // Add all sections to schedule (for UI purposes)

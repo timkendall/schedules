@@ -98,7 +98,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
     })
     // View current and saved schedules
     .state('schedules', {
-        url: '/schedules',
+        url: '/schedule',
         views: {
             'secondary': {
                 templateUrl: 'views/schedules-secondary.html',

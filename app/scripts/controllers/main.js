@@ -8,11 +8,13 @@ angular.module('schedules')
 //start: 28800, end: 31788,
     $rootScope.courses = [
       { id: 1, term: 'Fall 2014', course: 'CPSC-353', GEs: '', major: 'CPSC', level: 300, title: 'Computer Networks', likes: 3, sections: [
-        { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['Mon', 'Wed', 'Fri'], start: '10AM', end: '11AM', professor: 'M. Fahy', location: 'Leatherby B13'},
-        { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['Tue', 'Thu'], start: '12AM', end: '1:15PM', professor: 'M. Fahy', location: 'Leatherby B13'}
+        { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['Mon', 'Wed', 'Fri'], start: 10, end: 10.83, professor: 'M. Fahy', location: 'Leatherby B13'},
+        { id: 2, course: 'CPSC-353', days:'MWF',  meets: ['Tue', 'Thu'], start: 12, end: 13.25, professor: 'M. Fahy', location: 'Leatherby B13'},
+        { id: 3, course: 'CPSC-353', days:'M',  meets: ['Mon'], start: 13, end: 15.83, professor: 'M. Fahy', location: 'Leatherby B13'}
       ] },
       { id: 2, term: 'Fall 2014', course: 'ECON-411', GEs: '', major: 'ECON', level: 400, title: 'American Economic History', likes: 55, sections: [
-        { id: 1, course: 'ECON-411', days:'TTh',  meets: ['Tue', 'Thu'], start: '1PM', end: '2PM', professor: 'J. Gurtovoy', location: 'Beckman 211'}
+        { id: 1, course: 'ECON-411', days:'TTh',  meets: ['Tue', 'Thu'], start: 13, end: 14.25, professor: 'J. Gurtovoy', location: 'Beckman 211'},
+        { id: 2, course: 'ECON-411', days:'TTh',  meets: ['Wed'], start: 14, end: 16.83, professor: 'F. Narddog', location: 'Beckman 206'}
       ] },
       { id: 3, term: 'Fall 2014', course: 'ECON-101', GEs: '7EI', major: 'ECON', level: 100, title: 'Macroeconomics', likes: 4, sections: [] },
       { id: 4, term: 'Interterm 2014', course: 'SPAN-101', GEs: '', major: 'SPAN', level: 100, title: 'Spanish I', likes: 2, sections: [] },
