@@ -17,14 +17,14 @@
   </li>
 </ul>
 
-<ul class="list-unstyled" id="selected-sections">
-  <li ng-repeat="section in selectedCourse.sections">
+<ul class="list-unstyled courses-list" id="selected-sections">
+  <li ng-repeat="section in selectedCourse.sections" ng-mouseover="showSection(section)" ng-mouseleave="hideSection(section)" ng-click="selectSection(section)">
     <div class="number-bubble">{{$index + 1}}</div>
-    <small><b>{{section.meets | days}}</b> {{section.start}} <i class="icon-right-thin"></i> {{section.end}}</small>
+    <small><b>{{section.meets | days}}</b> {{section.start | time}} <i class="icon-right-thin"></i> {{section.end | time}}</small>
     <h4>{{section.professor}}</h4>
 
     <div class="radio">
-      <input type="radio" id="section-{{section.id}}" name="check" value="{{section.id}}" ng-model="section.selected">
+      <input type="radio" id="section-{{section.id}}" name="check" ng-checked="section.selected">
       <label for="section-{{section.id}}"></label>
     </div>
 

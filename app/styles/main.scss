@@ -1020,6 +1020,18 @@ ul.schedules {
       left: 25px;
     }
 
+    .number-bubble {
+      position: absolute;
+      top: calc(50% - 8px);
+      left: 25px;
+    }
+
+    .radio {
+      position: absolute;
+      top: calc(50% - 20px);
+      right: 35px;
+    }
+
     .btn-icon {
       position: absolute;
       top: calc(50% - 20px); // vertical center
@@ -1082,42 +1094,6 @@ ul.schedules {
     }
   }
 
-}
-
-#selected-sections {
-  margin-top: 45px;
-  padding: 0 25px;
-
-
-  li {
-    position: relative;
-    padding: 6px 26px;
-    color: rgba(0,0,0,0.5);
-
-    .number-bubble {
-      position: absolute;
-      top: calc(50% - 8px);
-      left: 0;
-    }
-
-    .radio {
-      position: absolute;
-      top: calc(50% - 20px);
-      right: 20px;
-    }
-
-    small {
-      color: rgba(0,0,0,0.3);
-      margin-top: 0;
-      font-size: 13px;
-    }
-
-    h4 {
-      color: rgba(0,0,0,0.5);
-      font-size: 16px;
-      margin-top: 0;
-    }
-  }
 }
 
 .number-bubble {

@@ -1,21 +1,14 @@
 'use strict';
 
 /*
- * Description: Takes in a time string (ex. '8:50 AM') and outputs just the time
- * (ex. '8:50')
+ * Description: Takes in a time string (ex. '13.25') and output 1:15PM
  */
 
 angular.module('schedules').filter('time', function () {
   return function (time) {
-    // Fix format
-    var formattedTime = Time(time).format('hh:mm AM');
+    var hour = Math.floor(time);
+    var minutes = Math.round((time % 1) * 60);
 
-    var indexAM = formattedTime.indexOf('A'),
-      indexPM = formattedTime.indexOf('P');
-
-    if (indexAM !== -1)  return formattedTime.substring(0, indexAM);
-    else if (indexPM !== -1) return formattedTime.substring(0, indexPM);
-    else throw new Error('Invalid time format');
-
+    return (hour > 12 ? hour - 12 : hour) + ':' + (minutes < 10 ? minutes + '0' : minutes) + '' + (hour < 12 ? 'am' : 'pm');
   }
 });

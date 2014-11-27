@@ -47,6 +47,23 @@ angular.module('schedules').directive('event', function($timeout, $rootScope) {
             element.on('mouseleave', function() {
                 if (scope.event.selected) $rootScope.$broadcast('hide all sections', { course: scope.event.course });
             });
+             // Show a single section
+            scope.$on('show section', function(event, data) {
+                if (scope.event.course === data.course && scope.event.id === data.section  && !scope.event.selected) {
+                    element.css('display', 'block');
+                }
+            });
+             // Show a single section
+            scope.$on('hide section', function(event, data) {
+                if (scope.event.course === data.course && scope.event.id === data.section  && !scope.event.selected) {
+                    element.addClass('fadeOut');
+                    // Hide elemnt for real after animation is done
+                    setTimeout(function () {
+                      element.css('display', 'none');
+                      element.removeClass('fadeOut');
+                    }, 300)
+                }
+            });
             // Show the event
             scope.$on('show all sections', function(event, data) {
                 if (scope.event.course === data.course && !scope.event.selected) {
@@ -61,7 +78,7 @@ angular.module('schedules').directive('event', function($timeout, $rootScope) {
                     setTimeout(function () {
                       element.css('display', 'none');
                       element.removeClass('fadeOut');
-                    }, 300)
+                    }, 300);
                 }
             });
 

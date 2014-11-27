@@ -25,7 +25,7 @@ angular.module('schedules').directive('calendar', function($timeout) {
                   $scope.schedule = null;
                 } else {
                   // Create a new schedule
-                  $scope.schedules = generateSchedules(newVal);
+                  $scope.schedules = createSchedule(newVal);
                 }
             }, true);
             /*
@@ -34,9 +34,9 @@ angular.module('schedules').directive('calendar', function($timeout) {
             function createSchedule(courses) {
 
               // Choose first section in each course
-              for (var i = 0; i < courses.length; ++i) {
-                if(courses[i].sections.length > 0) courses[i].sections[0].selected = true;
-              }
+              // for (var i = 0; i < courses.length; ++i) {
+              //   if(courses[i].sections.length > 0) courses[i].sections[0].selected = true;
+              // }
 
               // Add all sections to schedule (for UI purposes)
               var sections = [];
@@ -180,26 +180,12 @@ angular.module('schedules').directive('calendar', function($timeout) {
                 return sectionsSchedule;
             }
 
-            function Timespan(start, end) {
-                /*
-                 * Todo - handle multiday timespans
-                 */
-                // Make sure times are valid times
-                if (!Time.isValid(start) || !Time.isValid(end)) throw new Error('Invalid start or end times');
-                // Normalize format ex.'02:15 PM'
-                this.start = new Time(start).format('hh:mm AM');
-                this.end = new Time(end).format('hh:mm AM')
-                var self = this;
-                var convertToDateTime = function(time) {
-                    // Assuming this format ex.'02:15 PM' for time
-                    var hour = parseInt(time.substring(0, time.indexOf(':'))),
-                        minutes = parseInt(time.substring(time.indexOf(':') + 1, time.indexOf(' ')));
-                    // Handle PM
-                    var period = time.substring(time.indexOf(' ') + 1, time.length);
-                    if (period === 'PM') hour += 12;
-                    return new Date('2014', '10', '24', hour.toString(), minutes.toString()).getTime();
-                }
-                this.overlaps = function(timespanB) {
+
+            /*
+             * See if two sections conflict
+             */
+            function conflicts(sectionA, sectionB) {
+               this.overlaps = function(timespanB) {
                     // Convert times to Date() times
                     var startA = convertToDateTime(self.start),
                         endA = convertToDateTime(self.end),
@@ -209,12 +195,7 @@ angular.module('schedules').directive('calendar', function($timeout) {
                     else if (endA <= startB) return false; // A range completely before B
                     else return true; // Overlap
                 }
-            }
 
-            /*
-             * See if two sections conflict
-             */
-            function conflicts(sectionA, sectionB) {
                 var sameDays = _.intersection(sectionA.meets, sectionB.meets);
                 // Sections on different days
                 if (sameDays.length === 0) return false;
