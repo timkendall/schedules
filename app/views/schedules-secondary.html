@@ -1,0 +1,51 @@
+<div class="center">
+  <div class="pills pills-secondary">
+    <div class="pill active">Current</div>
+    <div class="pill">Saved</div>
+  </div>
+</div>
+
+<div class="placeholder" ng-show="!!!picked.length">Nothing in this schedule yet!</div>
+
+<h5 ng-show="!!picked.length">Courses</h5>
+<ul class="list-unstyled courses-list">
+  <li ng-class="{selected: course.id == selectedCourse.id}" ng-repeat="course in picked" ng-click="selectCourse(course)">
+    <span class="event-dot {{course.color}}"></span>
+    <small>{{course.courseId}}</small>
+    <h4>{{course.name}}</h4>
+
+    <!-- Event actions -->
+    <div class="btn btn-icon" dropdown is-open="status.isopen">
+      <i dropdown-toggle ng-disabled="disabled" class="icon-cog"></i>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-click="removeFromPicked(course)">Remove</li>
+        <li ng-click="likeCourse(selectedCourse); removeFromPicked(selectedCourse)">Save for later</li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
+<ul class="list-unstyled courses-list" id="selected-sections">
+  <li ng-repeat="section in selectedCourse.sections" ng-mouseover="showSection(section)" ng-mouseleave="hideSection(section)" ng-click="selectSection(section)">
+    <div class="number-bubble">{{$index + 1}}</div>
+    <small><b>{{section.meets | days}}</b> {{section.start | time}} <i class="icon-right-thin"></i> {{section.end | time}}</small>
+    <h4>{{section.professor}}</h4>
+
+    <div class="radio">
+      <input type="radio" id="section-{{section.id}}" name="check" ng-checked="section.selected">
+      <label for="section-{{section.id}}"></label>
+    </div>
+
+  </li>
+</ul>
+
+<div class="placeholder" ng-show="!!!selectedCourse.sections.length && selectedCourse">Darn, no sections for {{selectedCourse.course}} yet.</div>
+
+<!-- resolve conflicts? -->
+<!-- <h5>Saved Schedules</h5> -->
+
+<!-- <ul class="schedules list-unstyled">
+  <li>11/17/2014 <i class="icon-share"></i></li>
+  <li>11/12/2014 <i class="icon-share"></i></li>
+</ul>
+

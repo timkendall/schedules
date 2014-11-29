@@ -11,8 +11,4 @@ angular.module('schedules')
 
     $scope.course = loadCourse;
 
-    $scope.close = function () {
-      $location.path('/schedule');
-    }
-
   });

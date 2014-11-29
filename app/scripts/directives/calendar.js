@@ -15,39 +15,41 @@ angular.module('schedules').directive('calendar', function($timeout) {
              /*
              * Hold the generated schedules
              */
-            $scope.schedules = [];
-            $scope.organizedSchedules = [];
+            $scope.schedule = createSchedule($scope.courses);
             /*
              * Run generateSchedules() everytime the user's picked courses has changed
              */
-            $scope.$watch('courses', function(newVal, oldVal) {
+            $scope.$watch('courses', function (newVal, oldVal) {
                 if (newVal.length === 0) {
-                  $scope.organizedSchedules.length = 0;
-                  $scope.schedules.length = 0;
-                  $scope.chosenSchedule = null;
-                } else if (newVal.length > 0) {
-                  // Clear old array
-                  $scope.organizedSchedules.length = 0;
-                  // Grab freshly generated schedules
-                  $scope.schedules = generateSchedules(newVal);
-                  /*
-                   * This should be done on the fly; slot sections into days and generate metrics
-                   */
-                  $scope.schedules.forEach(function (schedule) {
-                    $scope.organizedSchedules.push(new Schedule(schedule));
-                  });
-
-                  $scope.chosenSchedule = $scope.organizedSchedules[0];
+                  // Clear current schedule
+                  $scope.schedule = null;
+                } else {
+                  // Create a new schedule
+                  $scope.schedules = createSchedule(newVal);
                 }
             }, true);
-
             /*
-             * Switch between schedules
+             * Create a schedule with params
              */
-             $scope.chooseSchedule = function (index) {
-              console.log($scope.organizedSchedules[index])
-                $scope.chosenSchedule = $scope.organizedSchedules[index];
+            function createSchedule(courses) {
+
+              // Choose first section in each course
+              // for (var i = 0; i < courses.length; ++i) {
+              //   if(courses[i].sections.length > 0) courses[i].sections[0].selected = true;
+              // }
+
+              // Add all sections to schedule (for UI purposes)
+              var sections = [];
+              for (var i = 0; i < courses.length; ++i) {
+                for (var j = 0; j < courses[i].sections.length; ++j) {
+                  courses[i].sections[j].color = courses[i].color; // set color, kinda hacky
+                  sections.push(courses[i].sections[j]);
+                }
+                //sections.push.apply(sections, courses[i].sections);
               }
+
+              return new Schedule(sections);
+            }
 
             /*
              * Options - these can be set by the user
@@ -89,14 +91,6 @@ angular.module('schedules').directive('calendar', function($timeout) {
                 this.fridays = [];
                 this.saturdays = [];
 
-                var colors = [
-                  'yellow',
-                  'orange',
-                  'purple',
-                  'green',
-                  'red'
-                ];
-
                 /*
                  * Run to generate metrics
                  */
@@ -106,8 +100,8 @@ angular.module('schedules').directive('calendar', function($timeout) {
                    */
                   self.sections.forEach(function (section, index) {
                     // Weird naming
-                    section.color = colors[Math.floor(Math.random() * colors.length -1) ];
-                    section.section.meets.forEach(function (day) {
+
+                    section.meets.forEach(function (day) {
                       switch (day) {
                         case 'Mon':
                           self.mondays.push(section);
@@ -176,34 +170,22 @@ angular.module('schedules').directive('calendar', function($timeout) {
             function convertNodesToSections(nodes) {
                 var sectionsSchedule = [];
                 nodes.forEach(function(node) {
+
                     sectionsSchedule.push({
-                        id: node.courseId,
-                        section: node.section
+                        id: node.course,
+                        section: node.section,
+                        color: node.color
                     });
                 });
                 return sectionsSchedule;
             }
 
-            function Timespan(start, end) {
-                /*
-                 * Todo - handle multiday timespans
-                 */
-                // Make sure times are valid times
-                if (!Time.isValid(start) || !Time.isValid(end)) throw new Error('Invalid start or end times');
-                // Normalize format ex.'02:15 PM'
-                this.start = new Time(start).format('hh:mm AM');
-                this.end = new Time(end).format('hh:mm AM')
-                var self = this;
-                var convertToDateTime = function(time) {
-                    // Assuming this format ex.'02:15 PM' for time
-                    var hour = parseInt(time.substring(0, time.indexOf(':'))),
-                        minutes = parseInt(time.substring(time.indexOf(':') + 1, time.indexOf(' ')));
-                    // Handle PM
-                    var period = time.substring(time.indexOf(' ') + 1, time.length);
-                    if (period === 'PM') hour += 12;
-                    return new Date('2014', '10', '24', hour.toString(), minutes.toString()).getTime();
-                }
-                this.overlaps = function(timespanB) {
+
+            /*
+             * See if two sections conflict
+             */
+            function conflicts(sectionA, sectionB) {
+               this.overlaps = function(timespanB) {
                     // Convert times to Date() times
                     var startA = convertToDateTime(self.start),
                         endA = convertToDateTime(self.end),
@@ -213,12 +195,7 @@ angular.module('schedules').directive('calendar', function($timeout) {
                     else if (endA <= startB) return false; // A range completely before B
                     else return true; // Overlap
                 }
-            }
 
-            /*
-             * See if two sections conflict
-             */
-            function conflicts(sectionA, sectionB) {
                 var sameDays = _.intersection(sectionA.meets, sectionB.meets);
                 // Sections on different days
                 if (sameDays.length === 0) return false;
@@ -273,7 +250,8 @@ angular.module('schedules').directive('calendar', function($timeout) {
             }
 
             function Node(course, section) {
-                this.courseId = course.courseId;
+                this.courseId = course.course;
+                this.color = course.color;
                 this.section = section;
                 this.edges = [];
             }

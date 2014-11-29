@@ -1,0 +1,33 @@
+<!-- swap between courses and sections views -->
+       <table class="table-full">
+
+       <thead>
+          <tr>
+            <td></td>
+            <td>Term</td>
+            <td>Course</td>
+            <td>GE</td>
+            <td>Title</td>
+            <td>Sections</td>
+            <td>Likes</td>
+            <td><!-- for like button --></td>
+          </tr>
+       </thead>
+
+       <tbody>
+        <tr ng-repeat="course in courses | filter:search | filter:filterMajor | filter:filterLevel" ng-class="{picked: isPickedCourse(course)}">
+        <!--| filter:filterMajor | filter:filterLevel | filter:filterTimes | filter:filterDays-->
+            <td ng-click="addToSchedule(course)">
+              <i class="fa fa-plus-square-o"></i>
+            </td>
+            <td ng-click="go(course)"><span class="term Spring">Spring 2015</span></td>
+            <td ng-click="go(course)">{{::course.courseId}}</td>
+            <td ng-click="go(course)">{{::course.GEs}}</td>
+            <td ng-click="go(course)">{{::course.name}}</td>
+            <td ng-click="go(course)" ng-click="go(course)">{{course.sections.length}}</td>
+            <td ng-click="go(course)">{{course.likes}} likes</td>
+            <td ng-click="likeCourse(course)"><i class="fa" ng-class="{'fa-heart-o': !isLikedCourse(course), 'fa-heart': isLikedCourse(course)}"></i></td>
+          </tr>
+
+       </tbody>
+    </table>

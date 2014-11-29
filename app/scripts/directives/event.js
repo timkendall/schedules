@@ -3,131 +3,115 @@
  *
  * Display the school week
  */
-
 'use strict';
+angular.module('schedules').directive('event', function($timeout, $rootScope) {
+    return {
+        restrict: 'A',
+        scope: {
+            event: '=event'
+        },
+        link: function(scope, element, attr) {
 
-angular.module('schedules').directive('event', function ($timeout) {
-  return {
-    restrict: 'E',
-    scope: {
-      start: '=start',
-      end: '=end',
-      color: '=color'
-    },
+            /*
+             * RENDERING
+             */
+            // Hide element while changes are made to position and height
+            element.css('display', 'none');
+            element.addClass(scope.event.color)
 
-    link: function (scope, element, attr) {
+            /* Note: This is based on a height of 50px per hour */
 
-      // Choose a random color
-      var colors = [
-        'yellow',
-        'orange',
-        'purple',
-        'green',
-        'red'
-      ]
+            // hardcode for now
+            var duration = formatTime(scope.event.end) - formatTime(scope.event.start);
 
-      // Hide element while changes are made to position and height
-      element.css('display', 'none');
+            element.css('height', Math.floor(duration*50) + 'px');
 
-      element.addClass(scope.color)
+            var start = formatTime(scope.event.start) - 8; // Normalize hours to start at 8
+            // Set position
+            translateY(element, start*50); // number of hours * height of 1 hr
 
-      /* Note: This is based on a height of 50px per hour */
-      var heights = {
-        '50': 42, // 50min
-        '75': 73, // 1hr 15min 13
-        '170': 162, // 2hr 50min
-        '230': 222 // 3hr 50min
-      }
+             // Show element
+            if (scope.event.selected) element.css('display', 'block');
 
-      // hardcode for now
-      scope.duration = 50;
+            function translateY (element, pixels) {
+                var ammount = 16 + pixels;
+                element.css('top', ammount + 'px');
+            }
 
-      // Set height
-      switch (scope.duration) {
-      case 50:
-        element.css('height', heights['50'] + 'px');
-        break;
-      case 75:
-        element.css('height', heights['75'] + 'px');
-        break;
-      case 170:
-        element.css('height', heights['170'] + 'px');
-        break;
-      case 230:
-        element.css('height', heights['230'] + 'px');
-        break;
-      default:
-        break;
-      }
+            function formatTime (time) {
+              /*
+               * time -> int
+               * Expect a 24 hour time and output as decimal
+               */
+               if (time < 100) { // 12AM times
+                var minutes = time / 60;
+                return 12 + minutes;
+               } else if (time < 1000) {
+                var timeString = time.toString(),
+                 whole = parseInt(timeString[0] + '0' + '0');
 
-      function translateY(element, pixels) {
-        var ammount = 16 + pixels;
-        element.css('top', ammount + 'px');
-      }
+                var hours = parseInt(timeString[0])
+                var minutes  = (time - whole) / 60;
+                return hours + minutes;
+               } else {
+                 var timeString = time.toString();
+                 var hours = parseInt(timeString[0] + timeString[1]);
+                 var minutes = parseInt(timeString[2] + timeString[3]) / 60;
+                 return hours + minutes;
+               }
+            }
 
 
-      // Normalize timeformat ex.'09:00 AM'
-      var start = Time(scope.start).format('hh:mmAM')
-      // Set position
-      if (start.indexOf('8:00AM') > -1) {
-        translateY(element, 0);
-      } else if (start.indexOf('8:30AM') > -1) {
-        translateY(element, 25);
-      } else if (start.indexOf('9:00AM') > -1) {
-        translateY(element, 50);
-      } else if (start.indexOf('9:30AM') > -1) {
-        translateY(element, 75);
-      } else if (start.indexOf('10:00AM') > -1) {
-        translateY(element, 100);
-      } else if (start.indexOf('10:30AM') > -1) {
-        translateY(element, 125);
-      } else if (start.indexOf('11:00AM') > -1) {
-        translateY(element, 150);
-      } else if (start.indexOf('11:30AM') > -1) {
-        translateY(element, 175);
-      } else if (start.indexOf('12:00PM') > -1) {
-        translateY(element, 200);
-      } else if (start.indexOf('12:30PM') > -1) {
-        translateY(element, 225);
-      } else if (start.indexOf('1:00PM') > -1) {
-        translateY(element, 250);
-      } else if (start.indexOf('1:30PM') > -1) {
-        translateY(element, 275);
-      } else if (start.indexOf('2:00PM') > -1) {
-        translateY(element, 300);
-      } else if (start.indexOf('2:30PM') > -1) {
-        translateY(element, 325);
-      } else if (start.indexOf('3:00PM') > -1) {
-        translateY(element, 350);
-      } else if (start.indexOf('3:30PM') > -1) {
-        translateY(element, 375);
-      } else if (start.indexOf('4:00PM') > -1) {
-        translateY(element, 400);
-      } else if (start.indexOf('4:30PM') > -1) {
-        translateY(element, 425);
-      } else if (start.indexOf('5:00PM') > -1) {
-        translateY(element, 450);
-      } else if (start.indexOf('5:30PM') > -1) {
-        translateY(element, 475);
-      } else if (start.indexOf('6:00PM') > -1) {
-        translateY(element, 500);
-      } else if (start.indexOf('6:30PM') > -1) {
-        translateY(element, 525);
-      } else if (start.indexOf('7:00PM') > -1) {
-        translateY(element, 550);
-      } else if (start.indexOf('7:30PM') > -1) {
-        translateY(element, 575);
-      } else if (start.indexOf('8:00PM') > -1) {
-        translateY(element, 600);
-      } else if (start.indexOf('8:30PM') > -1) {
-        translateY(element, 625);
-      } else if (start.indexOf('9:00PM') > -1) {
-        translateY(element, 650);
-      }
+            /*
+             * INTERACTIONS
+             */
 
-      // Show element
-      element.css('display', 'block');
+            // Emit event on hover
+            element.on('mouseover', function() {
+                if (scope.event.selected) {
+                    $rootScope.$broadcast('show all sections', {
+                        course: scope.event.course
+                    });
+                }
+            });
+            element.on('mouseleave', function() {
+                if (scope.event.selected) $rootScope.$broadcast('hide all sections', { course: scope.event.course });
+            });
+             // Show a single section
+            scope.$on('show section', function(event, data) {
+                if (scope.event.course === data.course && scope.event.id === data.section  && !scope.event.selected) {
+                    element.css('display', 'block');
+                }
+            });
+             // Show a single section
+            scope.$on('hide section', function(event, data) {
+                if (scope.event.course === data.course && scope.event.id === data.section  && !scope.event.selected) {
+                    element.addClass('fadeOut');
+                    // Hide elemnt for real after animation is done
+                    setTimeout(function () {
+                      element.css('display', 'none');
+                      element.removeClass('fadeOut');
+                    }, 300)
+                }
+            });
+            // Show the event
+            scope.$on('show all sections', function(event, data) {
+                if (scope.event.course === data.course && !scope.event.selected) {
+                    element.css('display', 'block');
+                }
+            });
+            // Hide the event
+            scope.$on('hide all sections', function(event, data) {
+                if (scope.event.course === data.course && !scope.event.selected) {
+                    element.addClass('fadeOut');
+                    // Hide elemnt for real after animation is done
+                    setTimeout(function () {
+                      element.css('display', 'none');
+                      element.removeClass('fadeOut');
+                    }, 300);
+                }
+            });
 
-    }
-  };
+        }
+    };
 });
