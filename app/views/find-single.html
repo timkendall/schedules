@@ -14,10 +14,10 @@
         </thead>
         <tbody>
             <tr ng-repeat="section in course.sections">
-                <td>{{section.course}}</td>
-                <td>{{section.days}}</td>
-                <td>{{section.start}}</td>
-                <td>{{section.end}}</td>
+                <td>{{course.courseId}}</td>
+                <td>{{section.meets | days}}</td>
+                <td>{{section.start | time}}</td>
+                <td>{{section.end | time}}</td>
                 <td>{{section.professor}}</td>
                 <td>{{section.location}}</td>
             </tr>

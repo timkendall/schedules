@@ -5,7 +5,12 @@
     <input type="text" ng-model="search" name="search" placeholder="Find courses" />
   </div>
 
-  <h1 class="placeholder" ng-show="!liked.length">Nothing here yet, click the <i class="fa fa-heart-o"></i> next to a course or section to see it here.</h1>
+  <div class="large-placeholder" ng-show="!liked.length">
+    <div>
+    <h1><i class="fa fa-heart-o"></i></h1>
+    <h3>Nothing here yet, click the <i class="fa fa-heart-o"></i> next to a course add it here.</h3>
+    </div>
+  </div>
 
   <div ng-hide="!liked.length" class="table-responsive">
      <!-- swap between courses and sections views -->

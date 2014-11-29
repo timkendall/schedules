@@ -19,7 +19,7 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
   $scope.selectSection = function (section) {
     // Unselect other section
     var course = _.find($rootScope.courses, function(course) {
-        return course.course === section.course
+        return course.id === section.course
     });
     course.sections.forEach(function (section) {
       section.selected = false;

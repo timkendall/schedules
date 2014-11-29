@@ -4,8 +4,6 @@ $radius: 0px;
   // Magic calc's allow for responsive table
   position: absolute;
   top: 60px;
-  //border: 1px solid #D1D5D8;
-  //border-radius: 6px;
   width: calc(100% - 80px);
   max-height: calc(100% - 100px);
   overflow-x: hidden;
@@ -26,11 +24,11 @@ $radius: 0px;
 
 thead {
   font-size: 12px;
-  color: #7A7E81;
+  color: hsla(194, 26%, 45%, 0.5);
   text-transform: uppercase;
   font-weight: 300;
   line-height: 55px;
-  border-bottom: 1px solid #D1D5D8;
+  border-bottom: 1px solid hsla(194, 26%, 85%, 1);
   position: sticky;
 
   td:first-child {
@@ -44,15 +42,15 @@ thead {
 
 tbody {
   font-size: 15px;
-  color: #515558;
+  color: hsla(194, 26%, 45%, 1);
 
   .fa-heart-o {
-    color: #D1D5D8;
+    color: hsla(194, 26%, 45%, 0.7);
      @include transition(all 0.2s ease-in-out);
   }
 
   .fa-heart-o:hover {
-    color: darken(#D1D5D8, 10%);
+    color: hsla(194, 26%, 45%, 1);
     @include transition(all 0.2s ease-in-out);
   }
 
@@ -64,14 +62,14 @@ tbody {
   }
 
   .fa-plus-square-o, .fa-minus-square-o {
-    color: darken(#D6DADC, 10%);
+    color: hsla(194, 26%, 45%, 0.7);
     margin-right: 0px;
    //margin-left: -20px;
     @include transition(all 0.2s ease-in-out);
   }
 
   .fa-plus-square-o:hover, .fa-minus-square-o:hover {
-    color: #515558;
+    color: hsla(194, 26%, 45%, 1);
     @include transition(all 0.2s ease-in-out);
   }
 
@@ -80,6 +78,8 @@ tbody {
   }
 
   tr {
+    @include backface-visibility(hidden);
+    @include transition(all 0.3s ease-in-out);
     font-size: 14px;
     //line-height: 52px;
     cursor: pointer;
@@ -97,11 +97,13 @@ tbody {
   }
 
   tr:nth-child(odd) {
-    background: #F8F9FB;
+    background: hsla(194, 26%, 95%, 0.5);
   }
 
   tr:hover {
-    background: darken(#F8F9FB, 5%);
+    //background: darken(#F8F9FB, 5%);
+    //@include transform(scale(1.1));
+    @include transition(all 0.3s ease-in-out);
   }
 }
 

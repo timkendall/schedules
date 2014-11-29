@@ -795,3 +795,14 @@ input[type="text"].add-course.active {
     }
   }
 }
+
+.pills-secondary {
+  .pill.active {
+    background: darken(#A69584, 10%) !important;
+    border-color: darken(#A69584, 10%) !important;
+  }
+
+  .pill:first-child.active {
+    @include border-right-radius(0px !important);
+  }
+}

@@ -11,60 +11,76 @@
     width: calc(100% / 6);
   }
 
-
+  // Main 1
   .days {
-    .column {
-      border-bottom: 1px solid #D8D9D9;
-      //margin-right: 20px;
-    }
-    //position: absolute;
-    //left: 480px;
-    margin-left: 40px;
-    width: calc(100% - 60px);
-    height: 65px;
-    //border: 1px solid red;
+    display: inline-block;
+    width: 100%;
+    height: 24px;
+    overflow-y: auto;
+    padding-left: 40px;
     background: none;
-    .day {
-      background: none;
-      border-radius: 100%;
-      // width: 34px;
-      // height: 34px;
-      margin: 14px auto 0 auto;
-      line-height: 34px;
-      text-align: left;
-      font-size: 14px;
-      color: #B6B8B9;
+    @include transform(translateY(12px));
 
-      @include transition(all 0.3s ease-in-out);
+    .column {
+      height: 24px;
+      padding: 0 4px; // space between columns
+      position: relative;
+      margin-left: 1px;
+
+      .day {
+          height: 100%;
+           border-bottom: 1px solid hsla(194, 26%, 85%, 0.6);
+        }
     }
-    .day.filled {
-      // background: #28A3D9;
-      // color: #fff;
-      @include transition(all 0.3s ease-in-out);
+
+    /*
+     * Need to figure out why theses widths are wacky; doing some hacky translates for now.
+     */
+
+    .column:nth-child(3) {
+      @include transform(translateX(1px));
     }
+
+    .column:nth-child(4) {
+      @include transform(translateX(2px));
+    }
+
+    .column:nth-child(5) {
+      @include transform(translateX(3px));
+    }
+
+    .column:nth-child(6) {
+      @include transform(translateX(4px));
+    }
+
   }
+
+  // Main 2
   .slots {
     position: fixed;
+
     width: calc(100% - 370px);
-    height: calc(100% - 150px);
-    //border: 1px solid green;
-    //overflow: hidden;
+    height: calc(100% - 100px);
+
+
     ul.hours {
       width: 40px;
       display: inline-block;
-      margin-right: -4px;
+      margin-right: 0px;
       //border: 1px solid yellow;
       float: left;
+
       // why?
 
     }
     ul.hours li {
-      color: lighten(#666666, 10%);
+      color: hsla(194, 26%, 45%, 1);
       height: 50px;
       font-size: 13px;
       text-align: right;
       padding: 0;
       @include transform(translateY(-13px));
+      z-index: 9999;
       // center up numbers with lines
       //border: 1px solid red;
 
@@ -77,47 +93,46 @@
 
       display: inline-block;
       width: 100%;
-
-
       height: calc(100% - 60px);
       overflow-y: auto;
-      //padding-right: 15px;
+      padding-top: 8px; // make room for hour legend
+      //overflow: visible;
+
       .column-container {
         // Fit slots next to time legend
         width: calc(100% - 40px);
-
       }
 
+      // Color saturday column a different shade
       .column:last-child {
-
         ul {
-        background: #F7F7F7;
+          background: hsla(194, 26%, 85%, 0.2);
         }
       }
+
+
       .column {
         height: 65px;
         line-height: 65px;
-        padding: 0 10px;
+        padding: 0 4px; // space between columns
         position: relative;
-        //border: 1px solid red;
+
         ul li {
           height: 50px;
-          border-bottom: 1px solid lighten(#D6D9DF, 5%);
+          border-bottom: 1px solid hsla(194, 26%, 85%, 0.6);
           .half {
             width: 100%;
             height: 50%;
           }
           .half:first-child {
-            border-bottom: 1px dotted lighten(#D6D9DF, 5%);
+            border-bottom: 1px dotted hsla(194, 26%, 85%, 0.6);
           }
         }
+
         ul li:first-child {
-          border-top: 1px solid lighten(#D6D9DF, 5%);
+          border-top: !important;
         }
-        //     @include display(flex);
-        // @include align-items(center);
-        // @include flex-direction(column);
-        // @include justify-content(center);
+
 
       }
     }

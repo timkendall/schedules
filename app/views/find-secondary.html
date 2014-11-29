@@ -1,11 +1,12 @@
 <!-- Sort -->
-
+<div class="inner-secondary" ng-class="{disabled: $state.includes('find.single')}">
             <h5>Filters</h5>
             <!-- Filter -->
             <div class="container-test">
+
             <div class="select" style="border-top: 1px solid rgba(255,255,255,0.15)">
-                <select>
-                   <option name="any">Any Major</option>
+                <select ng-model="fields.major" ng-options="course.major.abbreviation for course in courses | unique:'major' | orderBy: 'major'">
+                   <option name="any" value="">Any Major</option>
                  </select>
              </div>
 
@@ -16,8 +17,8 @@
              </div>
 
             <div class="select">
-                 <select>
-                   <option name="any">Any Level</option>
+                 <select ng-model="fields.level" ng-options="course.level for course in courses | unique:'level' | orderBy: 'level'">
+                   <option name="any" value="">Any Level</option>
                  </select>
              </div>
              </div>
@@ -27,16 +28,16 @@
              <!-- days -->
              <ul class="select-days list-inline">
 
-                    <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('mon') > -1" id="mon" /><label for="mon">Mon</label></li>
-                    <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('tue') > -1" id="tue" /><label for="tue">Tue</label></li>
+                    <li><input type="checkbox" value="mon" ng-click="toggleSelection('mon')" ng-checked="selectedDays.indexOf('mon') > -1" id="mon" /><label for="mon">Mon</label></li>
+                    <li><input type="checkbox" value="tue" ng-click="toggleSelection('tue')" ng-checked="selectedDays.indexOf('tue') > -1" id="tue" /><label for="tue">Tue</label></li>
 
 
-                    <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('wed') > -1" id="wed" /><label for="wed">Wed</label></li>
-                    <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('thu') > -1" id="thu" /><label for="thu">Thu</label></li>
+                    <li><input type="checkbox" value="wed" ng-click="toggleSelection('wed')" ng-checked="selectedDays.indexOf('wed') > -1" id="wed" /><label for="wed">Wed</label></li>
+                    <li><input type="checkbox" value="thu" ng-click="toggleSelection('thu')" ng-checked="selectedDays.indexOf('thu') > -1" id="thu" /><label for="thu">Thu</label></li>
 
 
-                    <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('fri') > -1" id="fri" /><label for="fri">Fri</label></li>
-                    <li><input type="checkbox" value="mon" ng-checked="selectedDays.indexOf('sat') > -1" id="sat" /><label for="sat">Sat</label></li>
+                    <li><input type="checkbox" value="fri" ng-click="toggleSelection('fri')" ng-checked="selectedDays.indexOf('fri') > -1" id="fri" /><label for="fri">Fri</label></li>
+                    <li><input type="checkbox" value="sat" ng-click="toggleSelection('sat')" ng-checked="selectedDays.indexOf('sat') > -1" id="sat" /><label for="sat">Sat</label></li>
 
              </ul>
 
@@ -44,7 +45,7 @@
              <h5>Start</h5>
             <!-- slider -->
             <div class="container-test">
-             <input class="slider" value=""  type="text" id="mySlider1" slider data-slider-min="8" data-slider-max="22" data-slider-step="0.5" data-slider-value="[8,21]" />
+             <input class="slider" value="" type="text" id="mySlider1" slider data-slider-min="8" data-slider-max="22" data-slider-step="0.5" data-slider-value="[8,21]" />
              <ul class="slider-scale list-unstyled">
                 <li class="long" slider-scale="8">
                     <span>
@@ -117,3 +118,4 @@
                 </li>
              </ul>
              </div>
+            </div>

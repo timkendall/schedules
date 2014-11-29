@@ -4,7 +4,7 @@
  * Wrap slider
  */
 'use strict';
-angular.module('schedules').directive('slider', function($timeout) {
+angular.module('schedules').directive('slider', function ($timeout, $rootScope) {
     return {
         restrict: 'EA',
         link: function(scope, element, attr) {
@@ -80,6 +80,11 @@ angular.module('schedules').directive('slider', function($timeout) {
                 }
             });
 
+            scope.slider.on('slideStop', function (event) {
+               $rootScope.fields.time = event.value;
+               $rootScope.$digest(); // Call digest() because we are outside of Angular's event loop
+            });
+
         }
     };
 });
@@ -87,18 +92,23 @@ angular.module('schedules').directive('slider', function($timeout) {
 /*
  * Tie clicks to slider
  */
-angular.module('schedules').directive('sliderScale', function($timeout) {
+angular.module('schedules').directive('sliderScale', function($timeout, $rootScope) {
     return {
         restrict: 'A',
         link: function(scope, element, attr) {
+
+          $rootScope.fields.time = scope.slider.getValue();
 
           element.on('click', function () {
             if (attr.sliderScale < 15) {
               var currentMax = scope.slider.getValue()[1];
               scope.slider.setValue([parseInt(attr.sliderScale), currentMax]);
+              // Update scope's value
+              $rootScope.fields.time = scope.slider.getValue();
             } else {
               var currentMin = scope.slider.getValue()[0];
               scope.slider.setValue([currentMin, parseInt(attr.sliderScale)]);
+              $rootScope.fields.time = scope.slider.getValue();
             }
 
           })

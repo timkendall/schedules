@@ -18,7 +18,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         // Return the saved token
         return store.get('token');
     }
-    $httpProvider.interceptors.push('jwtInterceptor');
+    //$httpProvider.interceptors.push('jwtInterceptor');
     // Configure states (routes)
     $stateProvider
     // Spalsh page

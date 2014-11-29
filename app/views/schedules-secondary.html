@@ -1,9 +1,18 @@
-<h5>Courses</h5>
+<div class="center">
+  <div class="pills pills-secondary">
+    <div class="pill active">Current</div>
+    <div class="pill">Saved</div>
+  </div>
+</div>
+
+<div class="placeholder" ng-show="!!!picked.length">Nothing in this schedule yet!</div>
+
+<h5 ng-show="!!picked.length">Courses</h5>
 <ul class="list-unstyled courses-list">
   <li ng-class="{selected: course.id == selectedCourse.id}" ng-repeat="course in picked" ng-click="selectCourse(course)">
     <span class="event-dot {{course.color}}"></span>
-    <small>{{course.course}}</small>
-    <h4>{{course.title}}</h4>
+    <small>{{course.courseId}}</small>
+    <h4>{{course.name}}</h4>
 
     <!-- Event actions -->
     <div class="btn btn-icon" dropdown is-open="status.isopen">

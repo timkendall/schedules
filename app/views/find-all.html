@@ -15,15 +15,15 @@
        </thead>
 
        <tbody>
-        <tr ng-repeat="course in courses | filter:search" ng-class="{picked: isPickedCourse(course)}">
-
+        <tr ng-repeat="course in courses | filter:search | filter:filterMajor | filter:filterLevel" ng-class="{picked: isPickedCourse(course)}">
+        <!--| filter:filterMajor | filter:filterLevel | filter:filterTimes | filter:filterDays-->
             <td ng-click="addToSchedule(course)">
               <i class="fa fa-plus-square-o"></i>
             </td>
-            <td ng-click="go(course)"><span class="term {{course.term}}">{{course.term}}</span></td>
-            <td ng-click="go(course)">{{course.course}}</td>
+            <td ng-click="go(course)"><span class="term Spring">Spring 2015</span></td>
+            <td ng-click="go(course)">{{course.courseId}}</td>
             <td ng-click="go(course)">{{course.GEs}}</td>
-            <td ng-click="go(course)">{{course.title}}</td>
+            <td ng-click="go(course)">{{course.name}}</td>
             <td ng-click="go(course)" ng-click="go(course)">{{course.sections.length}}</td>
             <td ng-click="go(course)">{{course.likes}} likes</td>
             <td ng-click="likeCourse(course)"><i class="fa" ng-class="{'fa-heart-o': !isLikedCourse(course), 'fa-heart': isLikedCourse(course)}"></i></td>

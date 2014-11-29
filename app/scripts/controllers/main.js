@@ -1,29 +1,48 @@
 'use strict';
 
 angular.module('schedules')
-  .controller('MainCtrl', function ($scope, $location, $state, Course, Section, $rootScope, auth) {
+  .controller('MainCtrl', function ($scope, $location, $state, Course, $rootScope, auth, $http) {
+
     $scope.$state = $state;
-    $scope.messages = {};
-    $scope.messages.unread = [{ id: 1, from: 'Debbie Smith', message: 'Sure, I can help!'}]
+
 //start: 28800, end: 31788,
-    $rootScope.courses = [
-      { id: 1, term: 'Fall 2014', course: 'CPSC-353', GEs: '', major: 'CPSC', level: 300, title: 'Computer Networks', likes: 3, sections: [
-        { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['Mon', 'Wed', 'Fri'], start: 10, end: 10.83, professor: 'M. Fahy', location: 'Leatherby B13'},
-        { id: 2, course: 'CPSC-353', days:'MWF',  meets: ['Tue', 'Thu'], start: 12, end: 13.25, professor: 'M. Fahy', location: 'Leatherby B13'},
-        { id: 3, course: 'CPSC-353', days:'M',  meets: ['Mon'], start: 13, end: 15.83, professor: 'M. Fahy', location: 'Leatherby B13'}
-      ] },
-      { id: 2, term: 'Fall 2014', course: 'ECON-411', GEs: '', major: 'ECON', level: 400, title: 'American Economic History', likes: 55, sections: [
-        { id: 1, course: 'ECON-411', days:'TTh',  meets: ['Tue', 'Thu'], start: 13, end: 14.25, professor: 'J. Gurtovoy', location: 'Beckman 211'},
-        { id: 2, course: 'ECON-411', days:'TTh',  meets: ['Wed'], start: 14, end: 16.83, professor: 'F. Narddog', location: 'Beckman 206'}
-      ] },
-      { id: 3, term: 'Fall 2014', course: 'ECON-101', GEs: '7EI', major: 'ECON', level: 100, title: 'Macroeconomics', likes: 4, sections: [] },
-      { id: 4, term: 'Interterm 2014', course: 'SPAN-101', GEs: '', major: 'SPAN', level: 100, title: 'Spanish I', likes: 2, sections: [] },
-      { id: 5, term: 'Interterm 2014', course: 'SPAN-102', GEs: '', major: 'SPAN', level: 100, title: 'Spanish II', likes: 2, sections: [] },
-      { id: 6, term: 'Fall 2014', course: 'CPSC-400', GEs: '', major: 'CPSC', level: 400, title: 'Compiler Construction', likes: 2, sections: [] },
-      { id: 7, term: 'Fall 2014', course: 'CPSC-453', GEs: '', major: 'CPSC', level: 400, title: 'Programming Languages', likes: 14, sections: [] },
-      { id: 8, term: 'Spring 2015', course: 'CPSC-800', GEs: '', major: 'CPSC', level: 800, title: 'Algorithm Analysis', likes: 60, sections: [] },
-      { id: 9, term: 'Summer 2015', course: 'ACTG-101', GEs: '', major: 'ACTG', level: 101, title: 'Intro to Accounting', likes: 13, sections: [] }
-    ];
+    // $rootScope.courses = [
+    //   { id: 1, term: 'Fall 2014', course: 'CPSC-353', GEs: '', major: 'CPSC', level: 300, title: 'Computer Networks', likes: 3, sections: [
+    //     { id: 1, course: 'CPSC-353', days:'MWF',  meets: ['mon', 'wed', 'fri'], start: 10, end: 10.83, professor: 'M. Fahy', location: 'Leatherby B13'},
+    //     { id: 2, course: 'CPSC-353', days:'TTh',  meets: ['tue', 'thu'], start: 12, end: 13.25, professor: 'M. Fahy', location: 'Leatherby B13'},
+    //     { id: 3, course: 'CPSC-353', days:'M',  meets: ['mon'], start: 13, end: 15.83, professor: 'M. Fahy', location: 'Leatherby B13'}
+    //   ] },
+    //   { id: 2, term: 'Fall 2014', course: 'ECON-411', GEs: '', major: 'ECON', level: 400, title: 'American Economic History', likes: 55, sections: [
+    //     { id: 1, course: 'ECON-411', days:'TTh',  meets: ['tue', 'thu'], start: 13, end: 14.25, professor: 'J. Gurtovoy', location: 'Beckman 211'},
+    //     { id: 2, course: 'ECON-411', days:'TTh',  meets: ['wed'], start: 14, end: 16.83, professor: 'F. Narddog', location: 'Beckman 206'}
+    //   ] },
+    //   { id: 3, term: 'Fall 2014', course: 'ECON-101', GEs: '7EI', major: 'ECON', level: 100, title: 'Macroeconomics', likes: 4, sections: [] },
+    //   { id: 4, term: 'Interterm 2014', course: 'SPAN-101', GEs: '', major: 'SPAN', level: 100, title: 'Spanish I', likes: 2, sections: [] },
+    //   { id: 5, term: 'Interterm 2014', course: 'SPAN-102', GEs: '', major: 'SPAN', level: 100, title: 'Spanish II', likes: 2, sections: [] },
+    //   { id: 6, term: 'Fall 2014', course: 'CPSC-400', GEs: '', major: 'CPSC', level: 400, title: 'Compiler Construction', likes: 2, sections: [] },
+    //   { id: 7, term: 'Fall 2014', course: 'CPSC-453', GEs: '', major: 'CPSC', level: 400, title: 'Programming Languages', likes: 14, sections: [] },
+    //   { id: 8, term: 'Spring 2015', course: 'CPSC-800', GEs: '', major: 'CPSC', level: 800, title: 'Algorithm Analysis', likes: 60, sections: [] },
+    //   { id: 9, term: 'Summer 2015', course: 'ACTG-101', GEs: '', major: 'ACTG', level: 100, title: 'Intro to Accounting', likes: 13, sections: [] }
+    // ];
+
+    /*
+     * Retrieve course data (server or local)
+     */
+    var school = '543f2167cc91ba0b1cd8eb0c'; // hardcode chapman for now
+    Course.findAll({school: school}).then(function (courses) {
+        console.log(courses)
+        $rootScope.courses = courses;
+    });
+    //$scope.unbindCourses = Course.bindAll($rootScope, 'courses');
+
+
+    // Setup filter model
+     $rootScope.fields = {
+        major: null,
+        ge: null,
+        level: null,
+        time: null
+     };
 
      /*
      * USER ACTIONS stuff
@@ -99,51 +118,5 @@ angular.module('schedules')
      $scope.removeFromPicked = function (_course) {
         _.remove($rootScope.picked, function (course) { return course.id == _course.id; });
      }
-
-
-
-    /*
-     * FILTER stuff
-     */
-
-    // Checked days
-    $scope.days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-    $scope.selectedDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-
-    // toggle selection for a given fruit by name
-    $scope.toggleSelection = function toggleSelection (day) {
-      var idx = $scope.selectedDays.indexOf(day);
-
-      // is currently selected
-      if (idx > -1) {
-        $scope.selectedDays.splice(idx, 1);
-      }
-
-      // is newly selected
-      else {
-        $scope.selectedDays.push(day);
-      }
-    };
-
-    $scope.checkAllDays = function () {
-
-    }
-
-
-    $scope.allNeedsClicked = function () {
-      var newValue = !$scope.allDays();
-
-      _.each($scope.todos, function (todo) {
-        todo.done = newValue;
-      });
-    };
-
-    $scope.allDays = function () {
-      var days = _.reduce($scope.days, function (memo, day) {
-        return memo + (day ? 1 : 0);
-      }, 0);
-
-      return (days === $scope.days.length);
-    };
 
   });

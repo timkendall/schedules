@@ -9,7 +9,8 @@ html, body {
 body {
     background: #fff;
     font-family: 'Quattrocento Sans', sans-serif;
-    color: #333;
+    color: #558391;
+    color: hsla(194, 26%, 45%, 1);
 }
 
 @import '../components/bourbon/dist/bourbon';
@@ -23,6 +24,8 @@ body {
 @import 'available';
 @import 'calendar';
 @import 'calendar-event';
+
+$text-light: hsla(194,46%,75%, 1);
 
 .main {
   width: 100%;
@@ -68,11 +71,11 @@ body {
      input {
       display: block;
       border-radius: 99px;
-      border: 1px solid #D1D5D8;
+      border: 1px solid hsla(194, 26%, 85%, 1);
       height: 30px;
       padding: 0 20px 0 30px;
       position: relative;
-      color: #818587;
+      color: hsla(194, 26%, 45%, 1);
       background: #fff;
       font-size: 12px;
       width: 200px;
@@ -94,7 +97,7 @@ body {
     top: 0;
     left: 0;
     line-height: 30px;
-    color: #7A7E81;
+    color: hsla(194,26%,45%, 1);
   }
 }
 
@@ -113,10 +116,25 @@ body {
     margin: 0 25px;
   }
 
+  .pills {
+    .pill {
+      border-color: hsla(24,15%,74%, 1);
+      color:  hsla(24,15%,44%, 1);
+    }
+    .pill:hover {
+      color: hsla(24,15%,44%, 1);
+      border-color: hsla(24,15%,74%, 1);
+    }
+  }
+
+  .placeholder {
+    color: hsla(24,15%,44%, 1);
+  }
+
   .user {
     height: 56px;
     width: 100%;
-    //background: darken(#0E8493, 5%);
+    background: #F1EEEC;
     //border-bottom: 1px solid rgba(255,255,255,0.18);
     border-top: 1px solid lighten(#A69584, 20%);
     position: absolute;
@@ -175,7 +193,7 @@ body {
   h5 {
     color: rgba(0,0,0,0.3);
     font-weight: bold;
-    margin-bottom: 0;
+    margin-bottom: 12px;
     padding-left: 25px;
   }
 
@@ -337,7 +355,7 @@ nav.third {
   height: 56px;
   background: #F6F6F6; background: #fff;
   padding: 0 40px;
-  border-top: 1px solid lighten(#7A7E81, 40%);
+  border-top: 1px solid hsla(194, 26%, 85%, 1);
   //box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.2);
   z-index: 99999999999;
 
@@ -352,9 +370,10 @@ nav.third {
     right: -5px;
     border: 2px solid #fff;
     font-weight: 300;
-    background: #1FB0BE;
+    background: hsla(244,39%,60%, 1);
    // @include animation(pulse 0.3s ease-in-out);
    @include animation-duration(0.3s);
+   @include transition(all 0.2s ease-in-out);
   }
 
   .badge-dot {
@@ -374,22 +393,32 @@ nav.third {
 
       a {
         font-size: 26px;
-        color: #666;
+        color: hsla(194, 26%, 45%, 1);
         line-height: 65px;
+        @include transition(all 0.2s ease-in);
+
+        i, i:before {
+           @include transition(all 0.2s ease-in-out);
+        }
       }
 
-      a:hover {
 
-      }
-
-      a.active {
+      a:hover, a.active {
+        @include transition(all 0.2s ease-in);
         color: lighten(#1E7B91, 20%);
+
+        .badge {
+          background: hsla(184,92%,33%, 1);
+          @include transition(all 0.2s ease-in-out);
+        }
 
         // Icon gradient
         i:before {
-          @include linear-gradient(-30deg, lighten(#127F92, 10%), lighten(#5A3688, 20%));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+           @include transition(all 0.2s ease-in-out);
+          //@include linear-gradient(-30deg, lighten(#127F92, 10%), lighten(#5A3688, 20%));
+          color: hsla(184,92%,43%, 1);
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
         }
       }
     }
@@ -407,7 +436,7 @@ nav.third {
 .placeholder {
   text-align: center !important;
   font-size: 14px;
-  color: #666666;
+  color: hsla(194, 26%, 45%, 1);
   margin-top: 40px;
   clear: both;
 }
@@ -580,10 +609,13 @@ input.slider {
 
   .pill:first-child {
     border-right: none;
+    border-radius: none;
     @include border-left-radius(4px);
+    @include border-right-radius(0px);
   }
 
   .pill:last-child {
+    border-radius: none;
     @include border-right-radius(4px);
   }
 
@@ -1008,6 +1040,8 @@ ul.schedules {
 
 .courses-list {
 
+
+
   li {
     position: relative;
     padding: 6px 25px;
@@ -1178,4 +1212,40 @@ ul.schedules {
 [type="radio"]:checked:focus + label:before,
 [type="radio"]:not(:checked):focus + label:before {
   //border: 1px dotted blue;
+}
+
+.inner-secondary {
+   @include transition(all 0.2s ease-in-out);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  @include transition(all 0.2s ease-in-out);
+}
+
+.large-placeholder {
+  position: absolute;
+
+  @include display(flex);
+  @include align-items(center);
+  @include flex-direction(row);
+  @include justify-content(center);
+  height: 100%;
+  width: calc(100% - 80px);
+  //border: 1px solid red;
+
+  h1 {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: hsla(194,26%,55%, 1);
+    text-align: center;
+  }
+
+    small {
+
+    }
 }
