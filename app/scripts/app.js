@@ -7,7 +7,7 @@
  *
  * Config module of the application.
  */
-angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', 'angular-storage', 'angular-jwt', 'angular-data.DS', 'ui.bootstrap']).config(function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
+angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', 'angular-storage', 'angular-jwt', 'angular-data.DS', 'angular-data.DSCacheFactory', 'ui.bootstrap']).config(function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
     // Configure Auth0 authentication
     authProvider.init({
         domain: 'schedules.auth0.com',
@@ -55,43 +55,43 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
         resolve: {
             loadCourse: function($q, $stateParams, $window, $location, $rootScope, Course) {
                 var deferred = $q.defer();
-                // var params = {
-                //   where: {
-                //     school: {
-                //       '==': $rootScope.school
-                //     }
-                //   }
-                // };
-                // var course = null;
-                // // Try and find the requested course
-                // Course.findAll(params).then(function(courses) {
-                //     course = _.find(Course.filter(), function(course) {
-                //         return course.courseId == $stateParams.courseId
-                //     });
-                //     if (course) {
-                //         console.log(course)
-                //         deferred.resolve(course);
-                //     } else {
-                //         $location.path('/schedule')
-                //         deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
-                //         //$window.history.back(); //need this?
-                //     }
-                // }).
-                // catch (function(error) {
-                //     console.log(error)
-                //});
-                var course = _.find($rootScope.courses, function(course) {
-                    return course.id == $stateParams.courseId
+                var params = {
+                  where: {
+                    school: {
+                      '==': '543f2167cc91ba0b1cd8eb0c'
+                    }
+                  }
+                };
+                var course = null;
+                // Try and find the requested course
+                Course.findAll(params).then(function(courses) {
+                    course = _.find(Course.filter(), function(course) {
+                        return course.courseId == $stateParams.courseId
+                    });
+                    if (course) {
+                        console.log(course)
+                        deferred.resolve(course);
+                    } else {
+                        $location.path('/courses/catalog/all')
+                        deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
+                        //$window.history.back(); //need this?
+                    }
+                }).
+                catch (function(error) {
+                    console.log(error)
                 });
-                if (course) {
-                    console.log('found course')
-                    deferred.resolve(course);
-                } else {
-                    console.log('no course there :(')
-                    $location.path('/courses/catalog/all')
-                    deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
-                    //$window.history.back(); //need this?
-                }
+                // var course = _.find($rootScope.courses, function(course) {
+                //     return course.id == $stateParams.courseId
+                // });
+                // if (course) {
+                //     console.log('found course')
+                //     deferred.resolve(course);
+                // } else {
+                //     console.log('no course there :(')
+                //     $location.path('/courses/catalog/all')
+                //     deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
+                //     //$window.history.back(); //need this?
+                // }
                 return deferred.promise;
             }
         }

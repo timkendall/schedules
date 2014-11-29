@@ -19,8 +19,7 @@
       <i dropdown-toggle ng-disabled="disabled" class="icon-cog"></i>
       <ul class="dropdown-menu" role="menu">
         <li ng-click="removeFromPicked(course)">Remove</li>
-        <li>Hide</li>
-        <li>Save for later</li>
+        <li ng-click="likeCourse(selectedCourse); removeFromPicked(selectedCourse)">Save for later</li>
       </ul>
     </div>
   </li>

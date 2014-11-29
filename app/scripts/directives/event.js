@@ -23,7 +23,6 @@ angular.module('schedules').directive('event', function($timeout, $rootScope) {
 
             // hardcode for now
             var duration = formatTime(scope.event.end) - formatTime(scope.event.start);
-            console.log(duration)
 
             element.css('height', Math.floor(duration*50) + 'px');
 

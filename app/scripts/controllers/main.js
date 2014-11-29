@@ -116,6 +116,7 @@ angular.module('schedules')
      }
 
      $scope.removeFromPicked = function (_course) {
+        if (_course.id === $rootScope.selectedCourse.id) $rootScope.selectedCourse = null;
         _.remove($rootScope.picked, function (course) { return course.id == _course.id; });
      }
 

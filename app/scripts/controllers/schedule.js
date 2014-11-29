@@ -10,10 +10,10 @@ angular.module('schedules').controller('ScheduleCtrl', function($scope, $rootSco
 
   $scope.calendarView = true;
 
-  $scope.selectedCourse = $rootScope.picked[0] || null;
+  $rootScope.selectedCourse = $rootScope.picked[0] || null;
 
   $scope.selectCourse = function (course) {
-    $scope.selectedCourse = course;
+    $rootScope.selectedCourse = course;
   }
 
   $scope.selectSection = function (section) {

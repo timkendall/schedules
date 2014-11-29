@@ -21,9 +21,9 @@
               <i class="fa fa-plus-square-o"></i>
             </td>
             <td ng-click="go(course)"><span class="term Spring">Spring 2015</span></td>
-            <td ng-click="go(course)">{{course.courseId}}</td>
-            <td ng-click="go(course)">{{course.GEs}}</td>
-            <td ng-click="go(course)">{{course.name}}</td>
+            <td ng-click="go(course)">{{::course.courseId}}</td>
+            <td ng-click="go(course)">{{::course.GEs}}</td>
+            <td ng-click="go(course)">{{::course.name}}</td>
             <td ng-click="go(course)" ng-click="go(course)">{{course.sections.length}}</td>
             <td ng-click="go(course)">{{course.likes}} likes</td>
             <td ng-click="likeCourse(course)"><i class="fa" ng-class="{'fa-heart-o': !isLikedCourse(course), 'fa-heart': isLikedCourse(course)}"></i></td>

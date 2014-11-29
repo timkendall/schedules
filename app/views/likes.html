@@ -35,10 +35,10 @@
             <td ng-click="addToSchedule(course)">
               <i class="fa fa-plus-square-o"></i>
             </td>
-            <td><span class="term {{course.term}}">{{course.term}}</span></td>
-            <td>{{course.course}}</td>
-            <td>{{course.GEs}}</td>
-            <td>{{course.title}}</td>
+            <td><span class="term Spring">Spring 2015</span></td>
+            <td>{{::course.courseId}}</td>
+            <td>{{::course.GEs}}</td>
+            <td>{{course.name}}</td>
             <td>{{course.sections.length}}</td>
             <td>{{course.likes}} likes</td>
             <td><i class="fa" ng-class="{'fa-heart-o': !isLikedCourse(course), 'fa-heart': isLikedCourse(course)}"  ng-click="likeCourse(course)"></i></td>

@@ -11,7 +11,7 @@ angular.module('schedules')
 
     // Handle table clicks
     $scope.go = function (course) {
-      $location.path('/find/' + course.id);
+      $location.path('/find/' + course.courseId);
     }
 
     $scope.filterMajor = function (course) {
