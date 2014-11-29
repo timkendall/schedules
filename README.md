@@ -1,7 +1,21 @@
 schedules
 =========
 
-Beautiful class registration webapp for universities. Head over to our [wiki](https://github.com/timkendall/schedules/wiki) for information on contributing.
+Schedules is the open source education planner platform for universities and students. It aims to allow students to take control over their education instead of wondering what class they can, should, or need to take. It functions as:
+
+* a schedule builder
+* a course catalog
+* a major reference
+
+Discuss the project and get help at [discuss.schedulesapp.com](http://discuss.schedulesapp.com/). Head over to our [wiki](https://github.com/timkendall/schedules/wiki) for information on contributing. For more information on the goals and philosophy of this project [visit **schedulesapp.com**](http://schedulesapp.com/)
+
+## Progress
+- [x] rehaul UX
+- [x] redesign schedule builder
+- [ ] reintegrate server data **in progress**
+- [ ] finish coding filters  **up next**
+- [ ] add user auth with backend
+- [ ] add schedule saving / sharing / exporting
 
 ## Required tools
 * NPM - Node.js package manager; should be installed when you install node.js.
