@@ -10,29 +10,9 @@ angular.module('schedules').filter('days', function () {
 
     var daysString = '';
 
-    days.forEach(function (day) {
-      switch (day) {
-        case 'Mon':
-          daysString += 'M';
-          break;
-        case 'Tue':
-          daysString += 'T';
-          break;
-        case 'Wed':
-          daysString += 'W';
-          break;
-        case 'Thu':
-          daysString += 'Th';
-          break;
-        case 'Fri':
-          daysString += 'F';
-          break;
-        case 'Sat':
-          daysString += 'S';
-          break;
-        default:
-          break;
-      }
+    days.forEach(function (day, index) {
+      if (index == days.length - 1) return daysString += day; // last day
+      daysString += day + ', ';
     });
 
     return daysString;

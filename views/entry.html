@@ -1,6 +1,6 @@
 <div id="entry" ng-class="{slideUp: choosing}">
 <div class="full-intro">
-  <div class="header">
+  <div class="header" ng-class="{darken: scrolled}" scroll>
     <ul class="list-inline">
      <li><a href="/contribute"><i class="fa fa-question-circle"></i> How it works</a></li>
       <li><a href="/api"><i class="fa fa-tasks"></i> Features</a></li>
@@ -23,7 +23,7 @@
         <div class="bar">
           <div class="filter">
           <i class="fa fa-search"></i>
-                <input ng-class="{active: addingCourse}" class="add-course" type="text" name="name" ng-model="search" ng-focus="addingCourse = true" losefocus placeholder="Add courses" />
+                <input ng-disabled="true" class="add-course" type="text" name="name" placeholder="Add courses" />
 
                 <div class="filter-buttons">
 

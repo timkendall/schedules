@@ -1,0 +1,25 @@
+
+    <table class="table-full">
+        <thead>
+            <tr>
+                <td>Course</td>
+                <td>Days</td>
+                <td>Start</td>
+                <td>End</td>
+                <td>Professor</td>
+                <td>Location</td>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="section in course.sections">
+                <td>{{::course.courseId}}</td>
+                <td>{{::section.meets | days}}</td>
+                <td>{{::section.start | time}}</td>
+                <td>{{::section.end | time}}</td>
+                <td>{{::section.professor}}</td>
+                <td>{{::section.location}}</td>
+            </tr>
+        </tbody>
+    </table>

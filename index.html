@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html lang="en" class="no-js">
     <head>
         <meta charset="utf-8">
         <title>schedules</title>
@@ -13,13 +13,21 @@
         <link rel="stylesheet" href="components/animate.css/animate.css" />
         <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css" />
         <link rel="stylesheet" href="components/molten/molten.css" />
+        <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
         <!-- endbower -->
         <!-- endbuild -->
 
+        <link rel="stylesheet" href="components/entypo/font/entypo.css" />
          <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 
+        <!-- Setting the right viewport for auth modal -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <!-- Set base URL for html5 route mode -->
+        <base href="/">
     </head>
     <body ng-app="schedules">
         <!--[if lt IE 10]>
@@ -29,8 +37,42 @@
         <!-- Header (navigation, user) -->
        <!--  <ng-include src="'templates/header.html'"></ng-include> -->
 
+       <div class="main" ng-controller="MainCtrl">
+        <div class="primary">
+            <!-- Primary View -->
+            <div ui-view="primary" class="animateFade" style="width: 100%; height: 100%"></div>
+
+            <!-- Actions -->
+             <nav class="third">
+                <ul class="list-inline">
+                    <li><a href ng-class="{active: $state.includes('find')}" ui-sref="find.all"><i class="icon-search"></i></a></li>
+                    <li><a href ui-sref-active="active" ui-sref="schedules"><i class="icon-calendar"></i> <div class="badge" event-class="{pulse: 'added course'}" ng-cloak>{{picked.length}}</div></a> </li>
+                    <li><a href ui-sref-active="active" ui-sref="likes"><i class="icon-heart-empty"></i></a></li>
+                    <!-- <li><a href ui-sref-active="active" ui-sref="plans"><i class="icon-chart-line"></i></a></li> -->
+                    <!-- <li><a href ui-sref-active="active" ui-sref="help"><i class="icon-chat"></i> <div class="badge-dot" ng-show="messages.unread.length" event-class="{pulse: 'message recieved'}"></div></a></li> -->
+                </ul>
+             </nav>
+        </div>
+
+        <div class="secondary">
+            <!-- user account stuff -->
+            <div class="user" ng-controller="LoginCtrl" ng-click="login()">
+
+
+                  <div ng-show="auth.isAuthenticated">
+                      <h4>{{auth.profile.nickname}} <i class="icon-down-open-mini"></i></h4>
+                  </div>
+            </div>
+
+             <!-- Secondary View -->
+            <div class="animateFade" ui-view="secondary"></div>
+        </div>
+       </div>
+
+
+
         <!-- Main views -->
-        <div ui-view style="width: 100%; height: 100%"></div>
+        <!-- <div ui-view style="width: 100%; height: 100%"></div> -->
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -45,6 +87,8 @@
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="components/modernizr/modernizr.js"></script>
+        <script src="components/jquery/dist/jquery.js"></script>
         <script src="components/angular/angular.js"></script>
         <script src="components/angular-resource/angular-resource.js"></script>
         <script src="components/angular-cookies/angular-cookies.js"></script>
@@ -60,17 +104,28 @@
         <script src="components/angular-socket-io/socket.js"></script>
         <script src="components/odometer/odometer.js"></script>
         <script src="components/time-js/time.js"></script>
+        <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="components/jquery-bridget/jquery.bridget.js"></script>
+        <script src="components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+        <script src="components/angular-jwt/dist/angular-jwt.js"></script>
+        <script src="components/angular-cache/dist/angular-cache.min.js"></script>
+        <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
+
+        <!-- Auth0 Lock script and AngularJS module -->
+        <script src="//cdn.auth0.com/js/lock-6.js"></script>
+        <script type="text/javascript" src="//rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
+        <script src="//cdn.auth0.com/w2/auth0-angular-3.js"> </script>
 
         <!-- build:js scripts/main.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/entry.js"></script>
-        <script src="scripts/controllers/planned.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/schedule.js"></script>
-        <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/courses.js"></script>
         <script src="scripts/controllers/course.js"></script>
-        <script src="scripts/controllers/section.js"></script>
         <script src="scripts/services/user.js"></script>
         <script src="scripts/services/school.js"></script>
         <script src="scripts/services/course.js"></script>
@@ -83,10 +138,15 @@
         <script src="scripts/directives/event.js"></script>
         <script src="scripts/directives/results.js"></script>
         <script src="scripts/directives/losefocus.js"></script>
+        <script src="scripts/directives/scroll.js"></script>
         <script src="scripts/directives/section.js"></script>
+        <script src="scripts/directives/slider.js"></script>
+        <script src="scripts/directives/when-scrolled.js"></script>
+         <script src="scripts/directives/event-class.js"></script>
         <script src="scripts/filters/days.js"></script>
         <script src="scripts/filters/time.js"></script>
         <script src="scripts/filters/period.js"></script>
+        <script src="scripts/filters/unique.js"></script>
 
         <!-- endbuild -->
 </body>

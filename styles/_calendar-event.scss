@@ -1,0 +1,170 @@
+.calendar-event {
+  display: block;
+  // Start at top
+  position: absolute;
+  top: 16px;
+  left: 0;
+
+  width: calc(100% - 10px); // why?
+  padding: 0 10px;
+  margin: 0 4px;
+  background: rgba(255,237,210,0.7);
+  //border-radius: 5px;
+  border-left: 3px solid darken(rgba(255,237,210,1), 15%);
+  z-index: 9999;
+  color: #A66100;
+
+  height: 50px;
+  cursor: pointer;
+  margin-top: -16px; //hacky, gotta figur eout why these are getting pushed down
+
+  @include animation(fadeIn 0.25s cubic-bezier(1, .25, .40, .34));
+
+  .wrap {
+    position: relative;
+    border: 1px solid red;
+    height: 100%;
+  }
+
+  h5 {
+    font-weight: 700;
+    margin: 6px 0 0 0;
+    color: #A66100;
+    font-size: 14px;
+  }
+
+  small {
+    margin: -8px 0 0 0;
+    display: block;
+    font-size: 13px;
+  }
+
+  .icon-alert {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+}
+
+.calendar-event.orange {
+  color: darken(#D06727, 15%);
+  background: rgba(251,202,179,0.7);
+  border-left: 3px solid darken(#FBCAB3, 10%);
+  h5 {
+    color: darken(#D06727, 15%);
+  }
+}
+
+.calendar-event.purple {
+  color: #7F4083;
+  background: rgba(212,187,213,0.7);
+  border-left: 3px solid #D387E4;
+  h5 {
+    color: #7F4083;
+  }
+}
+
+.calendar-event.green {
+  color: darken(#C5E1B1, 50%);
+  background: rgba(197,225,177,0.7);
+  border-left: 3px solid darken(#C5E1B1,15%);
+  h5 {
+    color: darken(#C5E1B1, 50%);
+  }
+}
+
+.calendar-event.red {
+  color: #AA646A;
+  background: rgba(235,182,190,0.7);
+  border-left: 3px solid darken(#EBB6BE, 15%);
+  h5 {
+    color: #AA646A;
+  }
+}
+
+.calendar-event-optional {
+
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0tMiAxMEwxMCAtMlpNMTAgNkw2IDEwWk0tMiAyTDIgLTIiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIiBzdHJva2Utd2lkdGg9IjQuNSI+PC9wYXRoPgo8L3N2Zz4="), linear-gradient(rgba(255,237,210,0.35),  rgba(255,237,210,0.35));
+
+   border: none;
+   border-left: 3px solid rgba(255,206,133,0.45);
+
+
+  @include animation-duration(0.3s);
+  color:  rgba(151,92,8,0.65);
+   h5 {
+    color:  rgba(151,92,8,0.65);
+  }
+}
+
+.fadeOut {
+   @include animation(fadeOut 0.3s ease-in-out);
+}
+
+.calendar-event-optional.red {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0tMiAxMEwxMCAtMlpNMTAgNkw2IDEwWk0tMiAyTDIgLTIiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIiBzdHJva2Utd2lkdGg9IjQuNSI+PC9wYXRoPgo8L3N2Zz4="), linear-gradient(rgba(235,182,190,0.35), rgba(235,182,190,0.35));
+  border: none;
+  border-left: 3px solid darken(#EBB6BE, 5%);
+
+  color: rgba(170,100,106,0.85);
+   h5 {
+    color: rgba(170,100,106,0.85);
+  }
+}
+
+.calendar-event-optional.orange {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0tMiAxMEwxMCAtMlpNMTAgNkw2IDEwWk0tMiAyTDIgLTIiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIiBzdHJva2Utd2lkdGg9IjQuNSI+PC9wYXRoPgo8L3N2Zz4="), linear-gradient(rgba(251,202,179,0.35), rgba(251,202,179,0.35));
+  border: none;
+  border-left: 3px solid rgba(248,168,131,0.45);
+
+  color: rgba(170,100,106,0.85);
+   h5 {
+    color: rgba(170,100,106,0.85);
+  }
+}
+
+.calendar-event-optional.green {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0tMiAxMEwxMCAtMlpNMTAgNkw2IDEwWk0tMiAyTDIgLTIiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIiBzdHJva2Utd2lkdGg9IjQuNSI+PC9wYXRoPgo8L3N2Zz4="), linear-gradient(rgba(197,225,177,0.35), rgba(197,225,177,0.35));
+  border: none;
+  border-left: 3px solid darken(rgba(197,225,177,1), 5%);
+
+  color: lighten(#446A29, 15%);
+   h5 {
+    color: lighten(#446A29, 15%);
+  }
+}
+
+.calendar-event-optional.purple {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0tMiAxMEwxMCAtMlpNMTAgNkw2IDEwWk0tMiAyTDIgLTIiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIiBzdHJva2Utd2lkdGg9IjQuNSI+PC9wYXRoPgo8L3N2Zz4="), linear-gradient(rgba(212,187,213,0.35),  rgba(212,187,213,0.35));
+  border: none;
+  border-left: 3px solid darken(rgba(212,187,213,0.7), 5%);
+
+  color: rgba(127,64,131,0.75);
+   h5 {
+    color: rgba(127,64,131,0.75);
+  }
+}
+
+.event-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+  background: darken(rgba(255,237,210,1), 15%);
+}
+
+.event-dot.red {
+  background: darken(rgba(235,182,190,1), 15%);
+}
+
+.event-dot.purple {
+  background: darken(rgba(212,187,213,1), 15%);
+}
+
+.event-dot.green {
+  background: darken(rgba(197,225,177,1), 15%);
+}
+
+.event-dot.orange {
+  background: darken(rgba(251,202,179,1), 15%);
+}

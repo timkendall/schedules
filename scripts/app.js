@@ -7,67 +7,61 @@
  *
  * Config module of the application.
  */
-angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'angular-data.DS']).config(function($stateProvider, $urlRouterProvider) {
-    // Check if the user is connected
-    var checkLoggedin = function($q, $timeout, $http, $location) {
-        // Initialize a new promise
-        var deferred = $q.defer();
-        // Make an AJAX call to check if the user is logged in
-        $http.get('/loggedin').success(function(user) {
-            // Authenticated
-            if (user !== '0') $timeout(deferred.resolve);
-            // Not Authenticated
-            else {
-                $timeout(deferred.reject);
-                $location.url('/login');
-            }
-        });
-        return deferred.promise;
-    };
+angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router', 'ngSanitize', 'ngTouch', 'auth0', 'angular-storage', 'angular-jwt', 'angular-data.DS', 'angular-data.DSCacheFactory', 'ui.bootstrap']).config(function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
+    // Configure Auth0 authentication
+    authProvider.init({
+        domain: 'schedules.auth0.com',
+        clientID: 'hHXmSgTUz2Cfv1LwjTLPgVcUoY8QBnls'
+    });
+    // Configure $http interceptors (send user's token for every API call)
+    jwtInterceptorProvider.tokenGetter = function(store) {
+        // Return the saved token
+        return store.get('token');
+    }
+    //$httpProvider.interceptors.push('jwtInterceptor');
+    // Configure states (routes)
     $stateProvider
-    // Schedule builder + registration
+    // Spalsh page
     .state('entry', {
         url: '/',
         templateUrl: 'views/entry.html',
         controller: 'EntryCtrl'
     })
-    // Schedule builder + registration
-    .state('schedule', {
-        url: '/schedule',
-        templateUrl: 'views/schedule.html',
-        controller: 'ScheduleCtrl',
-        resolve: {
-            checkSchool: function ($rootScope, $location, School) {
-                /*
-                 * Make sure the school exists (for course creation)
-                 */
-                if (!$rootScope.school) $location.path('/');
-                else {
-                    School.find($rootScope.school).then(function (school) {
-                        if (!school) $location.path('/');
-                        console.log(school)
-                    });
-                }
+    // Find courses to add
+    .state('find', {
+       abstract: true,
+       url: '/find',
+       views: {
+            'secondary': {
+                templateUrl: 'views/find-secondary.html',
+                controller: 'CoursesCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/find.html',
+                controller: 'CoursesCtrl'
             }
         }
     })
-    // Quick view of a course
-    .state('schedule.course', {
-        url: '/course/:courseId',
-        templateUrl: 'views/course.html',
+
+    // Find courses to add
+    .state('find.all', {
+        url: '/all',
+        templateUrl: 'views/find-all.html'
+    })
+     .state('find.single', {
+        url: '/:courseId',
+        templateUrl: 'views/find-single.html',
         controller: 'CourseCtrl',
         resolve: {
             loadCourse: function($q, $stateParams, $window, $location, $rootScope, Course) {
                 var deferred = $q.defer();
-
                 var params = {
                   where: {
                     school: {
-                      '==': $rootScope.school
+                      '==': '543f2167cc91ba0b1cd8eb0c'
                     }
                   }
                 };
-
                 var course = null;
                 // Try and find the requested course
                 Course.findAll(params).then(function(courses) {
@@ -78,7 +72,7 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
                         console.log(course)
                         deferred.resolve(course);
                     } else {
-                        $location.path('/schedule')
+                        $location.path('/courses/catalog/all')
                         deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
                         //$window.history.back(); //need this?
                     }
@@ -86,42 +80,97 @@ angular.module('schedules', ['ngAnimate', 'ngCookies', 'ngResource', 'ui.router'
                 catch (function(error) {
                     console.log(error)
                 });
+                // var course = _.find($rootScope.courses, function(course) {
+                //     return course.id == $stateParams.courseId
+                // });
+                // if (course) {
+                //     console.log('found course')
+                //     deferred.resolve(course);
+                // } else {
+                //     console.log('no course there :(')
+                //     $location.path('/courses/catalog/all')
+                //     deferred.reject(new Error("Can't find course with ID " + $stateParams.courseId));
+                //     //$window.history.back(); //need this?
+                // }
                 return deferred.promise;
             }
         }
-    }).state('schedule.course.overview', {
-        url: '/overview',
-        templateUrl: 'views/course/overview.html'
-    }).state('schedule.course.reviews', {
-        url: '/reviews',
-        templateUrl: 'views/course/reviews.html'
-    }).state('schedule.course.updates', {
-        url: '/updates',
-        templateUrl: 'views/course/updates.html'
     })
-    // Entire, searhable course catalog for school
-    .state('catalog', {
-        url: '/catalog',
-        templateUrl: 'views/catalog.html',
-        controller: 'CatalogCtrl'
+    // View current and saved schedules
+    .state('schedules', {
+        url: '/schedule',
+        views: {
+            'secondary': {
+                templateUrl: 'views/schedules-secondary.html',
+                controller: 'ScheduleCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/schedule.html',
+                controller: 'ScheduleCtrl'
+            }
+        }
     })
-    // An individual course
-    .state('catalog.course', {
-        url: '/:courseName',
-        templateUrl: 'views/course.html',
-        controller: 'CourseCtrl'
+     // View current and saved schedules
+    .state('likes', {
+        url: '/likes',
+        views: {
+            'secondary': {
+                templateUrl: 'views/likes-secondary.html',
+                controller: 'CoursesCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/likes.html',
+                controller: 'CoursesCtrl'
+            }
+        }
     })
-    $urlRouterProvider.otherwise('/');
-}).run(function($rootScope, Course, Major) {
-    /*
-     * Catch state change errors (otherwise won't see)
-     */
+    // View current and saved schedules
+    .state('plans', {
+        url: '/likes',
+        views: {
+            'secondary': {
+                templateUrl: 'views/likes-secondary.html',
+                controller: 'CoursesCtrl'
+            },
+            'primary': {
+                templateUrl: 'views/likes.html',
+                controller: 'CoursesCtrl'
+            }
+        }
+    })
+    .state('me', {
+        url: '/me',
+        templateUrl: 'views/me.html',
+        controller: 'ScheduleCtrl',
+        data: {
+          requiresLogin: true
+        }
+    });
+
+    // Set default route
+    $urlRouterProvider.otherwise('/find/all');
+    // use the HTML5 History API
+    //$locationProvider.html5Mode(true);
+    // Code to run at startup
+}).run(function($rootScope, $location, auth, store, jwtHelper, Course, Major) {
+    // Catch state change errors
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         console.log(error)
-    })
-
-    /*
-     * Update Course(s) collection when somebody adds one
-     */
-
+    });
+    // This hooks all auth events to check everything as soon as the app starts
+    auth.hookEvents();
+    // Maintain a user's login on page refresh
+    $rootScope.$on('$locationChangeStart', function() {
+        if (!auth.isAuthenticated) {
+            var token = store.get('token');
+            if (token) {
+                if (!jwtHelper.isTokenExpired(token)) {
+                    auth.authenticate(store.get('profile'), token);
+                } else {
+                    // Either show Login page or use the refresh token to get a new idToken
+                    //$location.path('/');
+                }
+            }
+        }
+    });
 });
