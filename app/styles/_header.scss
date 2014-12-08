@@ -1,0 +1,119 @@
+#header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100%;
+  line-height: 65px;
+  border-right: 1px solid #D6D9DF;
+  //background:#19252D;
+
+  margin: 0;
+  padding: 0 40px;
+   @include display(flex);
+  @include align-items(center);
+  @include flex-direction(column);
+  @include justify-content(center);
+
+  ul {
+    display: block;
+    margin: 0;
+
+    li {
+      padding: 0 10px;
+    }
+
+    li:first-child {
+      //padding-left: 0;
+    }
+  }
+
+  ul li a {
+    color: #7E7E7E;
+    outline: none;
+    @include transition(all 200ms cubic-bezier(0.39, 0.575, 0.565, 1));
+  }
+
+  ul li a:hover {
+    color: #5DC9E6;
+    text-decoration: none;
+    @include transition(all 200ms cubic-bezier(0.47, 0, 0.745, 0.715));
+  }
+
+  ul li.active a {
+    i {
+      color: #5DC9E6;
+      background: linear-gradient(#1D9BD6, #5DC9E6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .user {
+    position: absolute;
+    top: 0;
+    right: 0;
+    //background: #D6D9DF;
+    height: 65px;
+    width: 80px;
+    //border-bottom: 1px solid #D6D9DF;
+
+    .titles, img {
+      display: inline-block;
+    }
+
+    img {
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+      //margin: 12px 0px 0 0;
+      margin: 20px 0px 0 20px;
+      //float: right;
+      border: 2px solid darken(#D6D9DF, 30%);
+    }
+
+    i {
+      display: none;
+      //@include transform(rotate(180deg));
+      float: right;
+      line-height: 30px;
+      text-align: right;
+      padding-right: 4px;
+      margin: 18px 10px 0 -8px;
+      width: 30px;
+      height: 30px;
+      background: darken(#D6D9DF, 30%);
+      border-radius: 100%;
+      color: #fff;
+    }
+
+    .titles {
+      display: none;
+
+      padding: 10px;
+      padding-top: 16px;
+      text-align: right;
+      float: right;
+
+      @include transform(translateY(-6px));
+
+       h5, h6 {
+        margin: 0;
+      }
+
+      h5 {
+        margin-bottom: -4px;
+        color: darken(#7E7E7E, 20%);
+        font-weight: 700;
+      }
+
+      h6 {
+        text-align: right;
+        color: #80899C;
+      }
+    }
+
+
+  }
+
+}
