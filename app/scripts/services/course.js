@@ -6,6 +6,13 @@ angular.module('schedules').factory('Course', ['DS',
         name: 'course',
         baseUrl: 'http://107.170.253.85:1337/',
 
+        hasMany: {
+            section: {
+                localField: 'sections',
+                foreignKey: 'id'
+            }
+        },
+
         methods: {
 
         }
