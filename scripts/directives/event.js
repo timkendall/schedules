@@ -70,22 +70,22 @@ angular.module('schedules').directive('event', function($timeout, $rootScope) {
             element.on('mouseover', function() {
                 if (scope.event.selected) {
                     $rootScope.$broadcast('show all sections', {
-                        course: scope.event.course
+                        course: scope.event.course.id
                     });
                 }
             });
             element.on('mouseleave', function() {
-                if (scope.event.selected) $rootScope.$broadcast('hide all sections', { course: scope.event.course });
+                if (scope.event.selected) $rootScope.$broadcast('hide all sections', { course: scope.event.course.id });
             });
              // Show a single section
             scope.$on('show section', function(event, data) {
-                if (scope.event.course === data.course && scope.event.id === data.section  && !scope.event.selected) {
+                if (scope.event.course.id === data.course && scope.event.id === data.section  && !scope.event.selected) {
                     element.css('display', 'block');
                 }
             });
              // Show a single section
             scope.$on('hide section', function(event, data) {
-                if (scope.event.course === data.course && scope.event.id === data.section  && !scope.event.selected) {
+                if (scope.event.course.id === data.course && scope.event.id === data.section  && !scope.event.selected) {
                     element.addClass('fadeOut');
                     // Hide elemnt for real after animation is done
                     setTimeout(function () {
@@ -96,13 +96,13 @@ angular.module('schedules').directive('event', function($timeout, $rootScope) {
             });
             // Show the event
             scope.$on('show all sections', function(event, data) {
-                if (scope.event.course === data.course && !scope.event.selected) {
+                if (scope.event.course.id === data.course && !scope.event.selected) {
                     element.css('display', 'block');
                 }
             });
             // Hide the event
             scope.$on('hide all sections', function(event, data) {
-                if (scope.event.course === data.course && !scope.event.selected) {
+                if (scope.event.course.id === data.course && !scope.event.selected) {
                     element.addClass('fadeOut');
                     // Hide elemnt for real after animation is done
                     setTimeout(function () {

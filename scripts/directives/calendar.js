@@ -4,7 +4,7 @@
  * Display the school week
  */
 'use strict';
-angular.module('schedules').directive('calendar', function($timeout) {
+angular.module('schedules').directive('calendar', function($rootScope, $timeout, Section, Course, Professor) {
     return {
         restrict: 'E',
         templateUrl: 'templates/calendar.html',
@@ -12,45 +12,56 @@ angular.module('schedules').directive('calendar', function($timeout) {
             courses: '=courses'
         },
         controller: function($scope, $rootScope) {
-             /*
+            /*
              * Hold the generated schedules
              */
             $scope.schedule = createSchedule($scope.courses);
             /*
              * Run generateSchedules() everytime the user's picked courses has changed
              */
-            $scope.$watch('courses', function (newVal, oldVal) {
+            $rootScope.$watch('picked', function(newVal, oldVal) {
                 if (newVal.length === 0) {
-                  // Clear current schedule
-                  $scope.schedule = null;
+                    // Clear current schedule
+                    $scope.schedule = null;
                 } else {
-                  // Create a new schedule
-                  $scope.schedules = createSchedule(newVal);
+                    // Create a new schedule
+                    $scope.schedule = createSchedule(newVal);
                 }
             }, true);
             /*
              * Create a schedule with params
              */
             function createSchedule(courses) {
+                // Choose first section in each course
+                // for (var i = 0; i < courses.length; ++i) {
+                //   if(courses[i].sections.length > 0) courses[i].sections[0].selected = true;
+                // }
+                // Add all sections to schedule (for UI purposes)
+                var sections = [];
+                for (var i = 0; i < courses.length; ++i) {
+                  var course = courses[i];
+                    for (var j = 0; j < course.sections.length; ++j) {
+                        var section = courses[i].sections[j];
+                        section.color = courses[i].color; // set color, kinda hacky
 
-              // Choose first section in each course
-              // for (var i = 0; i < courses.length; ++i) {
-              //   if(courses[i].sections.length > 0) courses[i].sections[0].selected = true;
-              // }
+                        /*
+                         * Dirty link models (i.e. manually copy some atributes for easy accesss in views)
+                         */
+                        var prof = null;
+                        prof = _.find(Professor.filter(), function (professor) {
+                            return professor.id === section.professor;
+                        });
+                        section.course = { id: course.id, courseId: course.courseId };
+                        if (prof) section.professor = { id: prof.id, firstName: prof.firstName, lastName: prof.lastName };
+                        section.location = 'Beckman 209'; // Hardocde for now because most of the data has no location
+                        section.sectionNumber = section.sectionNumber || '01';
 
-              // Add all sections to schedule (for UI purposes)
-              var sections = [];
-              for (var i = 0; i < courses.length; ++i) {
-                for (var j = 0; j < courses[i].sections.length; ++j) {
-                  courses[i].sections[j].color = courses[i].color; // set color, kinda hacky
-                  sections.push(courses[i].sections[j]);
+                        sections.push(section);
+                    }
+                    //sections.push.apply(sections, courses[i].sections);
                 }
-                //sections.push.apply(sections, courses[i].sections);
-              }
-
-              return new Schedule(sections);
+                return new Schedule(sections);
             }
-
             /*
              * Options - these can be set by the user
              */
@@ -83,57 +94,51 @@ angular.module('schedules').directive('calendar', function($timeout) {
                 this.maxClassesInADay = null;
                 this.minClassesInADay = null;
                 this.agony = null; // agony rating (based on earliest times, spread, days a week, 3hr+ classes)
-
                 this.mondays = [];
                 this.tuesdays = [];
                 this.wednesdays = [];
                 this.thursdays = [];
                 this.fridays = [];
                 this.saturdays = [];
-
                 /*
                  * Run to generate metrics
                  */
                 (function(self) {
-                  /*
-                   * Slot sections into days
-                   */
-                  self.sections.forEach(function (section, index) {
-                    // Weird naming
-
-                    section.meets.forEach(function (day) {
-                      switch (day) {
-                        case 'Mon':
-                          self.mondays.push(section);
-                          break;
-                        case 'Tue':
-                          self.tuesdays.push(section);
-                          break;
-                        case 'Wed':
-                          self.wednesdays.push(section);
-                          break;
-                        case 'Thu':
-                          self.thursdays.push(section);
-                          break;
-                        case 'Fri':
-                          self.fridays.push(section);
-                          break;
-                        case 'Sat':
-                          self.saturdays.push(section);
-                          break;
-                        default:
-                          break;
-                      }
+                    /*
+                     * Slot sections into days
+                     */
+                    self.sections.forEach(function(section, index) {
+                        // Weird naming
+                        section.meets.forEach(function(day) {
+                            switch (day) {
+                                case 'Mon':
+                                    self.mondays.push(section);
+                                    break;
+                                case 'Tue':
+                                    self.tuesdays.push(section);
+                                    break;
+                                case 'Wed':
+                                    self.wednesdays.push(section);
+                                    break;
+                                case 'Thu':
+                                    self.thursdays.push(section);
+                                    break;
+                                case 'Fri':
+                                    self.fridays.push(section);
+                                    break;
+                                case 'Sat':
+                                    self.saturdays.push(section);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
                     });
-                  });
-
-
                 })(this);
             }
             /*
              * Primary function - generate array of schedules
              */
-
             function generateSchedules(courses) {
                 var schedules = []; //Array of working schedules
                 var schedulesGraph = new ScheduleGraph(courses);
@@ -145,7 +150,6 @@ angular.module('schedules').directive('calendar', function($timeout) {
                         schedules.push(schedule);
                     });
                 });
-
                 return schedules;
             }
 
@@ -170,7 +174,6 @@ angular.module('schedules').directive('calendar', function($timeout) {
             function convertNodesToSections(nodes) {
                 var sectionsSchedule = [];
                 nodes.forEach(function(node) {
-
                     sectionsSchedule.push({
                         id: node.course,
                         section: node.section,
@@ -179,13 +182,11 @@ angular.module('schedules').directive('calendar', function($timeout) {
                 });
                 return sectionsSchedule;
             }
-
-
             /*
              * See if two sections conflict
              */
             function conflicts(sectionA, sectionB) {
-               this.overlaps = function(timespanB) {
+                this.overlaps = function(timespanB) {
                     // Convert times to Date() times
                     var startA = convertToDateTime(self.start),
                         endA = convertToDateTime(self.end),
@@ -195,7 +196,6 @@ angular.module('schedules').directive('calendar', function($timeout) {
                     else if (endA <= startB) return false; // A range completely before B
                     else return true; // Overlap
                 }
-
                 var sameDays = _.intersection(sectionA.meets, sectionB.meets);
                 // Sections on different days
                 if (sameDays.length === 0) return false;
